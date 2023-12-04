@@ -13,6 +13,7 @@ enum MenuSection: Int, CaseIterable {
     case  banner, category, products
 }
 
+
 final class MenuScreenVC: UIViewController {
     
     //MARK: - Service
