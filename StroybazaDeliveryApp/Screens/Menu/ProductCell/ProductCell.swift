@@ -19,7 +19,7 @@ final class ProductCell: UITableViewCell {
     
     //MARK: - Properties
     private var product: Product?
-    
+
     //MARK: - UI
     private let nameLabel = MainTitleLabel(style: MainTitleType.product)
     private let detailLabel = DetaileLabel(style: DetaileLabelType.product)
@@ -77,7 +77,8 @@ extension ProductCell {
         
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
-            imageRef.downloadURL { url, error in
+            imageRef.downloadURL { [weak self] url, error in
+                guard let self = self else { return }
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
@@ -85,7 +86,6 @@ extension ProductCell {
                 }
             }
         }
-        
         self.product = product
         nameLabel.text = product.name
         detailLabel.text = product.detail
@@ -115,7 +115,7 @@ private extension ProductCell {
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.left.equalTo(productImageView.snp.right).offset(16)
-            make.right.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
+            make.right.equalTo(contentView.safeAreaLayoutGuide).offset(16)
         }
         
         priceButton.snp.makeConstraints { make in

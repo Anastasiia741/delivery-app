@@ -52,6 +52,7 @@ final class ProductImageView: UIImageView {
         case .menuSkeleton:
             self.layer.cornerRadius = 8
             self.layer.borderWidth = 0
+            self.backgroundColor = .lightGray
             self.image = UIImage()
         }
     }

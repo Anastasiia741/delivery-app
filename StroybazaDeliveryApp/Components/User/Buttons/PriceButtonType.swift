@@ -40,9 +40,9 @@ final class PriceButton: UIButton {
             self.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             self.isUserInteractionEnabled = true
         case .colorSkeleton:
-//            self.backgroundColor = .lightGray
             self.layer.cornerRadius = 8
             self.setTitle("", for: .normal)
+            self.backgroundColor = .lightGray
         }
     }
 }

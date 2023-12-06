@@ -20,7 +20,7 @@ class Product: Codable {
     var price: Int
     var image: String?
     var quantity: Int = 1
-    
+
     private enum CodingKeys: String, CodingKey {
         case name, id, category, detail, description, price, image, quantity
     }
