@@ -1,5 +1,5 @@
 //  DetailButton.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 16/8/23.
 
 import UIKit

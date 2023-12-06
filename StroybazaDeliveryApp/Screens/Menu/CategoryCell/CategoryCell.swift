@@ -1,5 +1,5 @@
 //  CategoryTVCell.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 11/9/23.
 
 import UIKit

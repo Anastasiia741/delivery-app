@@ -1,5 +1,5 @@
 //  AuthService.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 8/9/23.
 
 import Foundation

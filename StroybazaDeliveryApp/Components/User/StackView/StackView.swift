@@ -1,5 +1,5 @@
 //  StackView.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 25/8/23.
 
 import UIKit

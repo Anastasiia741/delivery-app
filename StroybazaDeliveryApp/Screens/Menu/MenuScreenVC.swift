@@ -1,5 +1,5 @@
 //  MenuScreenVC.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 2/8/23.
 
 import UIKit
@@ -68,16 +68,11 @@ final class MenuScreenVC: UIViewController {
         
         showSkeletonLoading()
         skeletonView.startSkeletonAnimation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.fetchAllProducts()
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        skeletonView.startSkeletonAnimation()
-    }
-    
 }
 
 //MARK: - Skeleton View
@@ -94,6 +89,7 @@ private extension MenuScreenVC {
     
     private func hideSkeletonLoading() {
         skeletonView.removeFromSuperview()
+        tableView.reloadData()
     }
 }
 
@@ -101,8 +97,7 @@ private extension MenuScreenVC {
 extension MenuScreenVC: ProductCellDelegate {
     
     func fetchAllProducts() {
-        showSkeletonLoading()
-        
+
         productsDB.fetchAllProducts { [weak self] result in
             guard let self = self else { return }
             switch result {
