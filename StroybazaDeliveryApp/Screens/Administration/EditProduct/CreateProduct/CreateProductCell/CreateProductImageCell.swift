@@ -1,5 +1,5 @@
 //  CreateProdectCellTableViewCell.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 10/10/23.
 
 import UIKit

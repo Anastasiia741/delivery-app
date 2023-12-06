@@ -1,6 +1,6 @@
 //  Product.swift
-//  CakeDeliveryApp
-//  Created by Анастасия Набатова on 2/8/23.
+//  StroybazaDeliveryApp
+//  Created by Анастасия Набатова on 6/12/23.
 
 import Foundation
 import FirebaseFirestore

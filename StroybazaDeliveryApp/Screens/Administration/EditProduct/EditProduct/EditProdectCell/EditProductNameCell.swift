@@ -1,5 +1,5 @@
 //  EditProductNameCell.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 11/10/23.
 
 import UIKit

@@ -1,5 +1,5 @@
 //  ActivityIndicator.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 7/9/23.
 
 import UIKit

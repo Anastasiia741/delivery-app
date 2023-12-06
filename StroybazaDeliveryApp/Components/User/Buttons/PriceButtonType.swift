@@ -1,5 +1,5 @@
 //  PriceButtonType.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 2/8/23.
 
 import UIKit

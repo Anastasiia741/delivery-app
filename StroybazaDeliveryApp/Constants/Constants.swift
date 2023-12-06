@@ -1,5 +1,5 @@
 //  Constants.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Artur Igberdin on 12.09.2023.
 
 import UIKit

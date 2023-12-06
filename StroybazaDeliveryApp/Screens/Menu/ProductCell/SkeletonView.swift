@@ -1,10 +1,10 @@
 //  SkeletonView.swift
-//  CakeDeliveryApp
+//  StroybazaDeliveryApp
 //  Created by Анастасия Набатова on 2/12/23.
 
 import UIKit
 
-class SkeletonView: UIView {
+final class SkeletonView: UIView {
     
     //MARK: - UI
     private let nameLabelFirst = MainTitleLabel(style: MainTitleType.productSkeleton)
@@ -23,30 +23,23 @@ class SkeletonView: UIView {
     private let priceButtonThird = PriceButton(style: PriceButtonType.colorSkeleton)
     
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupViews()
-//        setupConstraints()
-//        setupGradientAnimation()
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        setupGradientAnimation()
-//
-//    }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension SkeletonView {
+   
+    private func commonInit() {
+        setupViews()
+        setupConstraints()
+        setupGradientAnimation()
+    }
     
     func startSkeletonAnimation() {
         for subview in subviews {
@@ -88,7 +81,6 @@ private extension SkeletonView {
         
         if let previousGroup = previousGroup {
             group.beginTime = previousGroup.beginTime + 0.33
-            
         }
         
         return group
@@ -110,7 +102,6 @@ private extension SkeletonView {
  
     func setupViews() {
         backgroundColor = .white
-        
         addSubview(productImageViewFirst)
         addSubview(nameLabelFirst)
         addSubview(detailLabelFirst)
@@ -138,7 +129,6 @@ private extension SkeletonView {
             make.height.equalTo(30)
             make.width.equalTo(200)
         }
-        
         
         priceButtonFirst.snp.makeConstraints { make in
             make.top.equalTo(detailLabelFirst.snp.bottom).offset(16)
