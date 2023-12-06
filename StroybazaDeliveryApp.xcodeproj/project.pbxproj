@@ -76,6 +76,7 @@
 		719AA6282AB35CF300B03114 /* ProductsPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719AA6272AB35CF300B03114 /* ProductsPosition.swift */; };
 		719AA62A2AB361E100B03114 /* OrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719AA6292AB361E100B03114 /* OrderStatus.swift */; };
 		71A50E372ACC433A00369620 /* DBServiceProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A50E362ACC433A00369620 /* DBServiceProfile.swift */; };
+		71B3F9B12B20B0DA00608742 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71B3F9B02B20B0DA00608742 /* GoogleService-Info.plist */; };
 		71C0E3A02AE994FF00DF7A35 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E39F2AE994FF00DF7A35 /* FirebaseAuth */; };
 		71C0E3A22AE994FF00DF7A35 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A12AE994FF00DF7A35 /* FirebaseDatabase */; };
 		71C0E3A42AE994FF00DF7A35 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A32AE994FF00DF7A35 /* FirebaseDatabaseSwift */; };
@@ -86,7 +87,6 @@
 		71D8D24E2AF290A000A301D7 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D8D24D2AF290A000A301D7 /* Alerts.swift */; };
 		71D8D2502AF2AF2D00A301D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D8D24F2AF2AF2D00A301D7 /* Reachability.swift */; };
 		71DB3AB62A9631EA00C781C5 /* TitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DB3AB52A9631EA00C781C5 /* TitleTextView.swift */; };
-		71F057922B1DDDBF009D18A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F057912B1DDDBF009D18A0 /* GoogleService-Info.plist */; };
 		71F487CB2AD309D300C3807E /* DBServiceProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487CA2AD309D300C3807E /* DBServiceProducts.swift */; };
 		71F487EE2AD55E2700C3807E /* CreateProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487ED2AD55E2700C3807E /* CreateProductImageCell.swift */; };
 		71F487F02AD56FF800C3807E /* CreateProductNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487EF2AD56FF800C3807E /* CreateProductNameCell.swift */; };
@@ -165,11 +165,11 @@
 		719AA6272AB35CF300B03114 /* ProductsPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsPosition.swift; sourceTree = "<group>"; };
 		719AA6292AB361E100B03114 /* OrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatus.swift; sourceTree = "<group>"; };
 		71A50E362ACC433A00369620 /* DBServiceProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBServiceProfile.swift; sourceTree = "<group>"; };
+		71B3F9B02B20B0DA00608742 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71C0E3932AE98DFB00DF7A35 /* StroybazaDeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StroybazaDeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D8D24D2AF290A000A301D7 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		71D8D24F2AF2AF2D00A301D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		71DB3AB52A9631EA00C781C5 /* TitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextView.swift; sourceTree = "<group>"; };
-		71F057912B1DDDBF009D18A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71F487CA2AD309D300C3807E /* DBServiceProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBServiceProducts.swift; sourceTree = "<group>"; };
 		71F487ED2AD55E2700C3807E /* CreateProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductImageCell.swift; sourceTree = "<group>"; };
 		71F487EF2AD56FF800C3807E /* CreateProductNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductNameCell.swift; sourceTree = "<group>"; };
@@ -451,7 +451,7 @@
 			children = (
 				718800C92A7A5C0100F7C948 /* LaunchScreen.storyboard */,
 				718800C72A7A5C0100F7C948 /* Assets.xcassets */,
-				71F057912B1DDDBF009D18A0 /* GoogleService-Info.plist */,
+				71B3F9B02B20B0DA00608742 /* GoogleService-Info.plist */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -712,8 +712,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				718800CB2A7A5C0100F7C948 /* LaunchScreen.storyboard in Resources */,
-				71F057922B1DDDBF009D18A0 /* GoogleService-Info.plist in Resources */,
 				718800C82A7A5C0100F7C948 /* Assets.xcassets in Resources */,
+				71B3F9B12B20B0DA00608742 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,11 +938,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3X6Y8XCTP6;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 9N6US9U86T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StroybazaDeliveryApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = " Stroybaza";
+				INFOPLIST_KEY_CFBundleDisplayName = Stroybaza;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSCameraUsageDescription = Camera;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Library;
@@ -955,8 +955,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.StroybazaDeliveryApp;
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.stroybazadostavkaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -973,11 +973,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3X6Y8XCTP6;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 9N6US9U86T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StroybazaDeliveryApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = " Stroybaza";
+				INFOPLIST_KEY_CFBundleDisplayName = Stroybaza;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSCameraUsageDescription = Camera;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Library;
@@ -990,8 +990,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.StroybazaDeliveryApp;
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.stroybazadostavkaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

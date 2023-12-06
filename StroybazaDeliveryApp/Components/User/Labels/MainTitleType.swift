@@ -93,7 +93,8 @@ final class MainTitleLabel: UILabel {
             let underlineAttributedString = NSAttributedString(string: self.text ?? "", attributes: underlineAttribute)
             self.attributedText = underlineAttributedString
         case .productSkeleton:
-            self.text = "Shimmer"
+            self.text = ""
+            self.backgroundColor = .lightGray
         }
     }
 }

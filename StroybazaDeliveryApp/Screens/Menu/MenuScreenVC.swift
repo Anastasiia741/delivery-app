@@ -52,11 +52,9 @@ final class MenuScreenVC: UIViewController {
         tableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.reuseId)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.reuseID)
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.reuseId)
-        
-        
         return tableView
     }()
-    private var isUpdatingTable = false
+    private let isLoaded = true
     
     //MARK: - Life Curcle
     override func viewDidLoad() {
@@ -67,11 +65,8 @@ final class MenuScreenVC: UIViewController {
         setupConstraints()
         
         showSkeletonLoading()
-        skeletonView.startSkeletonAnimation()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.fetchAllProducts()
-        }
+        fetchAllProducts()
+        
     }
 }
 
@@ -97,21 +92,23 @@ private extension MenuScreenVC {
 extension MenuScreenVC: ProductCellDelegate {
     
     func fetchAllProducts() {
-
-        productsDB.fetchAllProducts { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case.success((let products, let categories)):
-                banners = products.filter { $0.category == CategoryName.discount }
-                newCategories = categories
-                if let defaultCategory = categories.first(where: { $0.category == CategoryName.armature}) {
-                    fetchProducts(for: defaultCategory)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            
+            self.productsDB.fetchAllProducts { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case.success((let products, let categories)):
+                    banners = products.filter { $0.category == CategoryName.discount }
+                    newCategories = categories
+                    if let defaultCategory = categories.first(where: { $0.category == CategoryName.armature}) {
+                        fetchProducts(for: defaultCategory)
+                    }
+                    selectedCategory = newCategories.first
+                    self.hideSkeletonLoading()
+                    
+                case .failure(let error):
+                    print("Ошибка при загрузке баннеров: \(error)")
                 }
-                selectedCategory = newCategories.first
-                self.hideSkeletonLoading()
-                
-            case .failure(let error):
-                print("Ошибка при загрузке баннеров: \(error)")
             }
         }
     }
@@ -232,23 +229,24 @@ extension MenuScreenVC: UITableViewDataSource, UITableViewDelegate {
                 self?.categoryCellTapped(category)
             }
             return cell
+        
         case .products:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
-            let product = products[indexPath.row]
-            cell.selectionStyle = .none
-            
-            if let selectedCategory = selectedCategory, product.category == selectedCategory.category {
-                cell.update(withProduct: product)
-                cell.delegate = self
-            } else {
-                cell.isHidden = true
-            }
-            return cell
-            
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
+                let product = products[indexPath.row]
+                cell.selectionStyle = .none
+                if let selectedCategory = selectedCategory, product.category == selectedCategory.category {
+                    cell.update(withProduct: product)
+                    cell.delegate = self
+                } else {
+                    cell.isHidden = true
+                }
+                return cell
         default:
             return UITableViewCell()
         }
+            
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = MenuSection(rawValue: indexPath.section)

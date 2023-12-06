@@ -8,7 +8,7 @@ import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private let appId = "6473628112"
+    private let appId = "6473831252"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         

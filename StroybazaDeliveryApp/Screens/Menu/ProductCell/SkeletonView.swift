@@ -12,7 +12,7 @@ final class SkeletonView: UIView {
     private let productImageViewFirst = ProductImageView(style: ProductImageType.menuSkeleton)
     private let priceButtonFirst = PriceButton(style: PriceButtonType.colorSkeleton)
     
-    //TASK: - 
+    //TASK: -
     private let nameLabelSecond = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let detailLabelSecond = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let productImageViewSecond  = ProductImageView(style: ProductImageType.menuSkeleton)
@@ -21,7 +21,6 @@ final class SkeletonView: UIView {
     private let detailLabelThird = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let productImageViewThird = ProductImageView(style: ProductImageType.menuSkeleton)
     private let priceButtonThird = PriceButton(style: PriceButtonType.colorSkeleton)
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,7 +33,7 @@ final class SkeletonView: UIView {
 }
 
 extension SkeletonView {
-   
+    
     private func commonInit() {
         setupViews()
         setupConstraints()
@@ -52,14 +51,24 @@ extension SkeletonView {
 private extension SkeletonView {
     
     private func setupGradientAnimation() {
+        
         applyGradient(to: productImageViewFirst)
         applyGradient(to: nameLabelFirst)
         applyGradient(to: detailLabelFirst)
         applyGradient(to: priceButtonFirst)
+        
+        applyGradient(to: nameLabelSecond)
+        applyGradient(to: nameLabelSecond)
+        applyGradient(to: detailLabelSecond)
+        applyGradient(to: priceButtonSecond)
+        
+        applyGradient(to: productImageViewThird)
+        applyGradient(to: nameLabelThird)
+        applyGradient(to: detailLabelThird)
+        applyGradient(to: priceButtonThird)
     }
     
-    
-    func makeAnimationGroup(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
+    private func makeAnimationGroup(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
         let animDuration: CFTimeInterval = 1.5
         let anim1 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
         anim1.fromValue = UIColor.gradientLightGrey.cgColor
@@ -76,67 +85,137 @@ private extension SkeletonView {
         let group = CAAnimationGroup()
         group.animations = [anim1, anim2]
         group.repeatCount = .greatestFiniteMagnitude
-        group.duration = anim2.beginTime + anim2.duration
+        group.duration = anim2.beginTime + anim2.duration + 0.33
         group.isRemovedOnCompletion = false
         
         if let previousGroup = previousGroup {
             group.beginTime = previousGroup.beginTime + 0.33
         }
-        
         return group
     }
     
-    
     private func applyGradient(to view: UIView) {
         let gradient = CAGradientLayer()
-
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
         gradient.cornerRadius = 8
         gradient.frame = view.bounds
+        gradient.colors = [UIColor.gradientLightGrey.cgColor, UIColor.gradientDarkGrey.cgColor]
+        gradient.locations = [0.0, 1.0]
+        
         let animationGroup = makeAnimationGroup()
+        animationGroup.beginTime = 0.0
         view.layer.cornerRadius = 8
+        
+        view.layer.masksToBounds = true
         view.layer.addSublayer(gradient)
-
+        
         gradient.add(animationGroup, forKey: "backgroundColor")
     }
     
- 
     func setupViews() {
         backgroundColor = .white
+        
         addSubview(productImageViewFirst)
         addSubview(nameLabelFirst)
         addSubview(detailLabelFirst)
         addSubview(priceButtonFirst)
         
+        addSubview(productImageViewSecond)
+        addSubview(nameLabelSecond)
+        addSubview(detailLabelSecond)
+        addSubview(priceButtonSecond)
+        
+        addSubview(productImageViewThird)
+        addSubview(nameLabelThird)
+        addSubview(detailLabelThird)
+        addSubview(priceButtonThird)
     }
     
     func setupConstraints() {
+        let spacing: CGFloat = 16
         
         productImageViewFirst.snp.makeConstraints { make in
-            make.left.top.equalTo(self).offset(16)
+            make.left.top.equalTo(self).offset(spacing)
             make.width.height.equalTo(100)
         }
         
         nameLabelFirst.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(16)
-            make.left.equalTo(productImageViewFirst.snp.right).offset(16)
+            make.top.equalTo(self).offset(spacing)
+            make.left.equalTo(productImageViewFirst.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(230)
         }
         
         detailLabelFirst.snp.makeConstraints { make in
-            make.top.equalTo(nameLabelFirst.snp.bottom).offset(16)
-            make.left.equalTo(productImageViewFirst.snp.right).offset(16)
+            make.top.equalTo(nameLabelFirst.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewFirst.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(200)
         }
         
         priceButtonFirst.snp.makeConstraints { make in
-            make.top.equalTo(detailLabelFirst.snp.bottom).offset(16)
-            make.right.equalTo(self).inset(16)
-            make.height.equalTo(35)
-            make.width.equalTo(130)
+            make.top.equalTo(detailLabelFirst.snp.bottom).offset(spacing)
+            make.right.equalTo(self).inset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+        }
+        
+        productImageViewSecond.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonFirst.snp.bottom).offset(spacing)
+            make.left.equalTo(self).offset(spacing)
+            make.width.height.equalTo(100)
+        }
+        
+        nameLabelSecond.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonFirst.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewSecond.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(230)
+        }
+        
+        detailLabelSecond.snp.makeConstraints { make in
+            make.top.equalTo(nameLabelSecond.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewSecond.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(200)
+        }
+        
+        priceButtonSecond.snp.makeConstraints { make in
+            make.top.equalTo(detailLabelSecond.snp.bottom).offset(spacing)
+            make.right.equalTo(self).inset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+        }
+        
+        productImageViewThird.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonSecond.snp.bottom).offset(spacing)
+            make.left.equalTo(self).offset(spacing)
+            make.width.height.equalTo(100)
+        }
+        
+        nameLabelThird.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonSecond.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewThird.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(230)
+        }
+        
+        detailLabelThird.snp.makeConstraints { make in
+            make.top.equalTo(nameLabelThird.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewThird.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(200)
+        }
+        
+        priceButtonThird.snp.makeConstraints { make in
+            make.top.equalTo(detailLabelThird.snp.bottom).offset(spacing)
+            make.right.equalTo(self).inset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
         }
     }
+    
 }
 
 extension UIColor {
