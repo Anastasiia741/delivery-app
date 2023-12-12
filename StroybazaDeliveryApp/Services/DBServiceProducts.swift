@@ -28,7 +28,7 @@ final class DBServiceProducts {
         }
     }
     
-    //MARK: - Fetch and monitor changes of products from firebase
+//  MARK: - Fetch and monitor changes of products from firebase
     func fetchAllProducts(completion: @escaping (Result<([Product], [Category]), Error>) -> Void)  {
         DispatchQueue.global().async {
             self.listenerRegistation?.remove()
@@ -70,7 +70,118 @@ final class DBServiceProducts {
         print("listener registation remove")
     }
     
-    //MARK: - Сreate new product
+//  MARK: - Сreate new product
+//    func create(product: Product, completion: @escaping (Error?) -> Void) {
+//        let newProduct = product
+//        newProduct.id = UUID().hashValue
+//        do {
+//            let newDocumentRef = try productCollection.addDocument(from: newProduct)
+//            newProduct.documentID = newDocumentRef.documentID
+//            
+//            print("Новый документ успешно создан. ID: \(newDocumentRef.documentID)")
+//            update(product: newProduct, completion: completion)
+//        } catch {
+//            print("Ошибка при создании нового документа. Error: \(error.localizedDescription)")
+//            completion(error)
+//        }
+//    }
+//    
+    
+    
+//  MARK: - Сreate product content
+//    func update(product: Product, completion: @escaping (Error?) -> Void) {
+//        _ = "gs://souvenir-shop-716eb.appspot.com/productImages/default.jpg"
+//        let productID = product.id
+//        productCollection.whereField("id", isEqualTo: productID).getDocuments { (querySnapshot, error) in
+//            if let error = error {
+//                print("Ошибка поиска документа по ID: \(productID). Ошибка: \(error.localizedDescription)")
+//                completion(error)
+//            } else if let snapshot = querySnapshot, !snapshot.isEmpty {
+//                let document = snapshot.documents.first
+//                let uniqueImageURL = "gs://souvenir-shop-716eb.appspot.com/productImages/\(productID).jpg"
+//                document?.reference.updateData([
+//                    "name": product.name,
+//                    "category": product.category,
+//                    "detail": product.detail,
+//                    "description": product.description,
+//                    "price": product.price,
+//                    "image": uniqueImageURL,
+//                    "quantity": product.quantity
+//                ]) { error in
+//                    if let error = error {
+//                        print("Ошибка обновления документа: \(productID). Ошибка: \(error.localizedDescription)")
+//                        completion(error)
+//                    } else {
+//                        print("Документ успешно обновлен. ID: \(productID)")
+//                        completion(nil)
+//                    }
+//                }
+//            } else {
+//                print("Документ с ID \(productID) не найден.")
+//                completion(error)
+//            }
+//        }
+//    }
+//    
+    
+    
+//  MARK: - Save image in storage
+//    func saveImage(_ imageData: Data, nameImg: String, completion: @escaping (_ imageLink: String?) -> Void) {
+//        let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/productImages/\(nameImg)")
+//        
+//        _ = storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+//            if let error = error {
+//                print("Ошибка загрузки: ", error)
+//                completion(nil)
+//            } else {
+//                storageRef.downloadURL { (url, error) in
+//                    if let error = error {
+//                        print("Ошибка получения URL: ", error.localizedDescription)
+//                        completion(nil)
+//                    } else if let downloadURL = url {
+//                        print("-----> Успешно")
+//
+//                        completion(downloadURL.absoluteString)
+//                    } else {
+//                        print("URL не найден.")
+//                        completion(nil)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    
+    
+//  MARK: - update product image for firestore and save in storage
+//    func updateImage(_ image: UIImage, _ imageURL: String, completion: @escaping (String?) -> Void) {
+//        let imageRef = Storage.storage().reference(forURL: imageURL)
+//        
+//        if let imageData = image.jpegData(compressionQuality: 0.8) {
+//            imageRef.putData(imageData, metadata: nil) { (_, error) in
+//                if let error = error {
+//                    print("Ошибка при загрузке нового изображения в Firebase Storage: \(error.localizedDescription)")
+//                    completion(nil)
+//                } else {
+//                    print("Изображение успешно загружено по ссылке: \(imageURL)")
+//                    imageRef.downloadURL { (url, error) in
+//                        if let url = url {
+//                            let newImageURL = url.absoluteString
+//                            print("Новая ссылка на изображение: \(newImageURL)")
+//                            completion(newImageURL)
+//                        } else {
+//                            print("Ошибка при получении новой URL изображения: \(String(describing: error?.localizedDescription))")
+//                            completion(nil)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        
+//    }
+    
+    
+    
+//  MARK: - Сreate new product
     func create(product: Product, completion: @escaping (Error?) -> Void) {
         let newProduct = product
         newProduct.id = UUID().hashValue
@@ -86,67 +197,42 @@ final class DBServiceProducts {
         }
     }
     
-    //MARK: - Update product content
+//  MARK: - Сreate product content
     func update(product: Product, completion: @escaping (Error?) -> Void) {
-        _ = "gs://souvenir-shop-716eb.appspot.com/productImages/default.jpg"
-        let productID = product.id
-        productCollection.whereField("id", isEqualTo: productID).getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Ошибка поиска документа по ID: \(productID). Ошибка: \(error.localizedDescription)")
-                completion(error)
-            } else if let snapshot = querySnapshot, !snapshot.isEmpty {
-                let document = snapshot.documents.first
-                let uniqueImageURL = "gs://souvenir-shop-716eb.appspot.com/productImages/\(productID).jpg"
-                document?.reference.updateData([
-                    "name": product.name,
-                    "category": product.category,
-                    "detail": product.detail,
-                    "description": product.description,
-                    "price": product.price,
-                    "image": uniqueImageURL,
-                    "quantity": product.quantity
-                ]) { error in
-                    if let error = error {
-                        print("Ошибка обновления документа: \(productID). Ошибка: \(error.localizedDescription)")
-                        completion(error)
-                    } else {
-                        print("Документ успешно обновлен. ID: \(productID)")
-                        completion(nil)
-                    }
-                }
-            } else {
-                print("Документ с ID \(productID) не найден.")
-                completion(error)
-            }
-        }
-    }
+           _ = "gs://souvenir-shop-716eb.appspot.com/productImages/default.jpg"
+           let productID = product.id
+           productCollection.whereField("id", isEqualTo: productID).getDocuments { (querySnapshot, error) in
+               if let error = error {
+                   print("Ошибка поиска документа по ID: \(productID). Ошибка: \(error.localizedDescription)")
+                   completion(error)
+               } else if let snapshot = querySnapshot, !snapshot.isEmpty {
+                   let document = snapshot.documents.first
+                   let uniqueImageURL = "gs://souvenir-shop-716eb.appspot.com/productImages/\(productID).jpg"
+                   document?.reference.updateData([
+                       "name": product.name,
+                       "category": product.category,
+                       "detail": product.detail,
+                       "description": product.description,
+                       "price": product.price,
+                       "image": uniqueImageURL,
+                       "quantity": product.quantity
+                   ]) { error in
+                       if let error = error {
+                           print("Ошибка обновления документа: \(productID). Ошибка: \(error.localizedDescription)")
+                           completion(error)
+                       } else {
+                           print("Документ успешно обновлен. ID: \(productID)")
+                           completion(nil)
+                       }
+                   }
+               } else {
+                   print("Документ с ID \(productID) не найден.")
+                   completion(error)
+               }
+           }
+       }
     
-    //MARK: - Upload image in firestore
-    func upload(image: UIImage?, url: String, completion: @escaping (String?, Error?) -> Void) {
-        
-        //        if currentReachabilityStatus == .notReachable {
-        //                    print("Нет подключения к сети интернет!")
-        //                }
-        //
-        guard let image = image,
-              let imageData = image.jpegData(compressionQuality: 0.5) else {
-            
-            completion(nil, nil)
-            return
-        }
-        
-        let fileName = UUID().uuidString + url + ".jpg"
-        
-        save(imageData: imageData, nameImg: fileName) { imageLink in
-            if let imageLink = imageLink {
-                completion(imageLink, nil)
-            } else {
-                completion(nil, nil)
-            }
-        }
-    }
-    
-    //MARK: - Upload image in storage
+    //MARK: - Save image in storage
     func save(imageData: Data, nameImg: String, completion: @escaping (_ imageLink: String?) -> Void) {
         let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/productImages").child(nameImg)
         
@@ -167,7 +253,29 @@ final class DBServiceProducts {
         }
     }
     
-    //MARK: - Update image
+    //MARK: - Upload imagelink in firestore
+    func upload(image: UIImage?, url: String, completion: @escaping (String?, Error?) -> Void) {
+        
+        guard let image = image,
+              let imageData = image.jpegData(compressionQuality: 0.5) else {
+            
+            completion(nil, nil)
+            return
+        }
+        
+        let fileName = UUID().uuidString + url + ".jpg"
+        
+        save(imageData: imageData, nameImg: fileName) { imageLink in
+            if let imageLink = imageLink {
+                completion(imageLink, nil)
+            } else {
+                completion(nil, nil)
+            }
+        }
+    }
+    
+    
+    //MARK: - Upload new image for firebase
     func uploadImageToFirebase(_ image: UIImage, _ imageURL: String, completion: @escaping (String?) -> Void) {
         let imageRef = Storage.storage().reference(forURL: imageURL)
         
@@ -190,10 +298,11 @@ final class DBServiceProducts {
                     }
                 }
             }
+            
         }
     }
-    
-    //MARK: - Upload New Image
+
+    //MARK: - Upload new imagelink for storage
     func uploadNewImage(_ selectedImage: UIImage, _ imageName: String, completion: @escaping (String?, Error?) -> Void) {
         guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else {
             completion(nil, nil)

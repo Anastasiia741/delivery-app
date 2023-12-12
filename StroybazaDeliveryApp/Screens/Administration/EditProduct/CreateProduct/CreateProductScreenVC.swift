@@ -50,7 +50,6 @@ final class CreateProductScreenVC: UIViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setupAction()
         setupConstraints()
@@ -75,6 +74,12 @@ private extension CreateProductScreenVC {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
+    func removeKeyboard() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
     
     @objc func keyboardWillHide() {
         self.view.frame.origin.y = 0
@@ -86,11 +91,6 @@ private extension CreateProductScreenVC {
         }
     }
     
-    func removeKeyboard() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
 }
 
 //MARK: - Navigation
@@ -98,7 +98,6 @@ private extension CreateProductScreenVC {
     
     func setupAction() {
         saveView.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
@@ -221,6 +220,7 @@ extension CreateProductScreenVC {
             quantity: 1
         )
         
+        
         if let selectedImage = selectedImage,  let imageURL = imageURL {
             productsDB.upload(image: selectedImage, url: imageURL) { [weak self] imageURL, error in
                 DispatchQueue.main.async {
@@ -241,6 +241,35 @@ extension CreateProductScreenVC {
             self.createProduct(newProduct)
         }
     }
+        
+        
+//
+//        if let selectedImage = selectedImage {
+//            let fileName = UUID().uuidString + ".jpg"
+//            if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
+//                productsDB.saveImage(imageData, nameImg: fileName) { imageLink in
+//                    
+//                    DispatchQueue.main.async {
+//                        self.activityIndicator.stopAnimating()
+//                    }
+//                    
+//                    if let imageLink = imageLink {
+//                        newProduct.image = imageLink
+//                        print("-----> Unique Image URL: \(imageLink)")
+//
+////                        print("Изображение успешно загружено")
+//                        self.createProduct(newProduct)
+//                    } else  {
+//                        print("Ошибка при загрузке изображения:")
+//                        self.showErrorAlert()
+//                    }
+//                }
+//            } else {
+////                self.createProduct(newProduct)
+//                showErrorAlert()
+//            }
+//        }
+//    }
 }
 
 //MARK: - Layout

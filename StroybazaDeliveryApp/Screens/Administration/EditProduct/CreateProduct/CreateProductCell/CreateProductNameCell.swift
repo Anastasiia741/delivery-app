@@ -69,7 +69,7 @@ extension CreateProductNameCell {
         categoryTextField.text = ""
         priceTextField.text = ""
     }
-        
+    
     @objc private func textFieldDidChange(_ textField: UITextField) {
         if let name = nameTextField.text, let category = categoryTextField.text, let price = priceTextField.text {
             delegate?.didUpdateProductInfo(name, category.lowercased(), price)

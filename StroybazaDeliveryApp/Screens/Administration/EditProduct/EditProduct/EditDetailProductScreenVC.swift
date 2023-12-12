@@ -39,7 +39,6 @@ final class EditDetailProductScreenVC: UIViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setupStyles()
         setupAction()
@@ -60,7 +59,6 @@ final class EditDetailProductScreenVC: UIViewController {
 
 //MARK: - Bussiness logic
 private extension EditDetailProductScreenVC {
-    
     func updateProductInfo() {
         if selectedProduct != nil {
             tableView.reloadData()
@@ -177,8 +175,6 @@ extension EditDetailProductScreenVC: EditProductDelegate, EditProductDescription
     }
     
     @objc func saveButtonTapped() {
-        print("Button save tapped!")
-        
         guard let selectedProduct = selectedProduct else { return }
         
         productsDB.update(product: selectedProduct) { [weak self] error in
@@ -187,18 +183,22 @@ extension EditDetailProductScreenVC: EditProductDelegate, EditProductDescription
             } else {
                 print("Данные сохранены: \(selectedProduct)")
                 self?.showSuccessAlert()
+                
                 if self?.isImageChange == true {
-                    guard let selectedImage = self?.selectedImage, let imageURL = selectedProduct.image else { return }
+                    guard let selectedImage = self?.selectedImage else { return }
                     
-                    self?.productsDB.uploadImageToFirebase(selectedImage, imageURL) { imageURL in
-                        if let imageURL = imageURL {
+                    let imageURL = selectedProduct.image ?? "gs://souvenir-shop-716eb.appspot.com/productImages/"
+                    
+                    self?.productsDB.uploadImageToFirebase(selectedImage, imageURL) { newImageURL in
+                        if newImageURL != nil {
                             self?.selectedProduct?.image = imageURL
                             self?.showSuccessAlert()
                         } else {
-                            print("Ошибка при загрузке изображения в Firebase Storage.")
+                            print("Ошибка при загрузке изображения.")
                         }
                     }
                 }
+                
             }
         }
     }

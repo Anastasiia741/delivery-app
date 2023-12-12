@@ -22,7 +22,7 @@ final class CartCell: UITableViewCell {
     private let stepperView = CustomStepper()
     private let stepperContainerView = UIView ()
     var onProductChanged: ((Product, Int)->())?
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -102,7 +102,7 @@ private extension CartCell {
         
         priceLabel.snp.makeConstraints { make in
             make.left.equalTo(horizontalStackView)
-            make.centerY.equalTo(horizontalStackView)
+            make.centerY.equalTo(contentView.safeAreaLayoutGuide).offset(16)
         }
         
         stepperContainerView.snp.makeConstraints { make in

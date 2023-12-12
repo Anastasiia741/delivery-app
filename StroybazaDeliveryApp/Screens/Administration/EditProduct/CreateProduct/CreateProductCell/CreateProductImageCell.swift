@@ -29,7 +29,6 @@ final class CreateProductImageCell: UITableViewCell, UINavigationControllerDeleg
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupConstraints()
         setupAction()
@@ -53,18 +52,23 @@ extension CreateProductImageCell: UIImagePickerControllerDelegate {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
     private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         imagePicker.sourceType = sourceType
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
         
-        if let topViewController = UIApplication.shared.keyWindow?.rootViewController {
-            topViewController.present(imagePicker, animated: true, completion: nil)
+        var responder: UIResponder? = contentView
+        while responder != nil && !(responder is UIViewController) {
+            responder = responder?.next
         }
+        
+        if let viewController = responder as? UIViewController {
+            viewController.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -72,17 +76,13 @@ extension CreateProductImageCell: UIImagePickerControllerDelegate {
 private extension CreateProductImageCell {
     
     func showAlertImage() {
-        
         let alertController = UIAlertController(title: AlertMessage.imageTitle, message: nil, preferredStyle: .actionSheet)
-        
         let galleryAction = UIAlertAction(title: AlertMessage.galeryAction, style: .default) { [weak self] _ in
             self?.showImagePicker(sourceType: .photoLibrary)
         }
-        
         let cameraAction = UIAlertAction(title: AlertMessage.photoAction, style: .default) { [weak self] _ in
             self?.showImagePicker(sourceType: .camera)
         }
-        
         let cancelAction = UIAlertAction(title: AlertMessage.cancelAction, style: .cancel, handler: nil)
         
         alertController.addAction(galleryAction)
@@ -96,6 +96,8 @@ private extension CreateProductImageCell {
         selectImageFromGallery()
     }
     
+    
+    //MARK: - Fix
     func selectImageFromGallery() {
         
         if let selectedImage = selectedImage {
@@ -111,7 +113,6 @@ private extension CreateProductImageCell {
     }
     
     func setupAction() {
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(productImageTapped))
         productImage.isUserInteractionEnabled = true
         productImage.addGestureRecognizer(tapGesture)
@@ -124,8 +125,7 @@ private extension CreateProductImageCell {
 
 
 //MARK: - Bussines Logic
- extension CreateProductImageCell {
-    
+extension CreateProductImageCell {
     @objc func imageDidChange() {
         productImage.image = UIImage(named: Images.Picture.productImage)
     }
@@ -140,12 +140,10 @@ private extension CreateProductImageCell {
     }
     
     func setupConstraints() {
-        
         productImage.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).inset(20)
             make.bottom.equalTo(contentView.snp.bottom).inset(20)
             make.centerX.equalTo(contentView.snp.centerX)
         }
     }
-    
 }

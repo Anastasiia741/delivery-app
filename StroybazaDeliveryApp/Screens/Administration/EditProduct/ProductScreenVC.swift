@@ -64,9 +64,9 @@ class ProductScreenVC: UIViewController {
         fetchAllProducts()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        fetchAllProducts()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchAllProducts()
     }
 }
 
