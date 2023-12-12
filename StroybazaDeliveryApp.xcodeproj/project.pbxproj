@@ -76,7 +76,6 @@
 		719AA6282AB35CF300B03114 /* ProductsPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719AA6272AB35CF300B03114 /* ProductsPosition.swift */; };
 		719AA62A2AB361E100B03114 /* OrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719AA6292AB361E100B03114 /* OrderStatus.swift */; };
 		71A50E372ACC433A00369620 /* DBServiceProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A50E362ACC433A00369620 /* DBServiceProfile.swift */; };
-		71B3F9B12B20B0DA00608742 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71B3F9B02B20B0DA00608742 /* GoogleService-Info.plist */; };
 		71C0E3A02AE994FF00DF7A35 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E39F2AE994FF00DF7A35 /* FirebaseAuth */; };
 		71C0E3A22AE994FF00DF7A35 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A12AE994FF00DF7A35 /* FirebaseDatabase */; };
 		71C0E3A42AE994FF00DF7A35 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A32AE994FF00DF7A35 /* FirebaseDatabaseSwift */; };
@@ -94,6 +93,7 @@
 		71F487F72AD6A47C00C3807E /* EditProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487F62AD6A47C00C3807E /* EditProductImageCell.swift */; };
 		71F487F92AD6A48B00C3807E /* EditProductNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487F82AD6A48B00C3807E /* EditProductNameCell.swift */; };
 		71F487FB2AD6A49900C3807E /* EditProductDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487FA2AD6A49900C3807E /* EditProductDetailCell.swift */; };
+		71FC1AF72B2351E800292C49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71FC1AF62B2351E800292C49 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,7 +165,6 @@
 		719AA6272AB35CF300B03114 /* ProductsPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsPosition.swift; sourceTree = "<group>"; };
 		719AA6292AB361E100B03114 /* OrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatus.swift; sourceTree = "<group>"; };
 		71A50E362ACC433A00369620 /* DBServiceProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBServiceProfile.swift; sourceTree = "<group>"; };
-		71B3F9B02B20B0DA00608742 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		71C0E3932AE98DFB00DF7A35 /* StroybazaDeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StroybazaDeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D8D24D2AF290A000A301D7 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		71D8D24F2AF2AF2D00A301D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -177,6 +176,7 @@
 		71F487F62AD6A47C00C3807E /* EditProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductImageCell.swift; sourceTree = "<group>"; };
 		71F487F82AD6A48B00C3807E /* EditProductNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductNameCell.swift; sourceTree = "<group>"; };
 		71F487FA2AD6A49900C3807E /* EditProductDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductDetailCell.swift; sourceTree = "<group>"; };
+		71FC1AF62B2351E800292C49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,7 +451,7 @@
 			children = (
 				718800C92A7A5C0100F7C948 /* LaunchScreen.storyboard */,
 				718800C72A7A5C0100F7C948 /* Assets.xcassets */,
-				71B3F9B02B20B0DA00608742 /* GoogleService-Info.plist */,
+				71FC1AF62B2351E800292C49 /* GoogleService-Info.plist */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -712,8 +712,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				718800CB2A7A5C0100F7C948 /* LaunchScreen.storyboard in Resources */,
+				71FC1AF72B2351E800292C49 /* GoogleService-Info.plist in Resources */,
 				718800C82A7A5C0100F7C948 /* Assets.xcassets in Resources */,
-				71B3F9B12B20B0DA00608742 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

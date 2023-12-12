@@ -11,8 +11,6 @@ final class SkeletonView: UIView {
     private let detailLabelFirst = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let productImageViewFirst = ProductImageView(style: ProductImageType.menuSkeleton)
     private let priceButtonFirst = PriceButton(style: PriceButtonType.colorSkeleton)
-    
-    //TASK: -
     private let nameLabelSecond = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let detailLabelSecond = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let productImageViewSecond  = ProductImageView(style: ProductImageType.menuSkeleton)
@@ -40,11 +38,6 @@ extension SkeletonView {
         setupGradientAnimation()
     }
     
-    func startSkeletonAnimation() {
-        for subview in subviews {
-            applyGradient(to: subview)
-        }
-    }
 }
 
 //MARK: - Layout

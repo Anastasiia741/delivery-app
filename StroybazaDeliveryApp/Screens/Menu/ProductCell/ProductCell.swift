@@ -19,7 +19,7 @@ final class ProductCell: UITableViewCell {
     
     //MARK: - Properties
     private var product: Product?
-
+    
     //MARK: - UI
     private let nameLabel = MainTitleLabel(style: MainTitleType.product)
     private let detailLabel = DetaileLabel(style: DetaileLabelType.product)
@@ -97,7 +97,7 @@ extension ProductCell {
 //MARK: - Layout
 private extension ProductCell {
     
-    func setupViews() {   
+    func setupViews() {
         contentView.addSubview(productImageView)
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(nameLabel)
@@ -108,14 +108,15 @@ private extension ProductCell {
     func setupConstraints() {
         
         productImageView.snp.makeConstraints { make in
-            make.left.top.equalTo(contentView).offset(16)
+            make.left.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.centerY.equalTo(contentView)
         }
         
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.left.equalTo(productImageView.snp.right).offset(16)
-            make.right.equalTo(contentView.safeAreaLayoutGuide).offset(16)
+            make.right.equalTo(contentView.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(100)
         }
         
         priceButton.snp.makeConstraints { make in

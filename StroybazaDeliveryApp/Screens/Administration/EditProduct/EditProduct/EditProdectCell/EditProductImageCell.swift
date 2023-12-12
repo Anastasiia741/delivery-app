@@ -83,12 +83,20 @@ extension EditProductImageCell: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     func showImagePicker(sourceType: UIImagePickerController.SourceType) {
+        
         imagePicker.sourceType = sourceType
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
         
-        if let topViewController = UIApplication.shared.keyWindow?.rootViewController {
-            topViewController.present(imagePicker, animated: true, completion: nil)
+        var responder: UIResponder? = contentView
+        while responder != nil && !(responder is UIViewController) {
+            responder = responder?.next
+        }
+        
+        if let viewController = responder as? UIViewController {
+            viewController.present(imagePicker, animated: true, completion: nil)
+        } else {
+            print("UIViewController No found")
         }
     }
 }

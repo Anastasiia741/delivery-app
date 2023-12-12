@@ -59,14 +59,12 @@ final class MenuScreenVC: UIViewController {
     //MARK: - Life Curcle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupStyles()
         setupViews()
         setupConstraints()
         
         showSkeletonLoading()
         fetchAllProducts()
-        
     }
 }
 
@@ -92,7 +90,7 @@ private extension MenuScreenVC {
 extension MenuScreenVC: ProductCellDelegate {
     
     func fetchAllProducts() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
             self.productsDB.fetchAllProducts { [weak self] result in
                 guard let self = self else { return }
@@ -138,7 +136,7 @@ extension MenuScreenVC: ProductCellDelegate {
 
 //MARK: - Navigation
 private extension MenuScreenVC {
-  
+    
     func showDetailScreen(_ product: Product) {
         let viewController = ProductDetailScreenVC()
         viewController.selectedProduct = product
@@ -229,24 +227,24 @@ extension MenuScreenVC: UITableViewDataSource, UITableViewDelegate {
                 self?.categoryCellTapped(category)
             }
             return cell
-        
+            
         case .products:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
-                let product = products[indexPath.row]
-                cell.selectionStyle = .none
-                if let selectedCategory = selectedCategory, product.category == selectedCategory.category {
-                    cell.update(withProduct: product)
-                    cell.delegate = self
-                } else {
-                    cell.isHidden = true
-                }
-                return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
+            let product = products[indexPath.row]
+            cell.selectionStyle = .none
+            if let selectedCategory = selectedCategory, product.category == selectedCategory.category {
+                cell.update(withProduct: product)
+                cell.delegate = self
+            } else {
+                cell.isHidden = true
+            }
+            return cell
         default:
             return UITableViewCell()
         }
-            
+        
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = MenuSection(rawValue: indexPath.section)

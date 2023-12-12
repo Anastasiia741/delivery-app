@@ -66,7 +66,7 @@ private extension CreateProductDetailCell {
         descriptionMainTV.delegate = self
         descriptionDetailTV.delegate = self
     }
-
+    
     func setupConstraints() {
         
         verticalStackView.snp.makeConstraints { make in
