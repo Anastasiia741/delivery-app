@@ -10,7 +10,7 @@ enum CodingKeys: String, CodingKey {
     case id, category, name, detail, description, price, image, imageUrl, quantity
 }
 
-class Product: Codable {
+final class Product: Codable {
     @DocumentID var documentID: String?
     var id = UUID().hashValue
     var name: String

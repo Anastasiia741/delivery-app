@@ -5,10 +5,10 @@
 import Foundation
 
 final class OrderService {
-    
     let productRepository = ProductsRepository()
     var promoсode: String = ""
-    
+
+//  MARK: - Calculate price
     func calculatePrice() -> (Int, Int) {
         var totalPrice = 0
         var totalQuantity = 0
@@ -21,19 +21,18 @@ final class OrderService {
         
         return (totalPrice, totalQuantity)
     }
-    
+  
+//  MARK: - retreive products
     func retreiveProducts() -> [Product] {
         return productRepository.retrieve()
     }
-    
+   
+//  MARK: - update cart products
     func update(_ product: Product, _ count: Int) -> [Product] {
-        
         var products = productRepository.retrieve()
-        
         for (index, item) in products.enumerated() {
             if item.id == product.id {
                 products[index].quantity = count
-                
                 if count == 0 {
                     products.remove(at: index)
                 }
@@ -41,15 +40,13 @@ final class OrderService {
                 break
             }
         }
-        
         return products
     }
-    
+ 
+//  MARK: - add products in cart
     func addProduct(_ product: Product?) -> [Product] {
-        
         guard let product = product else { return [] }
         var products = productRepository.retrieve()
-        
         for (index, item) in products.enumerated() {
             if item.id == product.id {
                 products[index].quantity += 1
@@ -57,16 +54,14 @@ final class OrderService {
                 return products
             }
         }
-        
         products.append(product)
         productRepository.save(products)
-        
         print(products)
         return products
     }
-    
+
+//  MARK: - remove product from cart
     func removeProduct(_ product: Product) -> [Product] {
-        
         var products = productRepository.retrieve()
         for (index, item) in products.enumerated() {
             if item.id == product.id {
@@ -76,5 +71,4 @@ final class OrderService {
         }
         return products
     }
-    
 }

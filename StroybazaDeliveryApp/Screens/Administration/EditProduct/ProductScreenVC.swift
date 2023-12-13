@@ -10,10 +10,9 @@ import FirebaseFirestoreSwift
 
 class ProductScreenVC: UIViewController {
     
-    //MARK: - Service
+//  MARK: - Service
     private let productsDB = DBServiceProducts.shared
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var selectedProduct: Product?
     private var selectedCategory: Category? {
         didSet {
@@ -35,8 +34,7 @@ class ProductScreenVC: UIViewController {
             tableView.reloadData()
         }
     }
-    
-    //MARK: - UI
+//  MARK: - UI
     private let activityIndicator = ActivityIndicator(style: .medium)
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -54,10 +52,9 @@ class ProductScreenVC: UIViewController {
     }()
     private var isUpdatingTable = false
     
-    //MARK: - Life Cycle
+//  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setupStyles()
         setupConstraints()
@@ -70,11 +67,10 @@ class ProductScreenVC: UIViewController {
     }
 }
 
-//MARK: - Activity Indicator
+//  MARK: - Activity Indicator
 private extension ProductScreenVC {
     
     func showLoadingIndicator() {
-        
         DispatchQueue.main.async {
             self.view.addSubview(self.activityIndicator)
             self.activityIndicator.center = self.view.center
@@ -83,7 +79,6 @@ private extension ProductScreenVC {
     }
     
     func hideLoadingIndicator() {
-        
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
@@ -91,7 +86,7 @@ private extension ProductScreenVC {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 private extension ProductScreenVC {
     
     func fetchAllProducts() {
@@ -102,7 +97,6 @@ private extension ProductScreenVC {
             case.success((let products, let categories)):
                 banners = products.filter { $0.category == CategoryName.discount }
                 newCategories = categories
-                
                 if let defaultCategory = categories.first(where: { $0.category == CategoryName.armature}) {
                     fetchProducts(for: defaultCategory)
                 }
@@ -129,7 +123,6 @@ private extension ProductScreenVC {
             case .success(let (products, _)):
                 let filteredProducts = products.filter { $0.category == category.category}
                 self?.products = filteredProducts
-                
                 self?.isUpdatingTable = false
                 self?.hideLoadingIndicator()
                 self?.tableView.reloadData()
@@ -143,7 +136,7 @@ private extension ProductScreenVC {
     }
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 extension ProductScreenVC {
     func showDetailScreen(_ product: Product) {
         let viewController = EditDetailProductScreenVC()
@@ -152,7 +145,8 @@ extension ProductScreenVC {
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
-//MARK: - Actions
+
+//  MARK: - Actions
 extension ProductScreenVC {
     private func categoryCellTapped(_ category: Category) {
         selectedCategory = category
@@ -160,7 +154,7 @@ extension ProductScreenVC {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension ProductScreenVC {
     
     func setupViews() {
@@ -179,12 +173,11 @@ private extension ProductScreenVC {
     }
 }
 
-//MARK: - TableViewDataSource, TableViewDelegate
+//  MARK: - TableViewDataSource, TableViewDelegate
 extension ProductScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = MenuSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .category:
             return CellHeight.category
@@ -199,7 +192,6 @@ extension ProductScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = MenuSection.init(rawValue: section)
-        
         switch section {
         case .banner:
             return Sections.productsAdmin
@@ -214,7 +206,6 @@ extension ProductScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = MenuSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .banner:
             let cell = tableView.dequeueReusableCell(withIdentifier: BannerCell.reuseId, for: indexPath) as! BannerCell

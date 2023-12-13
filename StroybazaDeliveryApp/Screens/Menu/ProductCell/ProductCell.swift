@@ -12,15 +12,13 @@ protocol ProductCellDelegate: AnyObject {
 }
 
 final class ProductCell: UITableViewCell {
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.productCell
-    
+//  MARK: - Delegate
     weak var delegate: ProductCellDelegate?
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var product: Product?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let nameLabel = MainTitleLabel(style: MainTitleType.product)
     private let detailLabel = DetaileLabel(style: DetaileLabelType.product)
     private let productImageView = ProductImageView(style: ProductImageType.menu)
@@ -32,7 +30,8 @@ final class ProductCell: UITableViewCell {
         return button
     }()
     var isPriceButtonVisible = true
-    
+ 
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -44,9 +43,8 @@ final class ProductCell: UITableViewCell {
     }
 }
 
-//MARK: - Action
-extension ProductCell {
-    
+//  MARK: - Action
+private extension ProductCell {
     @objc func priceButtonTapped() {
         if let product = product {
             delegate?.priceButtonTapped(for: product)
@@ -65,7 +63,7 @@ extension ProductCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension ProductCell {
     
     override func prepareForReuse() {
@@ -74,7 +72,6 @@ extension ProductCell {
     }
     
     func update(withProduct product: Product) {
-        
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
             imageRef.downloadURL { [weak self] url, error in
@@ -94,9 +91,8 @@ extension ProductCell {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension ProductCell {
-    
     func setupViews() {
         contentView.addSubview(productImageView)
         contentView.addSubview(verticalStackView)
@@ -106,7 +102,6 @@ private extension ProductCell {
     }
     
     func setupConstraints() {
-        
         productImageView.snp.makeConstraints { make in
             make.left.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.centerY.equalTo(contentView)

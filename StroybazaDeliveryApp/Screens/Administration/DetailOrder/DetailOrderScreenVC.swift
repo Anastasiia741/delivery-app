@@ -13,14 +13,13 @@ protocol OrderStatusDelegate: AnyObject {
 
 final class DetailOrderScreenVC: UIViewController {
     
-    //MARK: - Properties
+//  MARK: - Properties
     var user: NewUser?
     var selectOrder: Order?
     private let profileService = DBServiceProfile.shared
     private let orderService = DBServiceOrders.shared
     var orderStatusDelegate: OrderStatusDelegate?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let containerView = ContainerView()
     private let nameLabel = OrderDetailLabel(style: .name)
     private let emailLabel = OrderDetailLabel(style: .email)
@@ -33,34 +32,31 @@ final class DetailOrderScreenVC: UIViewController {
     private let scrollView = UIScrollView()
     private let verticalStackView = StackView(style: .vertical)
     
-    //MARK: - Life Curcle
+//  MARK: - Life Curcle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupStyles()
         setupConstraints()
         setupActions()
+       
         fetchUserProfile()
         fetchOrderDetails()
         fetchOrderStatus()
-        
     }
 }
 
-//MARK: - Event Handler
+//  MARK: - Event Handler
 private extension DetailOrderScreenVC {
-    
     func setupActions() {
         changeStatusButton.addTarget(self, action: #selector(buttonStatusTapped), for: .touchUpInside)
     }
 }
 
-//MARK: - Bussunes logic
+//  MARK: - Bussunes logic
 private extension DetailOrderScreenVC {
-    
     func fetchUserProfile() {
         guard let userID = selectOrder?.userID else { return }
-        
         profileService.getProfile(by: userID) { [weak self] result in
             switch result {
             case .success(let user):
@@ -72,15 +68,14 @@ private extension DetailOrderScreenVC {
         }
     }
     
-    private func updateUserUI() {
-        nameLabel.text = "Имя: \(user?.name ?? "")"
-        emailLabel.text = "Email: \(user?.email ?? "")"
-        addressLabel.text = "Адрес: \(user?.address ?? "")"
-        phoneNumberLabel.text = "Номер телефона: \(user?.phone ?? "")"
-    }
+    func updateUserUI() {
+    nameLabel.text = "Имя: \(user?.name ?? "")"
+    emailLabel.text = "Email: \(user?.email ?? "")"
+    addressLabel.text = "Адрес: \(user?.address ?? "")"
+    phoneNumberLabel.text = "Номер телефона: \(user?.phone ?? "")"
+}
     
     func fetchOrderDetails() {
-        
         if let order = selectOrder {
             self.addressLabel.text = "Адрес доставки: \(String(describing: user?.address) )"
             self.phoneNumberLabel.text = "Номер телефона: \(String(describing: user?.phone) )"
@@ -99,7 +94,6 @@ private extension DetailOrderScreenVC {
     
     func formatOrderItemsText(for order: Order) -> String {
         var itemsText = ""
-        
         for position in order.positions {
             let itemText = "\(position.product.name): \(position.count) шт."
             if itemsText.isEmpty {
@@ -108,7 +102,6 @@ private extension DetailOrderScreenVC {
                 itemsText += "\n\(itemText)"
             }
         }
-        
         return itemsText
     }
     
@@ -126,15 +119,12 @@ private extension DetailOrderScreenVC {
 }
 
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension DetailOrderScreenVC {
     
     @objc func buttonStatusTapped() {
-        
         let alertController = UIAlertController(title: AlertMessage.orderStatus, message: AlertMessage.emptyMessage, preferredStyle: .alert)
-        
         let statusOptions = OrderStatus.allCases.filter { $0 != .all }.map { $0.rawValue }
-        
         for status in statusOptions {
             let action = UIAlertAction(title: status, style: .default) { [weak self] _ in
                 self?.changeStatusButton.setTitle(status, for: .normal)
@@ -146,18 +136,15 @@ private extension DetailOrderScreenVC {
             }
             alertController.addAction(action)
         }
-        
         let cancelAction = UIAlertAction(title: AlertMessage.closelAction, style: .cancel)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension DetailOrderScreenVC {
-    
     func setupViews() {
-        
         view.addSubview(containerView)
         containerView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(numberOrderDetailLabel)
@@ -178,7 +165,6 @@ private extension DetailOrderScreenVC {
     }
     
     func setupConstraints() {
-        
         containerView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.left.right.equalTo(view)

@@ -6,16 +6,14 @@ import UIKit
 
 final class ProfileTitileOrderCell: UITableViewCell {
 
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.profileTitleOrderCell
-    
-    //MARK: - UI
+//  MARK: - UI
     private let titleLabel = MainTitleLabel(style: .history)
- 
-    //MARK: - Init
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupConstraints()
     }
@@ -25,15 +23,13 @@ final class ProfileTitileOrderCell: UITableViewCell {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension ProfileTitileOrderCell {
-    
     func setupViews() {
         contentView.addSubview(titleLabel)        
     }
     
     func setupConstraints() {
-        
         titleLabel.snp.makeConstraints { make in
             make.left.right.equalTo(contentView).inset(20)
             make.top.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)

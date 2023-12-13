@@ -12,23 +12,19 @@ protocol EditProductDelegate: AnyObject {
 
 final class EditProductImageCell: UITableViewCell {
     
-    //MARK: - ReuseId
+    //  MARK: - ReuseId
     static let reuseId = ReuseId.editProductImageCell
-    
-    //MARK: - Database
+    //  MARK: - Database
     private let productDB = DBServiceProducts()
-    
-    //MARK: - Properties
+    //  MARK: - Properties
     var selectedProduct: Product?
     private var selectedImage: UIImage?
     private var imagePicker = UIImagePickerController()
     private var selectImageHandler: (() -> Void)?
     weak var delegate: EditProductDelegate?
-    
-    //MARK: - UI
+    //  MARK: - UI
     var productImage = ProductImageView(style: ProductImageType.editProduct)
-    
-    //MARK: - Life Cycle
+    //  MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -42,9 +38,8 @@ final class EditProductImageCell: UITableViewCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension EditProductImageCell {
-    
     func updateProductDetail() {
         if let product = selectedProduct {
             if let productImage = product.image {
@@ -62,28 +57,23 @@ extension EditProductImageCell {
             }
         }
     }
-    
 }
 
-//MARK: - UIImagePickerController
+//  MARK: - ImagePickerController
 extension EditProductImageCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let selectedImage = info[.originalImage] as? UIImage {
             self.selectedImage = selectedImage
             productImage.image = selectedImage
-            
             if let imageURL = selectedProduct?.image {
                 delegate?.didSelectImage(imageURL, selectedImage)
             }
-            
         }
         picker.dismiss(animated: true, completion: nil)
     }
     
     func showImagePicker(sourceType: UIImagePickerController.SourceType) {
-        
         imagePicker.sourceType = sourceType
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
@@ -92,18 +82,16 @@ extension EditProductImageCell: UIImagePickerControllerDelegate, UINavigationCon
         while responder != nil && !(responder is UIViewController) {
             responder = responder?.next
         }
-        
         if let viewController = responder as? UIViewController {
             viewController.present(imagePicker, animated: true, completion: nil)
         } else {
-            print("UIViewController No found")
+            print("UIViewController Не найден")
         }
     }
 }
 
-//MARK: - Action
+//  MARK: - Action
 private extension EditProductImageCell {
-    
     func showAlertImage() {
         let alertController = UIAlertController(title: AlertMessage.imageTitle, message: nil, preferredStyle: .actionSheet)
         let galleryAction = UIAlertAction(title: AlertMessage.galeryAction, style: .default) { [weak self] _ in
@@ -132,7 +120,7 @@ private extension EditProductImageCell {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension EditProductImageCell {
     
     func setupViews() {
@@ -146,10 +134,9 @@ private extension EditProductImageCell {
             make.centerX.equalTo(contentView.snp.centerX)
         }
     }
-    
 }
 
-//MARK: UIViewController
+//  MARK: UIViewController
 extension UIViewController {
     var topmostViewController: UIViewController {
         if let presented = presentedViewController {

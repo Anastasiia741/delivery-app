@@ -8,13 +8,11 @@ import FirebaseStorage
 
 final class CartCell: UITableViewCell {
     
-    //MARK: - reuseId
+//  MARK: - reuseId
     static let reuseId = ReuseId.cartCell
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var product: Product?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let productImageView = ProductImageView(style: ProductImageType.cart)
     private let nameLabel = MainTitleLabel(style: MainTitleType.cartTitle)
     private let priceLabel = PriceLabel(style: PriceLabelType.product)
@@ -22,7 +20,8 @@ final class CartCell: UITableViewCell {
     private let stepperView = CustomStepper()
     private let stepperContainerView = UIView ()
     var onProductChanged: ((Product, Int)->())?
-    
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -36,11 +35,9 @@ final class CartCell: UITableViewCell {
     
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension CartCell {
-    
     func update(_ product: Product) {
-        
         self.product = product
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
@@ -53,25 +50,20 @@ extension CartCell {
                 }
             }
         }
-        
         nameLabel.text = product.name
         priceLabel.text = "\(product.price) сом"
         stepperView.currentValue = product.quantity
     }
     
     @objc func stepperChangedValueAction(sender: CustomStepper) {
-        
         guard let product = self.product else { return }
         onProductChanged?(product, sender.currentValue)
     }
-    
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CartCell {
-    
     func setupViews() {
-        
         contentView.addSubview(productImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(horizontalStackView)
@@ -81,7 +73,6 @@ private extension CartCell {
     }
     
     func setupConstraints() {
-        
         productImageView.snp.makeConstraints { make in
             make.left.equalTo(contentView).offset(16)
             make.top.equalTo(contentView).offset(10)

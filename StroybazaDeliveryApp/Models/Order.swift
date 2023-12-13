@@ -35,7 +35,6 @@ struct Order {
     }
     
     init(id: String, userID: String, positions: [ProductsPosition], date: Date, status: String, promocode: String ) {
-        
         self.id = id
         self.userID = userID
         self.positions = positions

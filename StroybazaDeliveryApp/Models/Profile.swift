@@ -5,7 +5,7 @@
 import Foundation
 import FirebaseFirestore
 
-class Profile: ObservableObject {
+final class Profile: ObservableObject {
     
     public var profile: NewUser
     public var orders: [Order] = [Order]()

@@ -11,19 +11,16 @@ enum CartSection: Int, CaseIterable {
 
 final class CartScreenVC: UIViewController {
     
-    //MARK: - Database
+    //  MARK: - Database
     private let productsDB = DBServiceProducts.shared
-    
-    //MARK: - Properties
+    //  MARK: - Properties
     private var products = [Product]()
     private var orderProducts = [Product]()
     private let productsRepository = ProductsRepository()
-    
-    //MARK: - Services
+    //  MARK: - Services
     private let bannerAPI = BannerAPI()
     private let orderService = OrderService()
-    
-    //MARK: - UI
+    //  MARK: - UI
     private let informView = InformView()
     private let promoView = PromoButtonView()
     private let orderView = OrderButtonView()
@@ -41,11 +38,9 @@ final class CartScreenVC: UIViewController {
         
         return tableView
     }()
-    
-    //MARK: -  Alert
     var alertController: UIAlertController?
     
-    //MARK: - Life Curcle
+    //  MARK: - Life Curcle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -61,7 +56,7 @@ final class CartScreenVC: UIViewController {
     }
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension CartScreenVC {
     
     func showMenuScreen() {
@@ -69,42 +64,31 @@ private extension CartScreenVC {
     }
     
     func showEnterPromocodeAlert() {
-        
         let alertController = UIAlertController(title: AlertMessage.promoTitle, message: AlertMessage.emptyMessage, preferredStyle: .alert)
-        
         alertController.addTextField { textField in
             textField.placeholder = AlertMessage.promoPlaceholder
         }
-        
         let attributedStringForTitle = NSAttributedString(string: AlertMessage.promoTitle, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.202498883, green: 0.202498883, blue: 0.202498883, alpha: 1)])
         alertController.setValue(attributedStringForTitle, forKey: AlertMessage.promoKey)
-        
         alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
-        
         alertController.view.tintColor = .black
-        
         let cancelAction = UIAlertAction(title: AlertMessage.cancelAction, style: .cancel) { _ in }
         alertController.addAction(cancelAction)
-        
         let applyAction = UIAlertAction(title: AlertMessage.applyAction, style: .default) {[weak self] _ in
             if let promoCode = alertController.textFields?.first?.text?.lowercased() {
                 self?.applyPromocodeAlertTapped(promoCode)
             }
         }
         alertController.addAction(applyAction)
-        
         present(alertController, animated: true, completion: nil)
     }
     
     func showPromocodeResultAlert(message: String) {
-        
         let alertController = UIAlertController(title: AlertMessage.promoResult, message: message, preferredStyle: .alert)
-        
         let attributedStringForTitle = NSAttributedString(string: AlertMessage.promoResult, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.202498883, green: 0.202498883, blue: 0.202498883, alpha: 1)])
         alertController.setValue(attributedStringForTitle, forKey: AlertMessage.promoKey)
         alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
         alertController.view.tintColor = UIColor.black
-        
         let okAction = UIAlertAction(title: AlertMessage.okAction, style: .default, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
@@ -115,24 +99,23 @@ private extension CartScreenVC {
         present(authViewController, animated: true, completion: nil)
     }
     
+    func setupActions() {
+        promoView.promoButton.addTarget(self, action: #selector(promoButtonTapped), for: .touchUpInside)
+        orderView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
+    }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 private extension CartScreenVC {
     
     func fetchPromoProducts() {
-        
         productsDB.fetchAllProducts { [weak self] result in
-            
             guard let self = self else { return }
-            
             switch result {
             case .success((let products, _)):
                 let bannerProducts = products.filter { $0.category == CategoryName.discount }
-                
                 self.products = bannerProducts
                 self.tableView.reloadData()
-                
             case .failure(let error):
                 print("Ошибка при загрузке баннеров: \(error)")
             }
@@ -140,19 +123,14 @@ private extension CartScreenVC {
     }
     
     func fetchOrder() {
-        
         self.orderProducts = orderService.retreiveProducts()
         let (count, price) = orderService.calculatePrice()
-        
         if count == 0 {
             productCountLabel.text = TextMessage.cardEmpty
-            
         } else {
             productCountLabel.text = "\(price) товара на \(count) сом"
         }
-        
         productsRepository.save(orderProducts)
-        
         tableView.reloadData()
     }
     
@@ -163,17 +141,11 @@ private extension CartScreenVC {
     }
 }
 
-//MARK: - Event Handler
+//  MARK: - Event Handler
 private extension CartScreenVC {
-    
-    func setupActions() {
-        promoView.promoButton.addTarget(self, action: #selector(promoButtonTapped), for: .touchUpInside)
-        orderView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-    }
     
     func applyPromocodeAlertTapped(_ promoCode: String) {
         var discountMessage = AlertMessage.emptyMessage
-        
         switch promoCode {
         case AlertMessage.promoCode10.lowercased():
             discountMessage = AlertMessage.promoDiscount10
@@ -184,48 +156,35 @@ private extension CartScreenVC {
         default:
             discountMessage = AlertMessage.discountMessage
         }
-        
         showPromocodeResultAlert(message: discountMessage)
-        
         if let promoCode = alertController?.textFields?.first?.text?.lowercased() {
             self.orderService.promoсode = promoCode
         }
     }
     
-    
     @objc func promoButtonTapped() {
-        print("Button promo tapped!")
-        
         showEnterPromocodeAlert()
     }
     
     @objc func orderButtonTapped() {
-        print("Button oder tapped!")
-        
         if orderProducts.isEmpty {
             showMenuScreen()
         } else {
-            
             if let currentUser = DBServiceAuth.shared.currentUser {
-                
                 var order = Order(id: UUID().uuidString, userID: currentUser.uid, positions: [], date: Date(), status: OrderStatus.new.rawValue, promocode: "")
-                
                 if let promocode = alertController?.textFields?.first?.text?.lowercased() {
                     self.applyPromocodeAlertTapped(promocode)
                     order.promocode = promocode
-                    print("============\(promocode)")
+                    print("Promocode -->\(promocode)")
                 }
-                
                 order.positions = orderProducts.map { position in
                     return ProductsPosition(id: UUID().uuidString, product: position, count: position.quantity)
                 }
-                
                 if order.positions.isEmpty {
-                    print("Ваш заказ пуст.")
+                    print("Ваш заказ пуст")
                 } else {
                     DBServiceOrders.shared.saveOrder(order: order, promocode: order.promocode) { result in
                         switch result {
-                            
                         case .success(let order):
                             print("\(TextMessage.cardMessade) \(order.cost)")
                             self.orderProducts.removeAll()
@@ -233,7 +192,6 @@ private extension CartScreenVC {
                             self.productsRepository.save(self.orderProducts)
                             self.productCountLabel.text = TextMessage.cardOrder
                             self.showInformView()
-                            
                         case .failure(let error):
                             print(error.localizedDescription)
                         }
@@ -246,11 +204,9 @@ private extension CartScreenVC {
     }
 }
 
-//MARK: - Animation
+//  MARK: - Animation
 private extension CartScreenVC {
-    
     func showInformView() {
-        
         informView.frame.origin.y = view.frame.height
         let heightInf = view.frame.height - informView.frame.height
         UIView.animate(withDuration: 0.5, delay: 1) {
@@ -265,7 +221,6 @@ private extension CartScreenVC {
 
 //MARK: - Layout
 private extension CartScreenVC {
-    
     func setupViews() {
         view.addSubview(tableView)
         view.addSubview(promoView)
@@ -280,7 +235,6 @@ private extension CartScreenVC {
     }
     
     func setupConstraints() {
-        
         productCountLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.left.equalTo(view.safeAreaLayoutGuide).offset(16)
@@ -311,16 +265,14 @@ private extension CartScreenVC {
     }
 }
 
-//MARK: - UITableView
+//  MARK: - UITableView
 extension CartScreenVC: UITableViewDataSource, UITableViewDelegate {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         Sections.cart
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = CartSection.init(rawValue: section)
-        
         switch section {
         case .order:
             return orderProducts.count
@@ -332,35 +284,26 @@ extension CartScreenVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let section = CartSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .order:
             let cell = tableView.dequeueReusableCell(withIdentifier: CartCell.reuseId, for: indexPath) as! CartCell
             let product = orderProducts[indexPath.row]
             cell.selectionStyle = .none
-            
             cell.onProductChanged = { (product, count) in
-                
                 self.orderProducts = self.orderService.update(product, count)
                 self.fetchOrder()
             }
             cell.update(product)
-            
             return cell
-            
         case .promoProducts:
             let cell = tableView.dequeueReusableCell(withIdentifier: PromoCell.reuseId, for: indexPath) as! PromoCell
             cell.update(products: products)
             cell.selectionStyle = .none
-            
             cell.onPromoTapped = { product in
                 self.addPromoProductToOrder(for: product)
             }
-            
             return cell
-            
         default:
             return UITableViewCell()
         }
@@ -368,13 +311,10 @@ extension CartScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = CartSection(rawValue: indexPath.section)
-        
         switch section {
         case .promoProducts:
             _ = products[indexPath.row]
-            
             fetchOrder()
-            
         default:
             break
         }

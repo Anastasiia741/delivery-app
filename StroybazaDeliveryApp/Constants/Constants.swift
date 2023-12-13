@@ -103,5 +103,6 @@ enum TextMessage {
     static let cardOrder = "Мы уже готовим ваш заказ. Ожидайте 🌺"
     static let authorization = "Авторизация"
     static let registration = "Регистрация"
+    static let policy = "https://ilten.github.io/app-policy/"
 }
 

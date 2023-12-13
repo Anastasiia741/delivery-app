@@ -7,19 +7,18 @@ import SnapKit
 
 final class EditDetailProductScreenVC: UIViewController {
     
-    //MARK: - Properties
+//  MARK: - Properties
     var selectedProduct: Product?
     private var selectedImage: UIImage?
     private let productsDB = DBServiceProducts.shared
-    
-    //MARK: - UI
+//  MARK: - UI
     private let horizontalStack = StackView(style: .horizontal)
     private var removeButton = OrderButton(style: OrderButtonType.remove,
                                            highlightColor: .blue.withAlphaComponent(0.7) ,
                                            releaseColor: .blue.withAlphaComponent(0.5))
     private var saveButton = OrderButton(style: OrderButtonType.save,
-                                         highlightColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.7) ?? UIColor.red,
-                                         releaseColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.5) ?? UIColor.red)
+                                         highlightColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.7) ?? UIColor.red,
+                                         releaseColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.5) ?? UIColor.red)
     private var isImageChange = true
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -35,8 +34,7 @@ final class EditDetailProductScreenVC: UIViewController {
         
         return tableView
     }()
-    
-    //MARK: - Life Cycle
+//  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -57,7 +55,7 @@ final class EditDetailProductScreenVC: UIViewController {
     }
 }
 
-//MARK: - Bussiness logic
+//  MARK: - Bussiness logic
 private extension EditDetailProductScreenVC {
     func updateProductInfo() {
         if selectedProduct != nil {
@@ -66,9 +64,8 @@ private extension EditDetailProductScreenVC {
     }
 }
 
-//MARK: -  Keyboard observe
+//  MARK: -  Keyboard observe
 private extension EditDetailProductScreenVC {
-    
     func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
@@ -94,7 +91,6 @@ private extension EditDetailProductScreenVC {
 
 //MARK: - Navigation
 private extension EditDetailProductScreenVC {
-    
     func setupAction() {
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
@@ -126,36 +122,35 @@ private extension EditDetailProductScreenVC {
         present(alertController, animated: true, completion: nil)
     }
     
-    @objc private func handleTap() {
+    @objc func handleTap() {
         view.endEditing(true)
     }
 }
 
-//MARK: - RemoveProduct
-extension EditDetailProductScreenVC {
+//  MARK: - RemoveProduct
+private extension EditDetailProductScreenVC {
     
-    private func deleteSelectedProduct() {
-        guard let product = selectedProduct else {
-            return
-        }
-        
-        productsDB.delete(product: product) { [weak self] error in
-            if let error = error {
-                print("Ошибка удаления продукта: \(error.localizedDescription)")
-            } else {
-                print("Товар успешно удален")
-                self?.showSuccessAlert()
-            }
-        }
+    func deleteSelectedProduct() {
+    guard let product = selectedProduct else {
+        return
     }
     
+    productsDB.delete(product: product) { [weak self] error in
+        if let error = error {
+            print("Ошибка удаления продукта: \(error.localizedDescription)")
+        } else {
+            print("Товар успешно удален")
+            self?.showSuccessAlert()
+        }
+    }
+}
     
-    @objc private func removeButtonTapped() {
+    @objc func removeButtonTapped() {
         showDeleteAlert()
     }
 }
 
-//MARK: - EditProductDelegate
+//  MARK: - EditProductDelegate
 extension EditDetailProductScreenVC: EditProductDelegate, EditProductDescriptionDelegate, EditProductNameDelegate {
     
     func didSelectImage(_ imageURL: String?, _ image: UIImage) {
@@ -186,9 +181,7 @@ extension EditDetailProductScreenVC: EditProductDelegate, EditProductDescription
                 
                 if self?.isImageChange == true {
                     guard let selectedImage = self?.selectedImage else { return }
-                    
-                    let imageURL = selectedProduct.image ?? "gs://souvenir-shop-716eb.appspot.com/productImages/"
-                    
+                    let imageURL = selectedProduct.image ?? ""
                     self?.productsDB.uploadImageToFirebase(selectedImage, imageURL) { newImageURL in
                         if newImageURL != nil {
                             self?.selectedProduct?.image = imageURL
@@ -198,13 +191,12 @@ extension EditDetailProductScreenVC: EditProductDelegate, EditProductDescription
                         }
                     }
                 }
-                
             }
         }
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension EditDetailProductScreenVC {
     
     func setupViews() {

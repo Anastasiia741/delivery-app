@@ -9,19 +9,17 @@ import SDWebImage
 
 final class PromoCollectionCell: UICollectionViewCell {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static var reuseId = ReuseId.promoCollectionCell
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var product: Product?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let nameLabel = MainTitleLabel(style: MainTitleType.promo)
     private let priceButton = PriceButton(style: PriceButtonType.cartButton)
     private let productImage = ProductImageView(style: ProductImageType.cart)
     private let verticalStackView = StackView(style: .verticalForPromo)
     
-    //MARK: - Life Curcle
+//  MARK: - Life Cucle
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -34,14 +32,11 @@ final class PromoCollectionCell: UICollectionViewCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension PromoCollectionCell {
-    
     func update(_ product: Product) {
-        
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
-            
             imageRef.downloadURL { url, error in
                 if let error = error {
                     print(error.localizedDescription)
@@ -50,18 +45,15 @@ extension PromoCollectionCell {
                 }
             }
         }
-        
         self.product = product
         nameLabel.text = product.name
         priceButton.setTitle("\(product.price) сом", for: .normal)
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension PromoCollectionCell {
-    
     private func setupView() {
-        
         contentView.addSubview(productImage)
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(nameLabel)
@@ -69,13 +61,11 @@ private extension PromoCollectionCell {
     }
     
     private func setupStyles() {
-        
         contentView.layer.cornerRadius = 8
         contentView.backgroundColor = .lightGray.withAlphaComponent(0.2)
     }
     
     private func setupConstraints() {
-        
         productImage.snp.makeConstraints { make in
             make.top.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
             make.left.equalTo(contentView.snp.left).inset(10)

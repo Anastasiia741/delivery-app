@@ -10,21 +10,19 @@ protocol EditProductDescriptionDelegate: AnyObject {
 
 final class EditProductDetailCell: UITableViewCell {
     
-    //MARK: - ReuseId
+    //  MARK: - ReuseId
     static let reuseId = ReuseId.editProductDetailCell
-    
-    //MARK: - Properties
+    //  MARK: - Properties
     var selectedProduct: Product?
     weak var delegate: EditProductDescriptionDelegate?
-    
-    //MARK: - UI
+    //  MARK: - UI
     var descriptionMainTV = TitleTextView(style: .descriptionForMain)
     var descriptionDetailTV = TitleTextView(style: .descriptionForDetail)
     private let descriptionMainLabel = OrderDetailLabel(style: .productDescription)
     private let descriptionDetailLabel = OrderDetailLabel(style: .productDetail)
     private var verticalStackView = StackView(style: .vertical)
     
-    //MARK: - Life Cycle
+    //  MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -40,27 +38,24 @@ final class EditProductDetailCell: UITableViewCell {
     
 }
 
-//MARK: - Navigation
-extension EditProductDetailCell {
-    
+//  MARK: - Navigation
+private extension EditProductDetailCell {
     func clearDescTextView() {
         descriptionMainTV.text = AlertMessage.emptyMessage
         descriptionDetailTV.text = AlertMessage.emptyMessage
     }
 }
 
-//MARK: - Delegate
-extension EditProductDetailCell {
-    
+//  MARK: - Delegate
+extension EditProductDetailCell: UITextViewDelegate {
     func updateProductDetail() {
-        
         if let product = selectedProduct {
             descriptionMainTV.text = product.description
             descriptionDetailTV.text = product.detail
         }
     }
     
-    func editProductDetail() {
+    private func editProductDetail() {
         descriptionMainTV.delegate = self
         descriptionDetailTV.delegate = self
     }
@@ -70,9 +65,8 @@ extension EditProductDetailCell {
     }
 }
 
-//MARK: - Layout
-extension EditProductDetailCell: UITextViewDelegate {
-    
+//  MARK: - Layout
+private extension EditProductDetailCell {
     func setupViews() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(descriptionMainLabel)

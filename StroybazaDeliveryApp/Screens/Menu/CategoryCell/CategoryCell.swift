@@ -4,19 +4,16 @@
 
 import UIKit
 
-class CategoryCell: UITableViewCell {
+final class CategoryCell: UITableViewCell {
     
-    //MARK: - ReuseID
+//  MARK: - ReuseID
     static let reuseID = ReuseId.categoryCell
-    
-    //MARK: - Event Handler
+//  MARK: - Event Handler
     var onCategoryTapped: ((Category)->())?
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var categories = [Category]()
     private var selectedCategory: Category?
-   
-    //MARK: - UI
+//  MARK: - UI
     private var isFirstLaunch = true
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,7 +30,8 @@ class CategoryCell: UITableViewCell {
         
         return collection
     }()
-    
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -45,17 +43,15 @@ class CategoryCell: UITableViewCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension CategoryCell {
-    
     func update(categories: [Category]) {
         self.categories = categories
         collectionView.reloadData()
     }
-    
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CategoryCell {
     
     func setupViews() {
@@ -63,7 +59,6 @@ private extension CategoryCell {
     }
     
     func setupConstraints() {
-    
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
@@ -82,13 +77,9 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionCell.reuseId, for: indexPath) as! CategoryCollectionCell
-        
         let category = categories[indexPath.row]
-        
         cell.update(category)
-        
         if isFirstLaunch && category.category == CategoryName.armature {
             cell.contentView.layer.cornerRadius = 10
             cell.contentView.backgroundColor = UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.2)
@@ -116,7 +107,6 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate {
         }
         selectedCategory = category
         collectionView.reloadData()
-        
         isFirstLaunch = false
         onCategoryTapped?(category)
     }

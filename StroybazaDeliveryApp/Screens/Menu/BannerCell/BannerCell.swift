@@ -12,16 +12,13 @@ struct Screen {
 
 final class BannerCell: UITableViewCell {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.bannerCell
-    
-    //MARK: - Action
+//  MARK: - Action
     var onBannerTapped: ((Product)->())?
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var banners: [Product] = []
-    
-    //MARK: - UI
+//  MARK: - UI
     private let containerView: UIView = {
         var view = UIView()
         return view
@@ -41,7 +38,8 @@ final class BannerCell: UITableViewCell {
         collection.showsHorizontalScrollIndicator = false
         return collection
     }()
-    
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -53,18 +51,16 @@ final class BannerCell: UITableViewCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension BannerCell {
-    
     func update(products: [Product]) {
         banners = products
         collectionView.reloadData()
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension BannerCell {
-    
     func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(titleLabel)
@@ -95,9 +91,7 @@ extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionCell.reuseId, for: indexPath) as! BannerCollectionCell
-        
         let promoProduct = banners[indexPath.row]
         cell.update(promoProduct)
         
@@ -105,9 +99,7 @@ extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let banner = banners[indexPath.row]
-        
         onBannerTapped?(banner)
     }
 }
