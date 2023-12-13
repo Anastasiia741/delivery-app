@@ -7,22 +7,19 @@ import SnapKit
 
 final class AdminScreenVC: UIViewController {
     
-    //MARK: - Properties
+//  MARK: - Properties
     private var orders: [Order] = []
     private var filteredOrders: [Order] = []
     private var selectedStatus: OrderStatus = .all
-    
-    //MARK: Service
+//  MARK: - Service
     private let databaseService = DBServiceOrders.shared
-    
-    //MARK: - UI
+//  MARK: - UI
     private lazy var exitBarButton: UIBarButtonItem = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: ButtonsName.exit), for: .normal)
         button.addTarget(self, action: #selector(exitBarButtonTapped), for: .touchUpInside)
         button.tintColor = .gray
         let barButtonItem = UIBarButtonItem(customView: button)
-        
         return barButtonItem
     }()
     private lazy var tableView: UITableView = {
@@ -34,11 +31,10 @@ final class AdminScreenVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.register(AdminHeaderView.self, forHeaderFooterViewReuseIdentifier: AdminHeaderView.reuseId)
         tableView.register(AdminCell.self, forCellReuseIdentifier: AdminCell.reuseId)
-        
         return tableView
     }()
     
-    //MARK: -  Life Curcle
+//  MARK: - Life Cucle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -51,9 +47,8 @@ final class AdminScreenVC: UIViewController {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension AdminScreenVC {
-    
     private func filterOrdersByStatus(_ status: OrderStatus) {
         selectedStatus = status
         switch status {
@@ -75,9 +70,8 @@ extension AdminScreenVC {
     }
 }
 
-//MARK: - Event Handler
+//  MARK: - Event Handler
 extension AdminScreenVC: AdminCellDelegate, OrderStatusDelegate {
-    
     func orderDetailsButtonTapped(order: Order) {
         showOrderDetailScreen(order)
     }
@@ -91,9 +85,8 @@ extension AdminScreenVC: AdminCellDelegate, OrderStatusDelegate {
     }
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension AdminScreenVC {
-    
     func showOrderDetailScreen( _ order: Order) {
         let viewController = DetailOrderScreenVC()
         viewController.selectOrder = order
@@ -127,12 +120,10 @@ private extension AdminScreenVC {
         alertController.addAction(UIAlertAction(title: AlertMessage.cancelAction, style: .cancel))
         present(alertController, animated: true)
     }
-    
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension AdminScreenVC {
-    
     func setupViews() {
         self.navigationItem.rightBarButtonItem = exitBarButton
         view.addSubview(tableView)
@@ -144,16 +135,14 @@ private extension AdminScreenVC {
     }
     
     func setupConstraints() {
-        
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.right.bottom.equalToSuperview()
         }
     }
-    
 }
 
-//MARK: - UITableView
+//  MARK: - UITableView
 extension AdminScreenVC: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

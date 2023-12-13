@@ -10,10 +10,9 @@ enum CreateProductSection: Int, CaseIterable {
 
 final class CreateProductScreenVC: UIViewController {
     
-    //MARK: - Database
+    //  MARK: - Database
     private let productsDB = DBServiceProducts.shared
-    
-    //MARK: - Propertiese
+    //  MARK: - Propertiese
     private var productName: String = ""
     private var category: String = ""
     private var price: Int = 0
@@ -21,11 +20,10 @@ final class CreateProductScreenVC: UIViewController {
     private var detail: String = ""
     private var imageURL: String?
     private var selectedImage: UIImage?
-    
-    //MARK: - UI
+    //  MARK: - UI
     private let saveView = OrderButton(style: OrderButtonType.save,
-                                       highlightColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.7) ?? UIColor.red,
-                                       releaseColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.5) ?? UIColor.red)
+                                       highlightColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.7) ?? UIColor.red,
+                                       releaseColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.5) ?? UIColor.red)
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.color = .gray
@@ -47,7 +45,7 @@ final class CreateProductScreenVC: UIViewController {
         return tableView
     }()
     
-    //MARK: - Life Cycle
+    //  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -66,7 +64,7 @@ final class CreateProductScreenVC: UIViewController {
     }
 }
 
-//MARK: -  Keyboard observe
+//  MARK: -  Keyboard observe
 private extension CreateProductScreenVC {
     
     func observeKeyboardNotifications() {
@@ -74,7 +72,7 @@ private extension CreateProductScreenVC {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     func removeKeyboard() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -93,9 +91,8 @@ private extension CreateProductScreenVC {
     
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension CreateProductScreenVC {
-    
     func setupAction() {
         saveView.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -126,12 +123,12 @@ private extension CreateProductScreenVC {
         present(alert, animated: true, completion: nil)
     }
     
-    @objc private func handleTap() {
+    @objc func handleTap() {
         view.endEditing(true)
     }
 }
 
-//MARK: - EditProductDelegate
+//  MARK: - EditProductDelegate
 extension CreateProductScreenVC: CreateProductDelegate, CreateProductNameDelegate, CreateProductDescriptionDelegate {
     
     func didSelectImage(_ image: UIImage?, _ imageURL: String) {
@@ -156,16 +153,14 @@ extension CreateProductScreenVC: CreateProductDelegate, CreateProductNameDelegat
     }
 }
 
-//MARK: - Save product
-extension CreateProductScreenVC {
-    
+//  MARK: - Business logic
+private extension CreateProductScreenVC {
     func createProduct(_ product: Product) {
         productsDB.create(product: product) { [weak self] error in
             if let error = error {
                 print("Ошибка создания продукта:", error.localizedDescription)
             } else {
                 print("Продукт создан: \(product.name)")
-                
                 DispatchQueue.main.async {
                     self?.showSuccessAlert()
                     self?.clearTextFields()
@@ -196,7 +191,7 @@ extension CreateProductScreenVC {
         }
     }
     
-    @objc private func saveButtonTapped() {
+    @objc func saveButtonTapped() {
         activityIndicator.startAnimating()
         
         guard !productName.isEmpty, !category.isEmpty, !detail.isEmpty, !String(price).isEmpty, !((imageURL?.isEmpty) == nil) else {
@@ -220,17 +215,14 @@ extension CreateProductScreenVC {
             quantity: 1
         )
         
-        
         if let selectedImage = selectedImage,  let imageURL = imageURL {
             productsDB.upload(image: selectedImage, url: imageURL) { [weak self] imageURL, error in
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
                 }
-                
                 if let imageURL = imageURL {
                     newProduct.image = imageURL
                     print("Изображение успешно загружено")
-                    
                     self?.createProduct(newProduct)
                 } else if let error = error {
                     print("Ошибка при загрузке изображения:", error.localizedDescription)
@@ -241,38 +233,9 @@ extension CreateProductScreenVC {
             self.createProduct(newProduct)
         }
     }
-        
-        
-//
-//        if let selectedImage = selectedImage {
-//            let fileName = UUID().uuidString + ".jpg"
-//            if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
-//                productsDB.saveImage(imageData, nameImg: fileName) { imageLink in
-//                    
-//                    DispatchQueue.main.async {
-//                        self.activityIndicator.stopAnimating()
-//                    }
-//                    
-//                    if let imageLink = imageLink {
-//                        newProduct.image = imageLink
-//                        print("-----> Unique Image URL: \(imageLink)")
-//
-////                        print("Изображение успешно загружено")
-//                        self.createProduct(newProduct)
-//                    } else  {
-//                        print("Ошибка при загрузке изображения:")
-//                        self.showErrorAlert()
-//                    }
-//                }
-//            } else {
-////                self.createProduct(newProduct)
-//                showErrorAlert()
-//            }
-//        }
-//    }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CreateProductScreenVC {
     
     func setupViews() {
@@ -283,7 +246,6 @@ private extension CreateProductScreenVC {
     }
     
     func setupConstraints() {
-        
         tableView.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(saveView.snp.top)
@@ -301,7 +263,7 @@ private extension CreateProductScreenVC {
     }
 }
 
-// MARK: - TableViewDataSource, TableViewDelegate
+//  MARK: - TableViewDataSource, TableViewDelegate
 extension CreateProductScreenVC: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -321,7 +283,6 @@ extension CreateProductScreenVC: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = CreateProductSection.init(rawValue: section)
-        
         switch section {
         case .image:
             return SectionRows.createProduct
@@ -354,7 +315,6 @@ extension CreateProductScreenVC: UITableViewDataSource, UITableViewDelegate  {
             return cell
         case .none:
             fatalError("Случай необработанной секции: \(String(describing: section))")
-            
         }
     }
 }

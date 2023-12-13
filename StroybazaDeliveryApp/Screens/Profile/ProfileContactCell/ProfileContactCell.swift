@@ -6,20 +6,18 @@ import UIKit
 
 final class ProfileContactCell: UITableViewCell {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.profileContactCell
-   
-    //MARK: - UI
+//  MARK: - Propertice
+    var profile = Profile(profile: NewUser(id: "", name: "", phone: "", address: "", email: ""))
+//  MARK: - UI
     private let emailLabel = MainTitleLabel(style: .emailTitle)
     private let titleLabel = MainTitleLabel(style: .contact)
     let emailTextField = MainTitleLabel(style: .email)
     let addressTextField = ProfileTextField(style: .address)
     private let verticalStackView = StackView(style: .vertical)
-    
-    //MARK: - Propertice
-    var profile = Profile(profile: NewUser(id: "", name: "", phone: "", address: "", email: ""))
-    
-    //MARK: - Init
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -30,18 +28,16 @@ final class ProfileContactCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-//MARK: -  Business Logic
+//  MARK: -  Business Logic
 extension ProfileContactCell {
-    
     func configure(with profile: NewUser, email: String) {
         emailTextField.text = email
         addressTextField.text = profile.address
     }
 }
 
-//MARK: - layout
+//  MARK: - layout
 private extension ProfileContactCell {
-    
     func setupViews() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(emailLabel)
@@ -51,7 +47,6 @@ private extension ProfileContactCell {
     }
     
     func setupConstraints() {
-        
         verticalStackView.snp.makeConstraints { make in
             make.left.right.equalTo(contentView).inset(20)
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(30)

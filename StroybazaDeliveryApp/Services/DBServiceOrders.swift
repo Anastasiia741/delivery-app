@@ -14,10 +14,10 @@ final class DBServiceOrders {
     private var orderHistory = [Order]()
     private let authService = DBServiceAuth.shared
     private var ordersRef: CollectionReference { return db.collection("orders") }
-
+    
     private init() {}
     
-    //MARK: - Save order in firebace
+//  MARK: - Save order in firebace
     func saveOrder(order: Order,
                    promocode: String,
                    completion: @escaping (Result<Order, Error>) -> ()) {
@@ -42,31 +42,24 @@ final class DBServiceOrders {
         }
     }
     
-    //MARK: - Save list of products in firebace
+//  MARK: - Save list of products in firebace
     func savePositions(to orderId: String,
                        positions: [ProductsPosition],
                        completion: @escaping (Result<[ProductsPosition], Error>) -> ()) {
-        
         let positionsRef = ordersRef.document(orderId).collection("positions")
-        
         for position in positions {
             positionsRef.document(position.id).setData(position.representation)
         }
         completion(.success(positions))
     }
     
-    //MARK: - Get list of products in order for admin
+//  MARK: - Get list of products in order for admin
     func fetchPositionsForOrder(by orderID: String, completion: @escaping (Result<[ProductsPosition], Error>) -> ()) {
-        
         let positionsRef = ordersRef.document(orderID).collection("positions")
-        
         positionsRef.getDocuments { [weak self] qSnap, error in
-            
             guard self != nil else { return }
-            
             if let querySnapshop = qSnap {
                 var positions = [ProductsPosition]()
-                
                 for doc in querySnapshop.documents {
                     if let position = ProductsPosition(doc: doc) {
                         positions.append(position)
@@ -79,22 +72,16 @@ final class DBServiceOrders {
         }
     }
     
-    //MARK: - Get order for admin
+//  MARK: - Get order for admin
     func fetchUserOrders(completion: @escaping ([Order]) -> Void) {
-        
-        let db = Firestore.firestore()
         let ordersCollection = db.collection("orders")
-        
         ordersCollection.getDocuments { [weak self] (querySnapshot, error) in
-            
             if let error = error {
                 print("Ошибка при загрузке заказов: \(error.localizedDescription)")
                 completion([])
                 return
             }
-            
             var userOrders: [Order] = []
-            
             for document in querySnapshot!.documents {
                 if let orderId = document["id"] as? String,
                    let userId = document["userID"] as? String,
@@ -107,13 +94,10 @@ final class DBServiceOrders {
                         case .success(let positions):
                             let date = dateTimestamp.dateValue()
                             let userOrder = Order(id: orderId, userID: userId, positions: positions, date: date, status: status, promocode: "")
-                            
                             userOrders.append(userOrder)
-                            
                             if userOrders.count == querySnapshot!.documents.count {
                                 completion(userOrders)
                             }
-                            
                         case .failure(let error):
                             print("Ошибка при получении позиций для заказа: \(error.localizedDescription)")
                         }
@@ -125,7 +109,7 @@ final class DBServiceOrders {
         }
     }
     
-    //MARK: - Change order status for admin
+//  MARK: - Change order status for admin
     func updateOrderStatus(orderID: String, newStatus: String) {
         let orderRef = db.collection("orders").document(orderID)
         orderRef.updateData(["status": newStatus]) { error in
@@ -137,11 +121,10 @@ final class DBServiceOrders {
         }
     }
     
-    //MARK: - Get order status for admin
+//  MARK: - Get order status for admin
     func fetchOrderStatus(orderID: String, completion: @escaping (String?) -> Void) {
         let ordersRef = db.collection("orders")
         let orderDocRef = ordersRef.document(orderID)
-        
         orderDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if let status = document.data()?["status"] as? String {
@@ -155,26 +138,21 @@ final class DBServiceOrders {
         }
     }
     
-    //MARK: Get odrer history for user
+//  MARK: Get odrer history for user
     func fetchOrderHistory(by userID: String?, completion: @escaping (Result<[Order], Error>) -> ()) {
-        
         let ordersRef = Firestore.firestore().collection("orders")
-        
         if let userID = userID {
             ordersRef.whereField("userID", isEqualTo: userID).getDocuments { (querySnapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                     return
                 }
-                
                 guard let querySnapshot = querySnapshot else {
                     completion(.success([]))
                     return
                 }
-                
                 var orders = [Order]()
                 var orderCount = 0
-                
                 for document in querySnapshot.documents {
                     if var order = Order(doc: document) {
                         self.fetchPositionsForOrder(by: order.id) { result in
@@ -199,18 +177,14 @@ final class DBServiceOrders {
                     completion(.failure(error))
                     return
                 }
-                
                 guard let querySnapshot = querySnapshot else {
                     completion(.success([]))
                     return
                 }
-                
                 var orders = [Order]()
                 var orderCount = 0
-                
                 for document in querySnapshot.documents {
                     if var order = Order(doc: document) {
-                        
                         self.fetchPositionsForOrder(by: order.id) { result in
                             switch result {
                             case .success(let positions):
@@ -220,7 +194,6 @@ final class DBServiceOrders {
                                 if orderCount == querySnapshot.documents.count {
                                     completion(.success(orders))
                                 }
-                                
                             case .failure(let error):
                                 print("Ошибка при получении позиций для заказа: \(error.localizedDescription)")
                             }

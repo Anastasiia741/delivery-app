@@ -7,7 +7,7 @@ import SnapKit
 
 final class MainTabBarController: UITabBarController {
     
-    //MARK: - UI
+//  MARK: - UI
     private let menuVC: UINavigationController = {
         let controller = MenuScreenVC()
         let navigationControler = UINavigationController.init(rootViewController: controller)
@@ -78,11 +78,11 @@ final class MainTabBarController: UITabBarController {
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.createProduct, tag: 2)
         
         controller.tabBarItem = tabBarItem
-       
+        
         return navigationControler
     }()
     
-    //MARK: - Lifecurcle
+//  MARK: - Lifecurcle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyles()
@@ -90,7 +90,7 @@ final class MainTabBarController: UITabBarController {
     }
 }
 
-//MARK: - Roles
+//  MARK: - Roles
 extension MainTabBarController {
     
     func updateTabBarForCurrentUser() {
@@ -106,12 +106,10 @@ extension MainTabBarController {
         } else {
             viewControllers = [menuVC, cartVC, authVC]
         }
-        
     }
-    
 }
 
-//MARK: - Styles
+//  MARK: - Styles
 extension MainTabBarController {
     
     func setupStyles() {

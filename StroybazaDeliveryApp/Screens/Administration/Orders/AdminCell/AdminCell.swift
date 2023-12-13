@@ -10,20 +10,18 @@ protocol AdminCellDelegate: AnyObject {
 
 final class AdminCell: UITableViewCell {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.adminCell
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var order: Order?
     private var users: NewUser?
     weak var delegate: AdminCellDelegate?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let dateOrderLabel = MainTitleLabel(style: MainTitleType.cartTitle)
     private let orderStatusLabel = MainTitleLabel(style: MainTitleType.cartTitle)
     private let detailButton = DetailButton(style: .detail, highlightColor: .blue.withAlphaComponent(0.7), releaseColor: .blue.withAlphaComponent(0.5))
     
-    //MARK: - Initialization
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -37,9 +35,8 @@ final class AdminCell: UITableViewCell {
     }
 }
 
-//MARK: -  Business Logic
+//  MARK: -  Business Logic
 extension AdminCell {
-    
     func configure(_ order: Order) {
         self.order = order
         let dateFormatter = DateFormatter()
@@ -64,28 +61,24 @@ extension AdminCell {
     }
 }
 
-//MARK: - Event Handler
+//  MARK: - Event Handler
 private extension AdminCell {
-    
     func setupActions() {
         detailButton.addTarget(self, action: #selector(orderDetailsButtonTapped), for: .touchUpInside)
     }
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension AdminCell {
-    
     @objc func orderDetailsButtonTapped() {
-        
         if let order = order {
             delegate?.orderDetailsButtonTapped(order: order)
         }
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension AdminCell {
-    
     func setupViews() {
         contentView.addSubview(dateOrderLabel)
         contentView.addSubview(detailButton)
@@ -132,4 +125,3 @@ private extension AdminCell {
         }
     }
 }
-

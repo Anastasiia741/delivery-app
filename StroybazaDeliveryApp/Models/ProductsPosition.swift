@@ -17,13 +17,11 @@ struct ProductsPosition: Identifiable {
     
     var representation: [String: Any] {
         var repres = [String: Any]()
-       
         repres["id"] = id
         repres["count"] = count
         repres["name"] = product.name
         repres["price"] = product.price
         repres["cost"] = self.cost
-
         return repres
     }
     
@@ -40,7 +38,6 @@ struct ProductsPosition: Identifiable {
         guard let price = data["price"] as? Int else { return nil}
         let product: Product = Product( id: 0, name: name, category: "", detail: "", description: "", price: price, image: "", quantity: 1)
         guard let count = data["count"] as? Int else { return nil}
-        
         self.id = id
         self.product = product
         self.count = count

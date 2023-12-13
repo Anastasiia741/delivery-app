@@ -8,19 +8,17 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-//MARK: - Sections name
+//  MARK: - Sections name
 enum MenuSection: Int, CaseIterable {
     case  banner, category, products
 }
 
-
 final class MenuScreenVC: UIViewController {
     
-    //MARK: - Service
+//  MARK: - Service
     private let orderService = OrderService()
     private let productsDB = DBServiceProducts.shared
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private let skeletonView = SkeletonView()
     private var selectedProduct: Product?
     private var selectedCategory: Category?
@@ -39,8 +37,7 @@ final class MenuScreenVC: UIViewController {
             tableView.reloadData()
         }
     }
-    
-    //MARK: - UI
+//  MARK: - UI
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
@@ -56,7 +53,7 @@ final class MenuScreenVC: UIViewController {
     }()
     private let isLoaded = true
     
-    //MARK: - Life Curcle
+//  MARK: - Life Cucle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyles()
@@ -68,10 +65,9 @@ final class MenuScreenVC: UIViewController {
     }
 }
 
-//MARK: - Skeleton View
+//  MARK: - Skeleton View
 private extension MenuScreenVC {
-    
-    private func showSkeletonLoading() {
+    func showSkeletonLoading() {
         view.addSubview(skeletonView)
         skeletonView.backgroundColor = .white
         
@@ -80,18 +76,16 @@ private extension MenuScreenVC {
         }
     }
     
-    private func hideSkeletonLoading() {
+    func hideSkeletonLoading() {
         skeletonView.removeFromSuperview()
         tableView.reloadData()
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension MenuScreenVC: ProductCellDelegate {
-    
-    func fetchAllProducts() {
+    private func fetchAllProducts() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            
             self.productsDB.fetchAllProducts { [weak self] result in
                 guard let self = self else { return }
                 switch result {
@@ -103,7 +97,6 @@ extension MenuScreenVC: ProductCellDelegate {
                     }
                     selectedCategory = newCategories.first
                     self.hideSkeletonLoading()
-                    
                 case .failure(let error):
                     print("Ошибка при загрузке баннеров: \(error)")
                 }
@@ -111,22 +104,19 @@ extension MenuScreenVC: ProductCellDelegate {
         }
     }
     
-    func fetchProductsBySelectedCategory() {
+    private func fetchProductsBySelectedCategory() {
         if let selectedCategory = selectedCategory {
             fetchProducts(for: selectedCategory)
         }
     }
     
     private func fetchProducts(for category: Category) {
-        
         productsDB.fetchAllProducts { [weak self] result in
             switch result {
             case .success(let (products, _)):
                 let filteredProducts = products.filter { $0.category == category.category}
                 self?.products = filteredProducts
-                
                 self?.tableView.reloadData()
-                
             case .failure(let error):
                 print("Ошибка при получении товаров: \(error)")
             }
@@ -134,9 +124,8 @@ extension MenuScreenVC: ProductCellDelegate {
     }
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension MenuScreenVC {
-    
     func showDetailScreen(_ product: Product) {
         let viewController = ProductDetailScreenVC()
         viewController.selectedProduct = product
@@ -144,7 +133,7 @@ private extension MenuScreenVC {
     }
 }
 
-//MARK: - Actions
+//  MARK: - Actions
 extension MenuScreenVC {
     private func categoryCellTapped(_ category: Category) {
         selectedCategory = category
@@ -156,7 +145,7 @@ extension MenuScreenVC {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension MenuScreenVC {
     
     func setupStyles() {
@@ -175,9 +164,8 @@ private extension MenuScreenVC {
     }
 }
 
-//MARK: - TableViewDataSource, TableViewDelegate
+//  MARK: - TableViewDataSource, TableViewDelegate
 extension MenuScreenVC: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = MenuSection.init(rawValue: indexPath.section)
         switch section {
@@ -194,7 +182,6 @@ extension MenuScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = MenuSection.init(rawValue: section)
-        
         switch section {
         case .banner:
             return SectionRows.banner
@@ -209,7 +196,6 @@ extension MenuScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = MenuSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .banner:
             let cell = tableView.dequeueReusableCell(withIdentifier: BannerCell.reuseId, for: indexPath) as! BannerCell
@@ -244,7 +230,6 @@ extension MenuScreenVC: UITableViewDataSource, UITableViewDelegate {
         }
         
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = MenuSection(rawValue: indexPath.section)

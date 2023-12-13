@@ -10,14 +10,12 @@ protocol EditProductNameDelegate: AnyObject {
 
 final class EditProductNameCell: UITableViewCell, UITextFieldDelegate {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.editProductNameCell
-    
-    //MARK: - Properties
+//  MARK: - Properties
     var selectedProduct: Product?
     weak var delegate: EditProductNameDelegate?
-    
-    //MARK: - UI
+//  MARK: - UI
     var nameTextField = ProfileTextField(style: .product)
     var categoryTextField = ProfileTextField(style: .category)
     var priceTextField =  ProfileTextField(style: .price)
@@ -25,11 +23,10 @@ final class EditProductNameCell: UITableViewCell, UITextFieldDelegate {
     private let categoryLabel = OrderDetailLabel(style: .productCategory)
     private let priceLabel = OrderDetailLabel(style: .productPrice)
     private var verticalStackView = StackView(style: .vertical)
-    
-    //MARK: - Life Cycle
+
+//  MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupStyles()
         setupAction()
@@ -42,9 +39,8 @@ final class EditProductNameCell: UITableViewCell, UITextFieldDelegate {
     }
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 extension EditProductNameCell {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTextField {
             categoryTextField.becomeFirstResponder()
@@ -57,11 +53,9 @@ extension EditProductNameCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension EditProductNameCell {
-    
     func updateProductDetail() {
-        
         if let product = selectedProduct {
             nameTextField.text = product.name
             categoryTextField.text = product.category.lowercased()
@@ -69,21 +63,21 @@ extension EditProductNameCell {
         }
     }
     
-    func setupAction() {
+    private func setupAction() {
         nameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         categoryTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         priceTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
         if let name = nameTextField.text, let category = categoryTextField.text, let priceText = priceTextField.text, let price = Int(priceText) {
             delegate?.didUpdateProductInfo(name: name, category: category, price: price)
         }
     }
 }
 
-//MARK: - Layout
-extension EditProductNameCell {
+//  MARK: - Layout
+private extension EditProductNameCell {
     
     func setupViews() {
         contentView.addSubview(verticalStackView)

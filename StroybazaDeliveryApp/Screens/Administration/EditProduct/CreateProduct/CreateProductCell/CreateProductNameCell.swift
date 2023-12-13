@@ -11,22 +11,19 @@ protocol CreateProductNameDelegate: AnyObject {
 
 final class CreateProductNameCell: UITableViewCell, UITextFieldDelegate {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.createProductNameCell
-    
-    //MARK: - UI
+//  MARK: - UI
     private var verticalStackView = StackView(style: .vertical)
     private let nameTextField = ProfileTextField(style: .product)
     private let categoryTextField = ProfileTextField(style: .category)
     private let priceTextField = ProfileTextField(style: .price)
-    
-    //MARK: - Propertise
+//  MARK: - Propertise
     weak var delegate: CreateProductNameDelegate?
-    
-    //MARK: - Life Cycle
+
+//  MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupAction()
         setupConstraints()
@@ -35,20 +32,17 @@ final class CreateProductNameCell: UITableViewCell, UITextFieldDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 extension CreateProductNameCell {
-    
-    func setupAction() {
+    private func setupAction() {
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         categoryTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         priceTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField == nameTextField {
             categoryTextField.becomeFirstResponder()
         } else if textField == categoryTextField {
@@ -56,14 +50,12 @@ extension CreateProductNameCell {
         } else if textField == priceTextField {
             textField.resignFirstResponder()
         }
-        
         return true
     }
 }
 
-//MARK: - Delegate
+//  MARK: - Delegate
 extension CreateProductNameCell {
-    
     func clearNameTextField() {
         nameTextField.text = ""
         categoryTextField.text = ""
@@ -75,12 +67,10 @@ extension CreateProductNameCell {
             delegate?.didUpdateProductInfo(name, category.lowercased(), price)
         }
     }
-    
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CreateProductNameCell {
-    
     func setupViews() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(nameTextField)
@@ -93,7 +83,6 @@ private extension CreateProductNameCell {
     }
     
     func setupConstraints() {
-        
         verticalStackView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalTo(contentView).inset(20)
         }

@@ -11,6 +11,5 @@ struct Category: Codable, Comparable, Equatable, Hashable {
     }
     
     let category: String
-    
 }
       

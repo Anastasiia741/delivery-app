@@ -12,18 +12,16 @@ enum ProfileSection: Int, CaseIterable {
 
 final class ProfileScreenVC: UIViewController {
     
-    //MARK: Service
+//  MARK: Service
     private let authService = DBServiceAuth.shared
     private let databaseService = DBServiceOrders.shared
     private let databaseProfile = DBServiceProfile.shared
-    
-    //MARK: Properties
+//  MARK: Properties
     private var imageURL: String?
     private var selectedImage: UIImage?
     private var profile: NewUser?
     private var orders = [Order]()
-    
-    //MARK: UI
+//  MARK: UI
     private let exitButton = ExitButtonView()
     private lazy var saveButton = UIBarButtonItem(title: ButtonsName.save, style: .done, target: self, action: #selector(saveButtonTap))
     private lazy var tableView: UITableView = {
@@ -43,10 +41,9 @@ final class ProfileScreenVC: UIViewController {
         return tableView
     }()
     
-    //MARK: - Life Cyrcle
+//  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupStyles()
         setupViews()
         setupActions()
@@ -59,32 +56,25 @@ final class ProfileScreenVC: UIViewController {
         super.viewDidAppear(animated)
         fetchOrderHistory()
     }
-    
 }
 
-// MARK: - Delegate
+//  MARK: - Delegate
 extension ProfileScreenVC: ProfileCellDelegate {
     
     func didSelectImage(_ image: UIImage?, _ imageURL: String) {
-        
         if let image = image {
             self.selectedImage = image
         }
-        
-        print("---- \(selectedImage)")
         if !imageURL.isEmpty {
             self.imageURL = imageURL
         }
-        
     }
-    
 }
 
-//MARK: - Business Logic
-extension ProfileScreenVC {
+//  MARK: - Business Logic
+private extension ProfileScreenVC {
     
     func saveProfile(_ profile: NewUser) {
-         
         if let email = authService.currentUser?.email {
             databaseProfile.setProfile(user: profile, email: email) { [weak self] result in
                 switch result {
@@ -103,7 +93,6 @@ extension ProfileScreenVC {
     func fetchUserProfile() {
         if let currentUser = authService.currentUser {
             let currentUserUID = currentUser.uid
-            
             databaseProfile.getProfile(by: currentUserUID) { [weak self] result in
                 switch result {
                 case .success(let user):
@@ -119,7 +108,6 @@ extension ProfileScreenVC {
     }
     
     func fetchOrderHistory() {
-        
         databaseService.fetchOrderHistory(by: authService.currentUser?.uid) { [weak self] result in
             switch result {
             case .success(let orderHistory):
@@ -160,12 +148,11 @@ extension ProfileScreenVC {
     }
     
     @objc func saveButtonTap() {
-        
         guard var updatedProfile = profile else {
             print("Профиль пользователя не инициализирован")
             return
         }
-        
+       
         if let nameCell = tableView.cellForRow(at: IndexPath(row: SectionRows.none, section: ProfileSection.name.rawValue)) as? ProfileCell {
             updatedProfile.name = nameCell.nameTextField.text ?? TextMessage.empty
             updatedProfile.phone = nameCell.numberTextField.text ?? TextMessage.empty
@@ -174,15 +161,12 @@ extension ProfileScreenVC {
         if let addressCell = tableView.cellForRow(at: IndexPath(row: SectionRows.none, section: ProfileSection.address.rawValue)) as? ProfileContactCell {
             updatedProfile.address = addressCell.addressTextField.text ?? TextMessage.empty
         }
-        
-        print(updatedProfile)
         saveProfile(updatedProfile)
     }
 }
 
-// MARK: - Navigation
+//  MARK: - Navigation
 private extension ProfileScreenVC {
-    
     func setupActions() {
         exitButton.exitButton.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -210,9 +194,8 @@ private extension ProfileScreenVC {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension ProfileScreenVC {
-    
     func setupStyles() {
         self.navigationItem.title = Titles.profile
         view.backgroundColor = .white
@@ -226,7 +209,6 @@ private extension ProfileScreenVC {
     }
     
     func setupConstraints() {
-        
         tableView.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(exitButton.snp.top)
@@ -240,7 +222,7 @@ private extension ProfileScreenVC {
     }
 }
 
-//MARK: - UITableView
+//  MARK: - UITableView
 extension ProfileScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -249,7 +231,6 @@ extension ProfileScreenVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = ProfileSection.init(rawValue: section)
-        
         switch section {
         case .name:
             return SectionRows.profile
@@ -265,51 +246,40 @@ extension ProfileScreenVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let section = ProfileSection.init(rawValue: indexPath.section)
         switch section {
         case .name:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.reuseId, for: indexPath) as! ProfileCell
             cell.selectionStyle = .none
             cell.delegate = self
-            
             if let profile = self.profile {
                 cell.configure(with: profile)
             }
-            
             return cell
-            
         case .address:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileContactCell.reuseId, for: indexPath) as! ProfileContactCell
             cell.selectionStyle = .none
-            
             if let profile = self.profile {
                 cell.configure(with: profile, email: authService.currentUser?.email ?? TextMessage.empty)
             }
             return cell
-            
         case .titleOrders:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTitileOrderCell.reuseId, for: indexPath) as! ProfileTitileOrderCell
             cell.selectionStyle = .none
-            
             return cell
         case .orders:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileOrderCell.reuseId, for: indexPath) as! ProfileOrderCell
             cell.selectionStyle = .none
             let order = orders[indexPath.row]
             cell.configure(with: order)
-            
             return cell
-            
         default:
             return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         let section = ProfileSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .name:
             return CellHeight.profileName
@@ -323,5 +293,4 @@ extension ProfileScreenVC: UITableViewDataSource, UITableViewDelegate {
             return CellHeight.profileDefault
         }
     }
-    
 }

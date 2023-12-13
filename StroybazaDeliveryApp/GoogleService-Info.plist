@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.stasy.StroybazaDeliveryApp</string>
+	<string>com.stasy.stroybazadostavkaapp</string>
 	<key>PROJECT_ID</key>
 	<string>souvenir-shop-716eb</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,7 +25,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:487964973404:ios:85e7a4de2ee9ab53ac8999</string>
+	<string>1:487964973404:ios:7540b67cf5ec7773ac8999</string>
 	<key>DATABASE_URL</key>
 	<string>https://souvenir-shop-716eb-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>

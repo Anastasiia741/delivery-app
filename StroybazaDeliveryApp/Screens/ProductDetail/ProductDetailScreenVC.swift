@@ -9,13 +9,11 @@ import SDWebImage
 
 final class ProductDetailScreenVC: UIViewController{
     
-    //MARK: - Actions
+//  MARK: - Actions
     var selectedProduct: Product?
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private let orderService = OrderService()
-
-    //MARK: - UI
+//  MARK: - UI
     private let scrollView = UIScrollView()
     private let verticalStackView = StackView(style: .verticalForProduct)
     private let orderView = OrderButtonView()
@@ -23,12 +21,10 @@ final class ProductDetailScreenVC: UIViewController{
     private let nameLabel = MainTitleLabel.init(style: .titleDetail)
     private let detailLabel = DetaileLabel(style: .detail)
     private let priceLabel = PriceLabel(style: PriceLabelType.price)
-    
-    
-    //MARK: - Life Curcle
+        
+//  MARK: - Life Cucle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         setupViews()
         setupStyles()
         setupActions()
@@ -39,11 +35,9 @@ final class ProductDetailScreenVC: UIViewController{
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 private extension ProductDetailScreenVC {
-    
     func updateImageDetail() {
-      
         if let product = selectedProduct {
             if let productImage = product.image {
                 let imageRef = Storage.storage().reference(forURL: productImage)
@@ -59,38 +53,32 @@ private extension ProductDetailScreenVC {
         }
     }
     
-
     func updateProductDetail() {
-        
         if let product = selectedProduct {
             nameLabel.text = product.name
             detailLabel.text = product.description
             priceLabel.text = "\(product.price) сом"
         }
     }
-    
 }
 
-//MARK: - Actions
+//  MARK: - Actions
 private extension ProductDetailScreenVC {
-    
-    @objc func oderButtonTapped() {
         
-        let _ = orderService.addProduct(selectedProduct)
-        
-        dismiss(animated: true)
-    }
-    
     func setupActions() {
         orderView.orderButton.addTarget(self, action: #selector(oderButtonTapped), for: .touchUpInside)
     }
+    
+    @objc func oderButtonTapped() {
+        let _ = orderService.addProduct(selectedProduct)
+        dismiss(animated: true)
+    }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension ProductDetailScreenVC {
     
     func setupViews() {
-        
         view.addSubview(scrollView)
         view.addSubview(orderView)
         scrollView.addSubview(verticalStackView)
@@ -111,7 +99,6 @@ private extension ProductDetailScreenVC {
     }
     
     func setupConstraints() {
-        
         scrollView.snp.makeConstraints { make in
             make.left.top.right.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(80)

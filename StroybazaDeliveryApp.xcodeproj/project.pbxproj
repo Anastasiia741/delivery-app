@@ -15,6 +15,7 @@
 		716403932AA9E3A500D44A88 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716403922AA9E3A500D44A88 /* ActivityIndicator.swift */; };
 		716403962AAA095300D44A88 /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716403952AAA095300D44A88 /* CategoryCollectionCell.swift */; };
 		716403A32AAB4F3B00D44A88 /* DBServiceAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716403A22AAB4F3B00D44A88 /* DBServiceAuth.swift */; };
+		7168DF622B29CB8100BE75E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7168DF612B29CB8100BE75E3 /* GoogleService-Info.plist */; };
 		7177E3682A8BACBA00C9845E /* AdminScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7177E3672A8BACBA00C9845E /* AdminScreenVC.swift */; };
 		7177E36C2A8BB07300C9845E /* AdminCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7177E36B2A8BB07300C9845E /* AdminCell.swift */; };
 		7177E36F2A8BB0AF00C9845E /* AdminHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7177E36E2A8BB0AF00C9845E /* AdminHeaderView.swift */; };
@@ -93,7 +94,6 @@
 		71F487F72AD6A47C00C3807E /* EditProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487F62AD6A47C00C3807E /* EditProductImageCell.swift */; };
 		71F487F92AD6A48B00C3807E /* EditProductNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487F82AD6A48B00C3807E /* EditProductNameCell.swift */; };
 		71F487FB2AD6A49900C3807E /* EditProductDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487FA2AD6A49900C3807E /* EditProductDetailCell.swift */; };
-		71FC1AF72B2351E800292C49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71FC1AF62B2351E800292C49 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +104,7 @@
 		716403922AA9E3A500D44A88 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		716403952AAA095300D44A88 /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
 		716403A22AAB4F3B00D44A88 /* DBServiceAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBServiceAuth.swift; sourceTree = "<group>"; };
+		7168DF612B29CB8100BE75E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7177E3672A8BACBA00C9845E /* AdminScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminScreenVC.swift; sourceTree = "<group>"; };
 		7177E36B2A8BB07300C9845E /* AdminCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCell.swift; sourceTree = "<group>"; };
 		7177E36E2A8BB0AF00C9845E /* AdminHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHeaderView.swift; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		71F487F62AD6A47C00C3807E /* EditProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductImageCell.swift; sourceTree = "<group>"; };
 		71F487F82AD6A48B00C3807E /* EditProductNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductNameCell.swift; sourceTree = "<group>"; };
 		71F487FA2AD6A49900C3807E /* EditProductDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductDetailCell.swift; sourceTree = "<group>"; };
-		71FC1AF62B2351E800292C49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +346,7 @@
 				719AA6202AB1C98000B03114 /* Constants */,
 				718800DE2A7A5D2B00F7C948 /* Resourses */,
 				718800CC2A7A5C0100F7C948 /* Info.plist */,
+				7168DF612B29CB8100BE75E3 /* GoogleService-Info.plist */,
 			);
 			path = StroybazaDeliveryApp;
 			sourceTree = "<group>";
@@ -451,7 +452,6 @@
 			children = (
 				718800C92A7A5C0100F7C948 /* LaunchScreen.storyboard */,
 				718800C72A7A5C0100F7C948 /* Assets.xcassets */,
-				71FC1AF62B2351E800292C49 /* GoogleService-Info.plist */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -712,8 +712,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				718800CB2A7A5C0100F7C948 /* LaunchScreen.storyboard in Resources */,
-				71FC1AF72B2351E800292C49 /* GoogleService-Info.plist in Resources */,
 				718800C82A7A5C0100F7C948 /* Assets.xcassets in Resources */,
+				7168DF622B29CB8100BE75E3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,7 +938,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9N6US9U86T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StroybazaDeliveryApp/Info.plist;
@@ -955,7 +955,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.stroybazadostavkaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -973,7 +973,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9N6US9U86T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StroybazaDeliveryApp/Info.plist;
@@ -990,7 +990,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.stroybazadostavkaapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

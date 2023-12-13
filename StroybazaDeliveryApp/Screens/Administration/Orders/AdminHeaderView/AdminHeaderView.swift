@@ -6,10 +6,9 @@ import UIKit
 
 final class AdminHeaderView: UITableViewHeaderFooterView {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.adminHeaderView
-    
-    //MARK: - UI
+//  MARK: - UI
     private let allButton = StatusButton(style: .all, highlightColor: .gray.withAlphaComponent(0.7), releaseColor:  .gray.withAlphaComponent(0.5))
     private let newButton = StatusButton(style: .new, highlightColor: .gray.withAlphaComponent(0.7), releaseColor:  .gray.withAlphaComponent(0.5))
     private let processingButton = StatusButton(style: .processing, highlightColor: .gray.withAlphaComponent(0.7), releaseColor:  .gray.withAlphaComponent(0.5))
@@ -18,13 +17,12 @@ final class AdminHeaderView: UITableViewHeaderFooterView {
     private let cancelledButton = StatusButton(style: .cancelled, highlightColor: .gray.withAlphaComponent(0.7), releaseColor:  .gray.withAlphaComponent(0.5))
     private let horizontalStackView = StackView(style: .horizontal)
     private let scrollView = UIScrollView()
-    
-    //MARK: - Action
+//  MARK: - Action
     var onButtonTapped: ((OrderStatus) -> Void)?
-    
+
+//  MARK: - Initialization
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupAction()
         setupConstraints()
@@ -33,10 +31,9 @@ final class AdminHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 private extension AdminHeaderView {
     
     @objc func allButtonTapped() {
@@ -64,7 +61,7 @@ private extension AdminHeaderView {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension AdminHeaderView {
     
     func setupViews() {
@@ -84,7 +81,6 @@ private extension AdminHeaderView {
     }
     
     private func setupConstraints() {
-        
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

@@ -8,7 +8,7 @@ import FirebaseAuth
 
 final class AuthorizationScreenVC: UIViewController, UITextFieldDelegate {
     
-    //MARK: - UI
+//  MARK: - UI
     private let titleLabel = MainTitleLabel(style: .auth)
     private let containerView = ContainerView()
     private let emailTextField = AuthTextField(style: .email)
@@ -18,12 +18,12 @@ final class AuthorizationScreenVC: UIViewController, UITextFieldDelegate {
     private let enterButton = EnterButtom(style: .authorization)
     private var toggleAuthButton = EnterButtom(style: .registration)
     private var verticalStackView = StackView(style: .verticalForAuth)
-    
+//  MARK: - Action
     private var isAuth = true
     private var isTabViewShow = false
     private var isShowAlert = false
     
-    //MARK: - Life Cyrcle
+//  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -39,9 +39,8 @@ final class AuthorizationScreenVC: UIViewController, UITextFieldDelegate {
     }
 }
 
-//MARK: - Actions
+//  MARK: - Actions
 private extension AuthorizationScreenVC {
-    
     func setupActions() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
@@ -110,16 +109,15 @@ private extension AuthorizationScreenVC {
     }
     
     @objc func disclaimerLabelTapped() {
-        if let url = URL(string: "https://ilten.github.io/app-policy/") {
+        if let url = URL(string: TextMessage.policy) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
 }
 
-//MARK: - Navigation
+//  MARK: - Navigation
 extension AuthorizationScreenVC {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case emailTextField:
@@ -146,7 +144,7 @@ extension AuthorizationScreenVC {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension AuthorizationScreenVC {
     
     func firstResponder() {
@@ -216,7 +214,6 @@ private extension AuthorizationScreenVC {
     }
     
     func updateConstraints() {
-        
         if isAuth {
             confirmPasswordTextField.removeFromSuperview()
             
@@ -246,8 +243,6 @@ private extension AuthorizationScreenVC {
                 make.top.equalTo(toggleAuthButton.snp.bottom).offset(8)
                 make.height.equalTo(50)
             }
-            
-            
         } else {
             if !verticalStackView.arrangedSubviews.contains(confirmPasswordTextField) {
                 verticalStackView.insertArrangedSubview(confirmPasswordTextField, at: 2)

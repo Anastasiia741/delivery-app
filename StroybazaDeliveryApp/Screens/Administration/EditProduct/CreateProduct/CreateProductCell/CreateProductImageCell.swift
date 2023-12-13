@@ -11,22 +11,19 @@ protocol CreateProductDelegate: AnyObject {
 
 final class CreateProductImageCell: UITableViewCell, UINavigationControllerDelegate {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.createProductImageCell
-    
-    //MARK: - Database
+//  MARK: - Database
     private let productDB = DBServiceProducts()
-    
-    //MARK: - Delegate
+//  MARK: - Delegate
     private var selectedImage: UIImage?
     private var imagePicker = UIImagePickerController()
     private var selectImageHandler: (() -> Void)?
     weak var delegate: CreateProductDelegate?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let productImage = ProductImageView(style: .editProduct)
     
-    //MARK: - Lifecycle
+//  MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -39,7 +36,7 @@ final class CreateProductImageCell: UITableViewCell, UINavigationControllerDeleg
     }
 }
 
-//MARK: - ImagePicker
+//  MARK: - ImagePicker
 extension CreateProductImageCell: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -72,7 +69,7 @@ extension CreateProductImageCell: UIImagePickerControllerDelegate {
     }
 }
 
-//MARK: - Actions
+//  MARK: - Actions
 private extension CreateProductImageCell {
     
     func showAlertImage() {
@@ -96,10 +93,7 @@ private extension CreateProductImageCell {
         selectImageFromGallery()
     }
     
-    
-    //MARK: - Fix
     func selectImageFromGallery() {
-        
         if let selectedImage = selectedImage {
             let fileName = UUID().uuidString + ".jpg"
             if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
@@ -124,14 +118,14 @@ private extension CreateProductImageCell {
 }
 
 
-//MARK: - Bussines Logic
+//  MARK: - Bussines Logic
 extension CreateProductImageCell {
     @objc func imageDidChange() {
         productImage.image = UIImage(named: Images.Picture.productImage)
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CreateProductImageCell {
     
     func setupViews() {

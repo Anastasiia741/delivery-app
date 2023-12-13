@@ -6,11 +6,12 @@ import UIKit
 import SnapKit
 
 final class PromoCell: UITableViewCell {
-    
-    var onPromoTapped: ((Product)->())?
+  
+//  MARK: - ReuseID
     static let reuseId = ReuseId.promoCell
+//  MARK: - Properties
     private var products: [Product] = []
-    
+//  MARK: - UI
     private let titleLabel = MainTitleLabel(style: .cartAddTitle)
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -35,7 +36,10 @@ final class PromoCell: UITableViewCell {
         
         return view
     }()
-    
+//  MARK: - Action
+    var onPromoTapped: ((Product)->())?
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -45,30 +49,25 @@ final class PromoCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
-//MARK: - Public
+//  MARK: - Business logic
 extension PromoCell {
-    
     func update(products: [Product]) {
         self.products = products
         collectionView.reloadData()
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension PromoCell {
-    
     func setupViews() {
-        
         contentView.addSubview(containerView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(collectionView)
     }
     
     func setupConstraints() {
-        
         containerView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
@@ -84,6 +83,7 @@ private extension PromoCell {
     }
 }
 
+//  MARK: - CollectionViewDelegate, CollectionViewDataSource
 extension PromoCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -91,21 +91,15 @@ extension PromoCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromoCollectionCell.reuseId, for: indexPath) as! PromoCollectionCell
-        
         let promoProduct = products[indexPath.row]
         cell.update(promoProduct)
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let promoProduct = products[indexPath.row]
-        
         onPromoTapped?(promoProduct)
-        print("Tap")
     }
 }
 
