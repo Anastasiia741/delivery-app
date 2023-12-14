@@ -142,6 +142,10 @@ extension AuthorizationScreenVC {
         mainTabBarController.modalPresentationStyle = .fullScreen
         present(mainTabBarController, animated: true, completion: nil)
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
+    }
 }
 
 //  MARK: - Layout
@@ -170,6 +174,10 @@ private extension AuthorizationScreenVC {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
+        
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        confirmPasswordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     func updateTitleLabel() {
