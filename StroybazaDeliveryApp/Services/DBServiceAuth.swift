@@ -5,6 +5,11 @@
 import Foundation
 import FirebaseAuth
 
+
+enum AuthError: Error {
+    case noCurrentUser
+}
+
 final class DBServiceAuth {
     
     static let shared = DBServiceAuth()
@@ -55,6 +60,23 @@ final class DBServiceAuth {
             completion(.success(()))
         } catch {
             completion(.failure(error))
+        }
+    }
+
+//  MARK: - Delete account
+    func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void){
+        guard let currentUser = auth.currentUser else {
+            completion(.failure(AuthError.noCurrentUser))
+            return
+        }
+        
+        auth.currentUser?.delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                print("Пользователь удален")
+                completion(.success(()))
+            }
         }
     }
 }
