@@ -5,7 +5,7 @@
 import UIKit
 
 enum MainTitleType {
-    case detail, product, productSkeleton, promo, menuTitle, cartTitle, cartAddTitle, emailTitle, email, contact, history, auth, orderHistory, orderAmount, orderStatus, titleDetail, disclaimer
+    case detail, product, productSkeleton, promo, menuTitle, cartTitle, cartAddTitle, emailTitle, email, contact, history, auth, orderHistory, orderAmount, orderStatus, titleDetail, disclaimer, deleteAccount
 }
 
 final class MainTitleLabel: UILabel {
@@ -95,6 +95,16 @@ final class MainTitleLabel: UILabel {
         case .productSkeleton:
             self.text = ""
             self.backgroundColor = .lightGray
+        case .deleteAccount:
+            self.text = "Удалить аккаунт"
+            self.textColor = .gray
+            self.textAlignment = .center
+            self.font = UIFont.systemFont(ofSize: 14, weight: .light)
+            self.isUserInteractionEnabled = true
+
+            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+            let underlineAttributedString = NSAttributedString(string: self.text ?? "", attributes: underlineAttribute)
+            self.attributedText = underlineAttributedString
         }
     }
 }

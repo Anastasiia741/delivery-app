@@ -12,17 +12,18 @@ enum ProfileSection: Int, CaseIterable {
 
 final class ProfileScreenVC: UIViewController {
     
-//  MARK: Service
+    //  MARK: Service
     private let authService = DBServiceAuth.shared
     private let databaseService = DBServiceOrders.shared
     private let databaseProfile = DBServiceProfile.shared
-//  MARK: Properties
+    //  MARK: Properties
     private var imageURL: String?
     private var selectedImage: UIImage?
     private var profile: NewUser?
     private var orders = [Order]()
-//  MARK: UI
+    //  MARK: UI
     private let exitButton = ExitButtonView()
+    private let deleteAccountLabel = MainTitleLabel(style: .deleteAccount)
     private lazy var saveButton = UIBarButtonItem(title: ButtonsName.save, style: .done, target: self, action: #selector(saveButtonTap))
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -41,7 +42,7 @@ final class ProfileScreenVC: UIViewController {
         return tableView
     }()
     
-//  MARK: - Life Cycle
+    //  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyles()
@@ -58,22 +59,79 @@ final class ProfileScreenVC: UIViewController {
     }
 }
 
-//  MARK: - Delegate
-extension ProfileScreenVC: ProfileCellDelegate {
+//  MARK: - Event Handler
+private extension ProfileScreenVC {
     
-    func didSelectImage(_ image: UIImage?, _ imageURL: String) {
-        if let image = image {
-            self.selectedImage = image
+    func setupAlert() {
+        let alert = UIAlertController(title: AlertMessage.createProduct, message: "", preferredStyle: .alert)
+        let attributedStringForTitle = NSAttributedString(string: AlertMessage.createProduct, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)])
+        alert.setValue(attributedStringForTitle, forKey: "attributedTitle")
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
+        alert.view.tintColor = .black
+        let okAction = UIAlertAction(title: AlertMessage.okAction, style: .default)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+    }
+    
+    
+    private func showSuccessAlert() {
+        let successAlert = UIAlertController(title: AlertMessage.deleteTitle, message: AlertMessage.deleteMessage, preferredStyle: .alert)
+        successAlert.addAction(UIAlertAction(title: AlertMessage.okAction, style: .default, handler: nil))
+        self.logout()
+        
+        present(successAlert, animated: true)
+    }
+    
+    func logout() {
+        authService.signOut { [weak self] result in
+            switch result {
+            case .success:
+                self?.showAuthScreen()
+            case .failure(let error):
+                print("Ошибка при выходе: \(error.localizedDescription)")
+            }
         }
-        if !imageURL.isEmpty {
-            self.imageURL = imageURL
+    }
+    
+    
+    @objc func saveButtonTap() {
+        guard var updatedProfile = profile else {
+            print("Профиль пользователя не инициализирован")
+            return
         }
+        
+        if let nameCell = tableView.cellForRow(at: IndexPath(row: SectionRows.none, section: ProfileSection.name.rawValue)) as? ProfileCell {
+            updatedProfile.name = nameCell.nameTextField.text ?? TextMessage.empty
+            updatedProfile.phone = nameCell.numberTextField.text ?? TextMessage.empty
+        }
+        
+        if let addressCell = tableView.cellForRow(at: IndexPath(row: SectionRows.none, section: ProfileSection.address.rawValue)) as? ProfileContactCell {
+            updatedProfile.address = addressCell.addressTextField.text ?? TextMessage.empty
+        }
+        saveProfile(updatedProfile)
+    }
+    
+    @objc private func deleteAccountButtonTapped() {
+        let alertController = UIAlertController(title: AlertMessage.deleteAccount, message: AlertMessage.deleteQuestion, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AlertMessage.cancelAction, style: .cancel))
+        alertController.addAction(UIAlertAction(title: AlertMessage.deleteAction, style: .destructive) { [weak self] _ in
+            self?.authService.deleteAccount { result in
+                switch result {
+                case .success:
+                    print("Аккаунт успешно удален")
+                    self?.showSuccessAlert()
+                case .failure(let error):
+                    print("Ошибка удаления аккаунта: \(error.localizedDescription)")
+                }
+            }
+        })
+        present(alertController, animated: true)
     }
 }
 
 //  MARK: - Business Logic
 private extension ProfileScreenVC {
-    
     func saveProfile(_ profile: NewUser) {
         if let email = authService.currentUser?.email {
             databaseProfile.setProfile(user: profile, email: email) { [weak self] result in
@@ -123,46 +181,6 @@ private extension ProfileScreenVC {
             }
         }
     }
-    
-    func logout() {
-        authService.signOut { [weak self] result in
-            switch result {
-            case .success:
-                self?.showAuthScreen()
-            case .failure(let error):
-                print("Ошибка при выходе: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func setupAlert() {
-        let alert = UIAlertController(title: AlertMessage.createProduct, message: "", preferredStyle: .alert)
-        let attributedStringForTitle = NSAttributedString(string: AlertMessage.createProduct, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)])
-        alert.setValue(attributedStringForTitle, forKey: "attributedTitle")
-        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
-        alert.view.tintColor = .black
-        let okAction = UIAlertAction(title: AlertMessage.okAction, style: .default)
-        alert.addAction(okAction)
-        
-        present(alert, animated: true)
-    }
-    
-    @objc func saveButtonTap() {
-        guard var updatedProfile = profile else {
-            print("Профиль пользователя не инициализирован")
-            return
-        }
-       
-        if let nameCell = tableView.cellForRow(at: IndexPath(row: SectionRows.none, section: ProfileSection.name.rawValue)) as? ProfileCell {
-            updatedProfile.name = nameCell.nameTextField.text ?? TextMessage.empty
-            updatedProfile.phone = nameCell.numberTextField.text ?? TextMessage.empty
-        }
-        
-        if let addressCell = tableView.cellForRow(at: IndexPath(row: SectionRows.none, section: ProfileSection.address.rawValue)) as? ProfileContactCell {
-            updatedProfile.address = addressCell.addressTextField.text ?? TextMessage.empty
-        }
-        saveProfile(updatedProfile)
-    }
 }
 
 //  MARK: - Navigation
@@ -170,6 +188,10 @@ private extension ProfileScreenVC {
     func setupActions() {
         exitButton.exitButton.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        
+        let deletetapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountButtonTapped))
+        deleteAccountLabel.addGestureRecognizer(deletetapGestureRecognizer)
+        
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -205,19 +227,28 @@ private extension ProfileScreenVC {
     func setupViews() {
         view.addSubview(tableView)
         view.addSubview(exitButton)
+        view.addSubview(deleteAccountLabel)
         self.navigationItem.rightBarButtonItem = saveButton
     }
     
     func setupConstraints() {
         tableView.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(exitButton.snp.top)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-150)
         }
         
         exitButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(exitButton.snp.top)
+            make.top.equalTo(tableView.snp.bottom).offset(20)
+            
             make.left.right.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
+        }
+        
+        deleteAccountLabel.snp.makeConstraints { make in
+            make.top.equalTo(exitButton.snp.bottom).offset(8)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(30)
         }
     }
 }
@@ -251,7 +282,6 @@ extension ProfileScreenVC: UITableViewDataSource, UITableViewDelegate {
         case .name:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.reuseId, for: indexPath) as! ProfileCell
             cell.selectionStyle = .none
-            cell.delegate = self
             if let profile = self.profile {
                 cell.configure(with: profile)
             }
