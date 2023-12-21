@@ -28,7 +28,7 @@ final class DetailOrderScreenVC: UIViewController {
     private let phoneNumberLabel = OrderDetailLabel(style: .phoneNumber)
     private let orderLabel = OrderDetailLabel(style: .order)
     private let amountLabel = OrderDetailLabel(style: .amount)
-    private var changeStatusButton = DetailButton(style: .accept, highlightColor: .green.withAlphaComponent(0.7), releaseColor: .green.withAlphaComponent(0.5))
+    private var changeStatusButton = DetailButton(style: .accept, highlightColor: .green.withAlphaComponent(0.5), releaseColor: .green.withAlphaComponent(0.7))
     private let scrollView = UIScrollView()
     private let verticalStackView = StackView(style: .vertical)
     
@@ -158,9 +158,9 @@ private extension DetailOrderScreenVC {
     }
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = Titles.detailProduct
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .systemBackground
         scrollView.showsVerticalScrollIndicator = false
     }
     

@@ -13,10 +13,3 @@ enum OrderStatus: String, CaseIterable {
     case cancelled = "отменен"
 }
 
-enum StatusColor {
-    static let new = "NewStatusColor"
-    static let inProgress = "InProgressStatusColor"
-    static let sended = "SendedStatusColor"
-    static let delivered = "DeliveredStatusColor"
-    static let cancelled = "CancelledStatusColor"
-}

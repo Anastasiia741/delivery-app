@@ -74,13 +74,6 @@ enum FieldType {
     case unknown
 }
 
-enum CollorBackground {
-    static let priceButton = "PriceButton"
-    static let buyButton = "BuyButton"
-    static let backgroundPromo = "GrayAlpha"
-    static let orderButtonHeader = "normalButtonBackground"
-    static let orderButtonHeaderTap = "pressedButtonBackground"
-}
 
 enum ButtonsName {
     static let exit = "arrow.right.doc.on.clipboard"

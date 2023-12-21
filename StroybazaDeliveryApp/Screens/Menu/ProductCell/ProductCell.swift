@@ -50,13 +50,13 @@ private extension ProductCell {
             delegate?.priceButtonTapped(for: product)
             UIView.animate(withDuration: 0.1, animations: {
                 self.priceButton.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
-                self.priceButton.backgroundColor = UIColor(named: CollorBackground.priceButton)?.withAlphaComponent(0.7)
-                self.priceButton.setTitleColor(.white, for: .normal)
+                self.priceButton.backgroundColor = .priceButton?.withAlphaComponent(0.7)
+                self.priceButton.setTitleColor(.systemBackground, for: .normal)
             }) { (_) in
                 UIView.animate(withDuration: 0.1) {
                     self.priceButton.transform = CGAffineTransform.identity
-                    self.priceButton.backgroundColor = UIColor(named: CollorBackground.priceButton)?.withAlphaComponent(0.4)
-                    self.priceButton.setTitleColor(.brown, for: .normal)
+                    self.priceButton.backgroundColor = .priceButton?.withAlphaComponent(0.4)
+                    self.priceButton.setTitleColor(.systemBrown, for: .normal)
                 }
             }
         }

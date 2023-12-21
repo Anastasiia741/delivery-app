@@ -25,7 +25,7 @@ final class TitleTextView: UITextView, UITextViewDelegate {
         self.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         self.layer.cornerRadius = 5
         self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor(named: "PriceButton")?.cgColor
+        self.layer.borderColor = UIColor.priceButton?.cgColor
         self.isScrollEnabled = true
         setupTextView()
     }

@@ -29,7 +29,7 @@ final class PromoCell: UITableViewCell {
     }()
     private let containerView: UIView = {
         var view = UIView()
-        view.backgroundColor = UIColor(named: CollorBackground.backgroundPromo)
+        view.backgroundColor = .backgroundPromo
         view.snp.makeConstraints { make in
             make.height.equalTo(200)
         }

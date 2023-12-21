@@ -25,11 +25,11 @@ final class DetaileLabel: UILabel {
         case .detail:
             self.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             self.numberOfLines = 0
-            self.tintColor = .gray
+            self.tintColor = .systemGray2
         case .product:
             self.font = UIFont.italicSystemFont(ofSize: 16)
             self.numberOfLines = 0
-            self.tintColor = .gray
+            self.tintColor = .systemGray2
         }
     }
 }

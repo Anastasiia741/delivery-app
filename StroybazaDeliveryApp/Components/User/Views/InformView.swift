@@ -17,7 +17,7 @@ final class InformView: UIView {
     }
     
     private func commonInit() {
-        self.backgroundColor = .darkGray
+        self.backgroundColor = .systemGray?.withAlphaComponent(0.9)
         self.layer.cornerRadius = 6
         self.alpha = 0.0
         
@@ -27,7 +27,7 @@ final class InformView: UIView {
             label.numberOfLines = 3
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-            label.textColor = .orange
+            label.textColor = .systemOrange
             return label
         }()
         

@@ -10,12 +10,12 @@ protocol EditProductDescriptionDelegate: AnyObject {
 
 final class EditProductDetailCell: UITableViewCell {
     
-    //  MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.editProductDetailCell
-    //  MARK: - Properties
+//  MARK: - Properties
     var selectedProduct: Product?
     weak var delegate: EditProductDescriptionDelegate?
-    //  MARK: - UI
+//  MARK: - UI
     var descriptionMainTV = TitleTextView(style: .descriptionForMain)
     var descriptionDetailTV = TitleTextView(style: .descriptionForDetail)
     private let descriptionMainLabel = OrderDetailLabel(style: .productDescription)
@@ -73,11 +73,9 @@ private extension EditProductDetailCell {
         verticalStackView.addArrangedSubview(descriptionMainTV)
         verticalStackView.addArrangedSubview(descriptionDetailLabel)
         verticalStackView.addArrangedSubview(descriptionDetailTV)
-        
     }
     
     func setupConstraints() {
-        
         verticalStackView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(contentView).inset(20)
         }

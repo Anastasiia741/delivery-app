@@ -5,8 +5,8 @@
 import UIKit
 
 final class PromoButtonView: UIView {
-    
     var promoButton = PromoButton()
+ 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -20,9 +20,8 @@ final class PromoButtonView: UIView {
     private func setupViews() {
         self.addSubview(promoButton)
     }
-   
+    
     private func setupConstraints() {
-       
         promoButton.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(8)
             make.centerX.equalToSuperview()
@@ -42,13 +41,12 @@ final class PromoButton: UIButton {
     }
     
     private func commonInit() {
-       
         self.setTitle("Ввести промокод", for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         self.setTitleColor(.black, for: .normal)
-        self.backgroundColor = UIColor(named: "PromoButton")
+        self.backgroundColor = .promoButton
         self.layer.cornerRadius = 20
-        self.tintColor = .white
+        self.tintColor = .systemBackground
         self.heightAnchor.constraint(equalToConstant: 45).isActive = true
         self.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.7).isActive = true
     }

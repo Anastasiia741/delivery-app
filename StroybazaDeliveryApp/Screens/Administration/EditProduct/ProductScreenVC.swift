@@ -38,13 +38,12 @@ class ProductScreenVC: UIViewController {
     private let activityIndicator = ActivityIndicator(style: .medium)
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
-        
         tableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.reuseID)
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.reuseId)
         tableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.reuseId)
@@ -141,7 +140,7 @@ extension ProductScreenVC {
     func showDetailScreen(_ product: Product) {
         let viewController = EditDetailProductScreenVC()
         viewController.selectedProduct = product
-        navigationController?.navigationBar.tintColor = UIColor(named: CollorBackground.buyButton)
+        navigationController?.navigationBar.tintColor = .buyButton
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -162,7 +161,7 @@ private extension ProductScreenVC {
     }
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         self.navigationItem.title = Titles.products
     }
     

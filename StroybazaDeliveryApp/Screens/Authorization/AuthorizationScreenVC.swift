@@ -60,7 +60,6 @@ private extension AuthorizationScreenVC {
     }
     
     @objc func enterButtonTapped() {
-        
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             showAlert(message: AlertMessage.authMessage)
@@ -113,7 +112,6 @@ private extension AuthorizationScreenVC {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    
 }
 
 //  MARK: - Navigation
@@ -134,7 +132,6 @@ extension AuthorizationScreenVC {
             break
         }
         return true
-        
     }
     
     func navigateToMenuScreen() {
@@ -158,9 +155,7 @@ private extension AuthorizationScreenVC {
     func setupViews() {
         view.addSubview(titleLabel)
         view.addSubview(containerView)
-        
         containerView.addSubview(verticalStackView)
-        
         verticalStackView.addArrangedSubview(emailTextField)
         verticalStackView.addArrangedSubview(passwordTextField)
         
@@ -185,7 +180,7 @@ private extension AuthorizationScreenVC {
     }
     
     func updateUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         verticalStackView.removeArrangedSubview(confirmPasswordTextField)
         confirmPasswordTextField.removeFromSuperview()
         

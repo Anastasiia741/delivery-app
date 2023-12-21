@@ -27,7 +27,7 @@ final class ProfileScreenVC: UIViewController {
     private lazy var saveButton = UIBarButtonItem(title: ButtonsName.save, style: .done, target: self, action: #selector(saveButtonTap))
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,23 +63,20 @@ final class ProfileScreenVC: UIViewController {
 private extension ProfileScreenVC {
     
     func setupAlert() {
-        let alert = UIAlertController(title: AlertMessage.createProduct, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: AlertMessage.createProduct, message: AlertMessage.emptyMessage, preferredStyle: .alert)
         let attributedStringForTitle = NSAttributedString(string: AlertMessage.createProduct, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)])
         alert.setValue(attributedStringForTitle, forKey: "attributedTitle")
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
-        alert.view.tintColor = .black
+        alert.view.tintColor = .systemBlack
         let okAction = UIAlertAction(title: AlertMessage.okAction, style: .default)
         alert.addAction(okAction)
         
         present(alert, animated: true)
     }
     
-    
     private func showSuccessAlert() {
         let successAlert = UIAlertController(title: AlertMessage.deleteTitle, message: AlertMessage.deleteMessage, preferredStyle: .alert)
         successAlert.addAction(UIAlertAction(title: AlertMessage.okAction, style: .default, handler: nil))
-        self.logout()
-        
         present(successAlert, animated: true)
     }
     
@@ -93,7 +90,6 @@ private extension ProfileScreenVC {
             }
         }
     }
-    
     
     @objc func saveButtonTap() {
         guard var updatedProfile = profile else {
@@ -120,7 +116,8 @@ private extension ProfileScreenVC {
                 switch result {
                 case .success:
                     print("Аккаунт успешно удален")
-                    self?.showSuccessAlert()
+                    self?.logout()
+                    self?.showAuthScreen()
                 case .failure(let error):
                     print("Ошибка удаления аккаунта: \(error.localizedDescription)")
                 }
@@ -220,8 +217,8 @@ private extension ProfileScreenVC {
 private extension ProfileScreenVC {
     func setupStyles() {
         self.navigationItem.title = Titles.profile
-        view.backgroundColor = .white
-        saveButton.tintColor = .black
+        view.backgroundColor = .systemBackground
+        saveButton.tintColor = .systemBlack
     }
     
     func setupViews() {

@@ -5,12 +5,11 @@
 import UIKit
 
 enum DetailButtonType {
-    case edit, accept, detail, create
-}
+    case detail, accept}
 
 final class DetailButton: UIButton {
-    private let highlightColor: UIColor
-    private let releaseColor: UIColor
+     let highlightColor: UIColor
+     let releaseColor: UIColor
     
     init(style: DetailButtonType, highlightColor: UIColor, releaseColor: UIColor) {
         self.highlightColor = highlightColor
@@ -24,44 +23,30 @@ final class DetailButton: UIButton {
     }
     
     private func commonInit(_ style: DetailButtonType){
-        
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1.5
-        self.layer.borderColor = UIColor.gray.cgColor
-        self.setTitleColor(.black, for: .normal)
-        self.backgroundColor = .gray.withAlphaComponent(0.5)
+        self.layer.borderColor = UIColor.systemGray2.cgColor
+        self.setTitleColor(.systemBlack, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         self.clipsToBounds = true
         self.setTitle("подробнее", for: .normal)
-        self.backgroundColor = .blue.withAlphaComponent(0.5)
         
         switch style {
-            
-        case .edit:
-            self.setTitle("изменить", for: .normal)
-            self.backgroundColor = .blue
         case .accept:
             self.setTitle("принять", for: .normal)
-            self.backgroundColor = .green
+            self.backgroundColor = .systemGreen
         case .detail:
             self.setTitle("подробнее", for: .normal)
-        case .create:
-            self.setTitle("добавить", for: .normal)
-            self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-            self.backgroundColor = .none
-            self.widthAnchor.constraint(equalToConstant: 74).isActive = true
-            self.heightAnchor.constraint(equalToConstant: 34).isActive = true
+            self.backgroundColor = .systemBlue
         }
         
         tapButtons()
     }
     
     func tapButtons() {
-        addTarget(self, action: #selector(buttonTapped(_:)), for: .touchDown)
-        addTarget(self, action: #selector(buttonReleased(_:)), for: .touchUpInside)
-        addTarget(self,action: #selector(buttonTapped(_:)), for: .touchUpOutside)
+        addTarget(self, action: #selector(buttonReleased(_:)), for: .touchDown)
+        addTarget(self, action: #selector(buttonTapped(_:)), for: [.touchUpInside, .touchUpOutside])
     }
-    
     
     @objc private func buttonTapped(_ sender: UIButton) {
         self.backgroundColor = highlightColor
@@ -71,3 +56,4 @@ final class DetailButton: UIButton {
         self.backgroundColor = releaseColor
     }
 }
+

@@ -65,7 +65,7 @@ final class DBServiceAuth {
 
 //  MARK: - Delete account
     func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void){
-        guard let currentUser = auth.currentUser else {
+        guard auth.currentUser != nil else {
             completion(.failure(AuthError.noCurrentUser))
             return
         }

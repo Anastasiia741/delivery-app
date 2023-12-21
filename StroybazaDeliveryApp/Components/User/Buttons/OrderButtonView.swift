@@ -11,18 +11,17 @@ enum OrderButtonType {
 
 final class OrderButtonView: UIView {
     var orderButton = OrderButton(style: OrderButtonType.order,
-                                  highlightColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.7) ?? UIColor.red,
-                                  releaseColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.5) ?? UIColor.red)
+                                  highlightColor: .buyButton?.withAlphaComponent(0.7) ?? UIColor.red,
+                                  releaseColor: .buyButton?.withAlphaComponent(0.9) ?? UIColor.red)
     var saveButton = OrderButton(style: OrderButtonType.save,
-                                 highlightColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.7) ?? UIColor.red,
-                                 releaseColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.5) ?? UIColor.red)
+                                 highlightColor: .buyButton?.withAlphaComponent(0.7) ?? UIColor.red,
+                                 releaseColor: .buyButton?.withAlphaComponent(0.5) ?? UIColor.red)
     var removeButton = OrderButton(style: OrderButtonType.remove,
-                                   highlightColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.7) ?? UIColor.red,
-                                   releaseColor: UIColor(named: "BuyButton")?.withAlphaComponent(0.5) ?? UIColor.red)
+                                   highlightColor: .buyButton?.withAlphaComponent(0.7) ?? UIColor.red,
+                                   releaseColor: .buyButton?.withAlphaComponent(0.5) ?? UIColor.red)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupStyles()
         setupViews()
         setupConstraints()
@@ -33,7 +32,7 @@ final class OrderButtonView: UIView {
     }
 
     private func setupStyles() {
-        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderColor = UIColor.systemGray?.cgColor
         self.layer.borderWidth = 1
     }
     
@@ -43,7 +42,6 @@ final class OrderButtonView: UIView {
     }
     
     private func setupConstraints() {
-     
         orderButton.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview().inset(18)
             make.bottom.equalToSuperview().inset(24)
@@ -71,10 +69,10 @@ final class OrderButton: UIButton {
     private func commonInit(_ style: OrderButtonType) {
 
         self.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        self.setTitleColor(.black, for: .normal)
-        self.backgroundColor = UIColor(named: "BuyButton")
+        self.setTitleColor(.systemBlack, for: .normal)
+        self.backgroundColor = .buyButton
         self.layer.cornerRadius = 20
-        self.tintColor = .white
+        self.tintColor = .systemBackground
         self.heightAnchor.constraint(equalToConstant: 40).isActive = true
       
         switch style {
@@ -82,14 +80,14 @@ final class OrderButton: UIButton {
             self.setTitle("Заказать", for: .normal)
         case .save:
             self.setTitle("Сохранить", for: .normal)
-                self.backgroundColor = UIColor(named: "BuyButton")?.withAlphaComponent(0.6)
+            self.backgroundColor = .buyButton?.withAlphaComponent(0.6)
                 self.layer.borderWidth = 2
-                self.layer.borderColor = UIColor(named: "BuyButton")?.cgColor
+            self.layer.borderColor = UIColor.buyButton?.cgColor
         case .remove:
             self.setTitle("Удалить", for: .normal)
-            self.backgroundColor = .blue.withAlphaComponent(0.4)
+            self.backgroundColor = .systemBlue.withAlphaComponent(0.4)
             self.layer.borderWidth = 2
-            self.layer.borderColor = UIColor.blue.withAlphaComponent(0.7).cgColor
+            self.layer.borderColor = UIColor.systemBlue.withAlphaComponent(0.7).cgColor
         }
         
         tapButtons()

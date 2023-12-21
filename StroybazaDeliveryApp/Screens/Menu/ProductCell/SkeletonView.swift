@@ -92,7 +92,7 @@ private extension SkeletonView {
     }
     
     func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         addSubview(productImageViewFirst)
         addSubview(nameLabelFirst)
         addSubview(detailLabelFirst)
