@@ -17,12 +17,12 @@ final class EditDetailProductScreenVC: UIViewController {
                                            highlightColor: .blue.withAlphaComponent(0.7) ,
                                            releaseColor: .blue.withAlphaComponent(0.5))
     private var saveButton = OrderButton(style: OrderButtonType.save,
-                                         highlightColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.7) ?? UIColor.red,
-                                         releaseColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.5) ?? UIColor.red)
+                                         highlightColor: .buyButton?.withAlphaComponent(0.7) ?? UIColor.red,
+                                         releaseColor: .buyButton?.withAlphaComponent(0.5) ?? UIColor.red)
     private var isImageChange = true
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
@@ -34,6 +34,7 @@ final class EditDetailProductScreenVC: UIViewController {
         
         return tableView
     }()
+
 //  MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,6 @@ private extension EditDetailProductScreenVC {
 private extension EditDetailProductScreenVC {
     func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
@@ -109,16 +109,12 @@ private extension EditDetailProductScreenVC {
     
     func showDeleteAlert() {
         let alertController = UIAlertController(title: AlertMessage.deleteProductTitle, message: AlertMessage.deleteProductMessage, preferredStyle: .alert)
-        
         let deleteAction = UIAlertAction(title: AlertMessage.yesAction, style: .destructive) { [weak self] (_) in
             self?.deleteSelectedProduct()
         }
-        
         let cancelAction = UIAlertAction(title: AlertMessage.noAction, style: .cancel, handler: nil)
-        
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
-        
         present(alertController, animated: true, completion: nil)
     }
     
@@ -208,7 +204,7 @@ private extension EditDetailProductScreenVC {
     }
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     func setupConstraints() {

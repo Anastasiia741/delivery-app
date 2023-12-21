@@ -12,19 +12,20 @@ protocol EditProductDelegate: AnyObject {
 
 final class EditProductImageCell: UITableViewCell {
     
-    //  MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.editProductImageCell
-    //  MARK: - Database
+//  MARK: - Database
     private let productDB = DBServiceProducts()
-    //  MARK: - Properties
+//  MARK: - Properties
     var selectedProduct: Product?
     private var selectedImage: UIImage?
     private var imagePicker = UIImagePickerController()
     private var selectImageHandler: (() -> Void)?
     weak var delegate: EditProductDelegate?
-    //  MARK: - UI
+//  MARK: - UI
     var productImage = ProductImageView(style: ProductImageType.editProduct)
-    //  MARK: - Life Cycle
+ 
+//  MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()

@@ -14,14 +14,14 @@ final class CustomStepper: UIControl {
     }
     private lazy var decreaseButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemBlack, for: .normal)
         button.setTitle("-", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     private lazy var currentStepValueLabel: UILabel = {
         var label = UILabel()
-        label.textColor = .black
+        label.textColor = .systemBlack
         label.text = "\(currentValue)"
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 12, weight: UIFont.Weight.regular)
         
@@ -31,7 +31,7 @@ final class CustomStepper: UIControl {
         let button = UIButton()
         button.setTitle("+", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemBlack, for: .normal)
         return button
     }()
     private lazy var horizontalStackView = StackView(style: .horizontal)
@@ -48,7 +48,7 @@ final class CustomStepper: UIControl {
     
     private func setupViews() {
        
-        backgroundColor = .systemGray6
+        backgroundColor = .systemGray5
         layer.cornerRadius = 20
         addSubview(horizontalStackView)
         

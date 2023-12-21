@@ -82,13 +82,13 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.update(category)
         if isFirstLaunch && category.category == CategoryName.armature {
             cell.contentView.layer.cornerRadius = 10
-            cell.contentView.backgroundColor = UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.2)
+            cell.contentView.backgroundColor = .buyButton?.withAlphaComponent(0.2)
             selectedCategory = category
         } else if category == selectedCategory {
             cell.contentView.layer.cornerRadius = 10
-            cell.contentView.backgroundColor = UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.2)
+            cell.contentView.backgroundColor = .buyButton?.withAlphaComponent(0.2)
         } else {
-            cell.contentView.backgroundColor = .white
+            cell.contentView.backgroundColor = .systemBackground
         }
         
         return cell
@@ -101,7 +101,7 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate {
             if let index = previousSelectedIndex {
                 let indexPath = IndexPath(row: index, section: SectionRows.none)
                 if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionCell {
-                    cell.contentView.backgroundColor = .white
+                    cell.contentView.backgroundColor = .systemBackground
                 }
             }
         }

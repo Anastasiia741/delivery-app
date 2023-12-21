@@ -13,10 +13,9 @@ protocol CreateProductDescriptionDelegate: AnyObject {
 
 final class CreateProductDetailCell: UITableViewCell, UITextViewDelegate {
     
-    //MARK: - ReuseId
+//MARK: - ReuseId
     static let reuseId = ReuseId.createProductDetailCell
-    
-    //MARK: - UI
+//MARK: - UI
     private var verticalStackView = StackView(style: .vertical)
     private let descriptionMainLable = OrderDetailLabel(style: .descriptionForMain)
     private let descriptionDetailLable = OrderDetailLabel(style: .descriptionForDetail)

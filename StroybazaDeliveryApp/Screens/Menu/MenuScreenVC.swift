@@ -40,7 +40,7 @@ final class MenuScreenVC: UIViewController {
 //  MARK: - UI
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
@@ -59,7 +59,7 @@ final class MenuScreenVC: UIViewController {
         setupStyles()
         setupViews()
         setupConstraints()
-        
+    
         showSkeletonLoading()
         fetchAllProducts()
     }
@@ -69,7 +69,7 @@ final class MenuScreenVC: UIViewController {
 private extension MenuScreenVC {
     func showSkeletonLoading() {
         view.addSubview(skeletonView)
-        skeletonView.backgroundColor = .white
+        skeletonView.backgroundColor = .systemBackground
         
         skeletonView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -149,7 +149,7 @@ extension MenuScreenVC {
 private extension MenuScreenVC {
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         self.navigationItem.title = Titles.menu
     }
     

@@ -89,7 +89,7 @@ private extension ProductDetailScreenVC {
     }
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         

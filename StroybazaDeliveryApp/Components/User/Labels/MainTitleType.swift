@@ -83,7 +83,7 @@ final class MainTitleLabel: UILabel {
             self.numberOfLines = 3
         case .disclaimer:
             self.text = "Политика Конфиденциальности"
-            self.textColor = .black
+            self.textColor = .systemBlack
             self.font = UIFont.systemFont(ofSize: 14, weight: .light)
             self.textAlignment = .center
             self.numberOfLines = 3

@@ -27,7 +27,7 @@ final class CartScreenVC: UIViewController {
     private let productCountLabel = MainTitleLabel(style: .cartTitle)
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CartCell.self, forCellReuseIdentifier: CartCell.reuseId)
@@ -83,8 +83,11 @@ private extension CartScreenVC {
         present(alertController, animated: true, completion: nil)
     }
     
-    func showPromocodeResultAlert(message: String) {
-        let alertController = UIAlertController(title: AlertMessage.promoResult, message: message, preferredStyle: .alert)
+    func showPromocodeResultAlert(message: NSAttributedString) {
+        let alertController = UIAlertController(title: AlertMessage.promoResult, message: "", preferredStyle: .alert)
+        alertController.setValue(message, forKey: "attributedMessage")
+        
+        
         let attributedStringForTitle = NSAttributedString(string: AlertMessage.promoResult, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.202498883, green: 0.202498883, blue: 0.202498883, alpha: 1)])
         alertController.setValue(attributedStringForTitle, forKey: AlertMessage.promoKey)
         alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
@@ -156,9 +159,12 @@ private extension CartScreenVC {
         default:
             discountMessage = AlertMessage.discountMessage
         }
-        showPromocodeResultAlert(message: discountMessage)
+        let coloredMessage = NSAttributedString(string: discountMessage, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+        showPromocodeResultAlert(message: coloredMessage)
+        
         if let promoCode = alertController?.textFields?.first?.text?.lowercased() {
             self.orderService.promoсode = promoCode
+            print("->\(promoCode)")
         }
     }
     
@@ -230,7 +236,7 @@ private extension CartScreenVC {
     }
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         self.navigationItem.title = Titles.cart
     }
     

@@ -10,9 +10,9 @@ enum CreateProductSection: Int, CaseIterable {
 
 final class CreateProductScreenVC: UIViewController {
     
-    //  MARK: - Database
+//  MARK: - Database
     private let productsDB = DBServiceProducts.shared
-    //  MARK: - Propertiese
+//  MARK: - Propertiese
     private var productName: String = ""
     private var category: String = ""
     private var price: Int = 0
@@ -20,19 +20,19 @@ final class CreateProductScreenVC: UIViewController {
     private var detail: String = ""
     private var imageURL: String?
     private var selectedImage: UIImage?
-    //  MARK: - UI
+//  MARK: - UI
     private let saveView = OrderButton(style: OrderButtonType.save,
-                                       highlightColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.7) ?? UIColor.red,
-                                       releaseColor: UIColor(named: CollorBackground.buyButton)?.withAlphaComponent(0.5) ?? UIColor.red)
+                                       highlightColor: .buyButton?.withAlphaComponent(0.7) ?? UIColor.red,
+                                       releaseColor: .buyButton?.withAlphaComponent(0.5) ?? UIColor.red)
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.color = .gray
+        indicator.color = .systemGray2
         indicator.hidesWhenStopped = true
         return indicator
     }()
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
@@ -69,14 +69,12 @@ private extension CreateProductScreenVC {
     
     func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func removeKeyboard() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
     @objc func keyboardWillHide() {
@@ -88,7 +86,6 @@ private extension CreateProductScreenVC {
             self.view.frame.origin.y = -keyboardSize.height
         }
     }
-    
 }
 
 //  MARK: - Navigation
@@ -239,7 +236,7 @@ private extension CreateProductScreenVC {
 private extension CreateProductScreenVC {
     
     func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         view.addSubview(saveView)
         view.addSubview(activityIndicator)

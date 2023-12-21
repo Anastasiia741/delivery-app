@@ -10,18 +10,18 @@ protocol AdminCellDelegate: AnyObject {
 
 final class AdminCell: UITableViewCell {
     
-//  MARK: - ReuseId
+    //  MARK: - ReuseId
     static let reuseId = ReuseId.adminCell
-//  MARK: - Properties
+    //  MARK: - Properties
     private var order: Order?
     private var users: NewUser?
     weak var delegate: AdminCellDelegate?
-//  MARK: - UI
+    //  MARK: - UI
     private let dateOrderLabel = MainTitleLabel(style: MainTitleType.cartTitle)
     private let orderStatusLabel = MainTitleLabel(style: MainTitleType.cartTitle)
-    private let detailButton = DetailButton(style: .detail, highlightColor: .blue.withAlphaComponent(0.7), releaseColor: .blue.withAlphaComponent(0.5))
+    private let detailButton = DetailButton(style: .detail, highlightColor: .systemBlue, releaseColor: .systemBlue.withAlphaComponent(0.5))
     
-//  MARK: - Initialization
+    //  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -29,7 +29,7 @@ final class AdminCell: UITableViewCell {
         setupStyles()
         setupConstraints()
     }
-    
+   
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -63,6 +63,7 @@ extension AdminCell {
 
 //  MARK: - Event Handler
 private extension AdminCell {
+    
     func setupActions() {
         detailButton.addTarget(self, action: #selector(orderDetailsButtonTapped), for: .touchUpInside)
     }
@@ -86,7 +87,7 @@ private extension AdminCell {
     }
     
     func setupStyles() {
-        orderStatusLabel.textColor = .green
+        orderStatusLabel.textColor = .systemGreen
     }
     
     func setupConstraints() {

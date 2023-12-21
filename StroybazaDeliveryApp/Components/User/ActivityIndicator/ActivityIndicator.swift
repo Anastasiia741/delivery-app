@@ -16,7 +16,7 @@ final class ActivityIndicator: UIActivityIndicatorView {
     }
     
     private func commonInit() {
-        color = .gray
+        color = .systemGray2
         hidesWhenStopped = true
     }
 }

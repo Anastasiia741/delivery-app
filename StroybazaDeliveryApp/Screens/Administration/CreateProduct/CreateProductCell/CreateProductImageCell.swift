@@ -129,7 +129,7 @@ extension CreateProductImageCell {
 private extension CreateProductImageCell {
     
     func setupViews() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(productImage)
     }
     
