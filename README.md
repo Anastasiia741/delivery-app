@@ -11,7 +11,7 @@ Welcome to online store for construction and renovation! This mobile application
   
   Easily and quickly place orders for necessary materials directly from the application, minimizing efforts in searching and purchasing.
 
-![Alt Text](https://media.giphy.com/media/xbfsqCOqg5HRas8NAu/giphy.gif)
+![Alt Text](https://media.giphy.com/media/DP6WRFmq1N5Y4LtuaS/giphy.gif)
 
 - **Order Management (for administrators):**
   Administrators have a dedicated application for efficient order management and adding new products to the inventory.
