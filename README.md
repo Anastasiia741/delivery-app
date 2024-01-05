@@ -12,4 +12,4 @@
 
 ## Usage
 
-![Simulator Screenshot - iPhone 15 - 2024-01-05 at 14 19 32](https://github.com/Anastasiia741/delivery-app/assets/56585649/118baafe-6470-41ea-8244-598059847b22)
+<img width="113" alt="Снимок экрана 2024-01-05 в 14 28 14" src="https://github.com/Anastasiia741/delivery-app/assets/56585649/1673313d-4e05-454f-8ede-7ad7282b9598">
