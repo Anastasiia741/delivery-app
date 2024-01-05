@@ -79,7 +79,7 @@ final class Product: Codable {
     }
 }
 ```
-####Fetch and monitor changes of products from firebase
+**Fetch and monitor changes of products from firebase:**
 
 ```   
 //  MARK: - Fetch and monitor changes of products from firebase
@@ -119,7 +119,7 @@ final class Product: Codable {
         print("Регистрация listener удалена")
     }
  ```
-####To add a new product to the Firebase Firestore and Storage:
+**To add a new product to the Firebase Firestore and Storage:**
 
 ```
 import Foundation
@@ -199,7 +199,7 @@ final class DBServiceProducts {
     
 ```
 
-####Manage product changes 
+**Manage product changes:** 
 
 ```
 //  MARK: - Change product in firestore
@@ -261,7 +261,7 @@ final class DBServiceProducts {
     }
 ```
 
-####Delete product from firestore 
+**Delete product from firestore:** 
 
 ``` 
 //  MARK: - Delete product from firestore
