@@ -14,11 +14,10 @@ Welcome to online store for construction and renovation! This mobile application
 ![Alt Text](https://media.giphy.com/media/DP6WRFmq1N5Y4LtuaS/giphy.gif)
 
 - **Order Management (for administrators):**
+  
   Administrators have a dedicated application for efficient order management and adding new products to the inventory.
-<img width="168" alt="Снимок экрана 2024-01-05 в 14 46 10" src="https://github.com/Anastasiia741/delivery-app/assets/56585649/1ba7d1e6-446f-454e-a17a-baa9f3d26d42">
 
-<img width="167" alt="Снимок экрана 2024-01-05 в 14 48 08" src="https://github.com/Anastasiia741/delivery-app/assets/56585649/b85d16b7-0166-49ac-a08c-947fd74631d3">
-
+![Alt Text](https://media.giphy.com/media/gMBMQOPGOd7ScfjnqJ/giphy.gif)
 
 ## Requirements
 
