@@ -44,10 +44,13 @@ This mobile application provides a convenient way to browse, order, and manage c
 This project adopts the Model-View-Presenter (MVP) architecture to application logic.
 
 - **Model:**
+
 The Model represents the data and business logic of the application. It is responsible for handling data storage, retrieval, and manipulation. In an MVP architecture, the Model notifies the Presenter of any changes in the data.
 - **View:**
+
 The View is responsible for displaying the user interface and presenting data to the user. It communicates with the Presenter to request data and updates. The View is passive and does not contain business logic. It observes changes in the Model and updates the UI accordingly.
 - **Presenter:**
+
 The Presenter acts as an intermediary between the Model and the View. It receives user input from the View, processes it (if needed), and updates the Model accordingly. The Presenter also receives updates from the Model and instructs the View to reflect these changes. It ensures a separation of concerns by handling the application's logic.
 
 
