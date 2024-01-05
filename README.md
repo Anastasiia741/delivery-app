@@ -1,4 +1,4 @@
-# delivery-app 🛠️🏡📲
+# Stroybaza Delivery App 🛠️🏡📲
 Welcome to online store for construction and renovation! This mobile application provides a convenient way to browse, order, and manage construction materials right from your mobile phone.
 ## Key Features:
 - **Catalog Browsing:**
@@ -20,7 +20,16 @@ Welcome to online store for construction and renovation! This mobile application
 ![Alt Text](https://media.giphy.com/media/gMBMQOPGOd7ScfjnqJ/giphy.gif)
 
 ## Requirements
+- **iOS Platform:** iOS 15.0 
+- **Swift Version:** Swift 5.5
+- **Xcode Version:** Xcode 13.0
+- **Dependency Manager:** Swift Package Manager (SPM)
 
+### External Libraries:
+
+- **SnapKit:** Used for declarative Auto Layout. [SnapKit GitHub](https://github.com/SnapKit/SnapKit)
+- **Firebase:** Used for backend services, authentication, and more. [Firebase iOS Docs](https://firebase.google.com/docs/ios)
+- **SDWebImage:** Used for asynchronous image loading and caching. [SDWebImage GitHub](https://github.com/SDWebImage/SDWebImage)
 
 ## Installation
 
