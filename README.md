@@ -40,7 +40,8 @@ Welcome to online store for construction and renovation! This mobile application
 
 ## Usage
 ### Creating a New Product
-The model a new product:
+
+**The model a new product:
 
 ```
 import Foundation
@@ -79,33 +80,9 @@ final class Product: Codable {
 }
 ```
 
-To add a new product to the Firebase Firestore:
+**Fetch and monitor changes of products from firebase
 
-```
-import Foundation
-import FirebaseStorage
-import FirebaseFirestoreSwift
-import FirebaseStorage
-import SDWebImage
-
-final class DBServiceProducts {
-    
-    static let shared = DBServiceProducts()
-    private let db = Firestore.firestore()
-    private let productCollection = Firestore.firestore().collection("products")
-    private let storage = Storage.storage()
-    var products: Product?
-    var listenerRegistation: ListenerRegistration?
-    
-    init() {}
-    
-//  MARK: - add collection 'product' in firebase
-    func add(product: Product, completion: @escaping (Error?) -> Void) throws {
-        try productCollection.addDocument(from: product) { error in
-            completion(error)
-        }
-    }
-    
+```   
 //  MARK: - Fetch and monitor changes of products from firebase
     func fetchAllProducts(completion: @escaping (Result<([Product], [Category]), Error>) -> Void)  {
         DispatchQueue.global().async {
@@ -142,8 +119,35 @@ final class DBServiceProducts {
         listenerRegistation?.remove()
         print("Регистрация listener удалена")
     }
+ ```
+
+**To add a new product to the Firebase Firestore and Storage:
+
+```
+import Foundation
+import FirebaseStorage
+import FirebaseFirestoreSwift
+import FirebaseStorage
+import SDWebImage
+
+final class DBServiceProducts {
     
-//  MARK: - Use this method for CreateProductScreenVC
+    static let shared = DBServiceProducts()
+    private let db = Firestore.firestore()
+    private let productCollection = Firestore.firestore().collection("products")
+    private let storage = Storage.storage()
+    var products: Product?
+    var listenerRegistation: ListenerRegistration?
+    
+    init() {}
+
+// MARK: - Use this method for CreateProductScreenVC
+    func add(product: Product, completion: @escaping (Error?) -> Void) throws {
+        try productCollection.addDocument(from: product) { error in
+            completion(error)
+        }
+    }
+
     func create(product: Product, completion: @escaping (Error?) -> Void) {
         let newProduct = product
         newProduct.id = UUID().hashValue
@@ -158,8 +162,49 @@ final class DBServiceProducts {
             completion(error)
         }
     }
+
+//  MARK: - Save image in storage
+    func save(imageData: Data, nameImg: String, completion: @escaping (_ imageLink: String?) -> Void) {
+        let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/productImages").child(nameImg)
+        _ = storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                print("Ошибка загрузки: ", error)
+                completion(nil)
+            } else {
+                storageRef.downloadURL { (url, error) in
+                    if let downloadURL = url {
+                        completion(downloadURL.absoluteString)
+                    } else {
+                        completion(nil)
+                    }
+                }
+            }
+        }
+    }
+
+//  MARK: - Upload imagelink in firestore
+    func upload(image: UIImage?, url: String, completion: @escaping (String?, Error?) -> Void) {
+        guard let image = image,
+              let imageData = image.jpegData(compressionQuality: 0.5) else {
+            completion(nil, nil)
+            return
+        }
+        let fileName = UUID().uuidString + url + ".jpg"
+        save(imageData: imageData, nameImg: fileName) { imageLink in
+            if let imageLink = imageLink {
+                completion(imageLink, nil)
+            } else {
+                completion(nil, nil)
+            }
+        }
+    }
     
-//  MARK: - Сreate new product in firestore
+```
+
+**Manage product changes 
+
+```
+//  MARK: - Change product in firestore
     func update(product: Product, completion: @escaping (Error?) -> Void) {
         let productID = product.id
         productCollection.whereField("id", isEqualTo: productID).getDocuments { (querySnapshot, error) in
@@ -191,44 +236,8 @@ final class DBServiceProducts {
             }
         }
     }
-    
-//  MARK: - Save image in storage
-    func save(imageData: Data, nameImg: String, completion: @escaping (_ imageLink: String?) -> Void) {
-        let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/productImages").child(nameImg)
-        _ = storageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            if let error = error {
-                print("Ошибка загрузки: ", error)
-                completion(nil)
-            } else {
-                storageRef.downloadURL { (url, error) in
-                    if let downloadURL = url {
-                        completion(downloadURL.absoluteString)
-                    } else {
-                        completion(nil)
-                    }
-                }
-            }
-        }
-    }
-    
-//  MARK: - Upload imagelink in firestore
-    func upload(image: UIImage?, url: String, completion: @escaping (String?, Error?) -> Void) {
-        guard let image = image,
-              let imageData = image.jpegData(compressionQuality: 0.5) else {
-            completion(nil, nil)
-            return
-        }
-        let fileName = UUID().uuidString + url + ".jpg"
-        save(imageData: imageData, nameImg: fileName) { imageLink in
-            if let imageLink = imageLink {
-                completion(imageLink, nil)
-            } else {
-                completion(nil, nil)
-            }
-        }
-    }
-    
-//  MARK: - Upload new image for firebase
+
+//  MARK: - Upload image for firestore
     func uploadImageToFirebase(_ image: UIImage, _ imageURL: String, completion: @escaping (String?) -> Void) {
         let imageRef = Storage.storage().reference(forURL: imageURL)
         if let imageData = image.jpegData(compressionQuality: 0.8) {
@@ -252,31 +261,11 @@ final class DBServiceProducts {
             }
         }
     }
-    
-//  MARK: - Upload new image for storage
-    func uploadNewImage(_ selectedImage: UIImage, _ imageName: String, completion: @escaping (String?, Error?) -> Void) {
-        guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else {
-            completion(nil, nil)
-            return
-        }
-        let uniqueImageURL = "gs://souvenir-shop-716eb.appspot.com/productImages/"
-        let storageRef = storage.reference(forURL: uniqueImageURL)
-        storageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            if let error = error {
-                print("Ошибка при загрузке нового изображения: ", error)
-                completion(nil, error)
-            } else {
-                storageRef.downloadURL { (url, error) in
-                    if let downloadURL = url {
-                        completion(downloadURL.absoluteString, nil)
-                    } else {
-                        completion(nil, nil)
-                    }
-                }
-            }
-        }
-    }
-    
+```
+
+**Delete product from firestore 
+
+``` 
 //  MARK: - Delete product from firestore
     func delete(product: Product, completion: @escaping (Error?) -> Void) {
         let productID = product.id
@@ -297,7 +286,6 @@ final class DBServiceProducts {
     
 //  MARK: - Delete image from storage
     func deleteImage(_ imageName: String, completion: @escaping (Error?) -> Void) {
-        
         let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/products/gs:/souvenir-shop-716eb.appspot.com/productImages").child(imageName)
         storageRef.delete { error in
             completion(error)
