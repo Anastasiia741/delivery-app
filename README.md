@@ -2,8 +2,9 @@
 Welcome to online store for construction and renovation! This mobile application provides a convenient way to browse, order, and manage construction materials right from your mobile phone.
 ## Key Features:
 - **Catalog Browsing:**
+  
   Explore a wide range of construction and renovation materials through a user-friendly mobile interface.
-<iframe src="https://giphy.com/embed/uNvpZ73FIqDMu4xk6n" width="222" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/uNvpZ73FIqDMu4xk6n">via GIPHY</a></p>
+![Alt Text](https://media.giphy.com/media/uNvpZ73FIqDMu4xk6n/giphy.gif)
 
 - **Order Placement:**
   Easily and quickly place orders for necessary materials directly from the application, minimizing efforts in searching and purchasing.
