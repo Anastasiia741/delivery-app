@@ -5,7 +5,7 @@ Welcome to online store for construction and renovation! This mobile application
   Explore a wide range of construction and renovation materials through a user-friendly mobile interface.
 <img width="113" alt="Снимок экрана 2024-01-05 в 14 28 14" src="https://github.com/Anastasiia741/delivery-app/assets/56585649/1673313d-4e05-454f-8ede-7ad7282b9598">
 -
-https://giphy.com/gifs/PWK0NnpS0ywaXdAVrn
+![Alt Text](https://media.giphy.com/media/PWK0NnpS0ywaXdAVrn/giphy.gif)
 
 - **Order Placement:**
   Easily and quickly place orders for necessary materials directly from the application, minimizing efforts in searching and purchasing.
