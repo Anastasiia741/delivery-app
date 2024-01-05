@@ -41,7 +41,7 @@ Welcome to online store for construction and renovation! This mobile application
 ## Usage
 ### Creating a New Product
 
-**The model a new product:
+**The model a new product:**
 
 ```
 import Foundation
