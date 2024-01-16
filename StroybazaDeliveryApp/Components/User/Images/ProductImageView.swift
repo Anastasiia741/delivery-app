@@ -4,7 +4,6 @@
 
 import UIKit
 
-
 enum ProductImageType {
     case menu, menuSkeleton, cart, detail, editProduct
 }

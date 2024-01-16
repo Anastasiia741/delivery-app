@@ -87,7 +87,6 @@ private extension CartScreenVC {
         let alertController = UIAlertController(title: AlertMessage.promoResult, message: "", preferredStyle: .alert)
         alertController.setValue(message, forKey: "attributedMessage")
         
-        
         let attributedStringForTitle = NSAttributedString(string: AlertMessage.promoResult, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.202498883, green: 0.202498883, blue: 0.202498883, alpha: 1)])
         alertController.setValue(attributedStringForTitle, forKey: AlertMessage.promoKey)
         alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
@@ -159,7 +158,7 @@ private extension CartScreenVC {
         default:
             discountMessage = AlertMessage.discountMessage
         }
-        let coloredMessage = NSAttributedString(string: discountMessage, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black,                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+        let coloredMessage = NSAttributedString(string: discountMessage, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
         showPromocodeResultAlert(message: coloredMessage)
         
         if let promoCode = alertController?.textFields?.first?.text?.lowercased() {

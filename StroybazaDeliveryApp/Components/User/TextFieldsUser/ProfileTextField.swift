@@ -25,11 +25,14 @@ final class ProfileTextField: UITextField {
         
         switch style {
         case .name:
-            self.font = UIFont.boldSystemFont(ofSize: 17)
+            self.font = UIFont.boldSystemFont(ofSize: 18)
             let attributes: [NSAttributedString.Key: Any] = [
-                .foregroundColor: UIColor.black
-            ]
-            self.attributedPlaceholder = NSAttributedString(string: "Ваше имя", attributes: attributes)
+                .foregroundColor: UIColor.black]
+            let placeholderAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.gray]
+            let placeholderText = "Ваше имя"
+            let attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
+            self.attributedPlaceholder = attributedPlaceholder
             self.backgroundColor = .none
             padding()
         case .number:

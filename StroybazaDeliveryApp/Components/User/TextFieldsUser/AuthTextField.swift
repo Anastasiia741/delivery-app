@@ -20,7 +20,6 @@ final class AuthTextField: UITextField {
     }
     
     private func commonInit(_ style: AuthTextFieldType) {
-        
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         self.leftView = leftPaddingView
         self.leftViewMode = .always
