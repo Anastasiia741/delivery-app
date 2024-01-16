@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        //        DBServiceProducts.shared.addAllProducts()
+//      DBServiceProducts.shared.addAllProducts()
         
         return true
     }

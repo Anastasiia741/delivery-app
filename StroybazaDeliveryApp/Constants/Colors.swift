@@ -1,9 +1,6 @@
-//
 //  Colors.swift
 //  StroybazaDeliveryApp
-//
 //  Created by Анастасия Набатова on 20/12/23.
-//
 
 import UIKit
 

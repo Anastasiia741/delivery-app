@@ -33,7 +33,7 @@ enum Titles {
     static let menu = "Меню"
     static let cart = "Корзина"
     static let profile = "Профиль"
-    static let products = "Десерты"
+    static let products = "Товары"
     static let orderAdmin = "Заказы"
     static let addProduct = "Добавить товар"
     static let detailProduct = "Детали заказа"

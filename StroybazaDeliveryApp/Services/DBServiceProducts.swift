@@ -9,7 +9,6 @@ import FirebaseFirestoreSwift
 import FirebaseStorage
 import SDWebImage
 
-
 final class DBServiceProducts {
     
     static let shared = DBServiceProducts()

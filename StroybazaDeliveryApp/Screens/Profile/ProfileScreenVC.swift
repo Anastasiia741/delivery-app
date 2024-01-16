@@ -64,10 +64,11 @@ private extension ProfileScreenVC {
     
     func setupAlert() {
         let alert = UIAlertController(title: AlertMessage.createProduct, message: AlertMessage.emptyMessage, preferredStyle: .alert)
+        
         let attributedStringForTitle = NSAttributedString(string: AlertMessage.createProduct, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)])
         alert.setValue(attributedStringForTitle, forKey: "attributedTitle")
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = #colorLiteral(red: 1, green: 0.9389490485, blue: 0.9055544138, alpha: 1)
-        alert.view.tintColor = .systemBlack
+        alert.view.tintColor = UIColor.black
         let okAction = UIAlertAction(title: AlertMessage.okAction, style: .default)
         alert.addAction(okAction)
         
