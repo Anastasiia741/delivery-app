@@ -12,17 +12,12 @@ struct Screen {
 
 final class BannerCell: UITableViewCell {
     
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static let reuseId = ReuseId.bannerCell
-    
-    //MARK: - Action
-    var onBannerTapped: ((Product)->())?
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var banners: [Product] = []
-    
-    //MARK: - UI
-    private let containerView: UIView = {
+//  MARK: - UI
+    private lazy var containerView: UIView = {
         var view = UIView()
         return view
     }()
@@ -31,7 +26,6 @@ final class BannerCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize.init(width: Screen.width * 0.6, height: Screen.width * 0.35)
-        
         let collection = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collection.delegate = self
         collection.dataSource = self
@@ -41,7 +35,10 @@ final class BannerCell: UITableViewCell {
         collection.showsHorizontalScrollIndicator = false
         return collection
     }()
-    
+//  MARK: - Action
+    public var onBannerTapped: ((Product)->())?
+
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -53,18 +50,16 @@ final class BannerCell: UITableViewCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension BannerCell {
-    
     func update(products: [Product]) {
         banners = products
         collectionView.reloadData()
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension BannerCell {
-    
     func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(titleLabel)
@@ -88,6 +83,7 @@ private extension BannerCell {
     }
 }
 
+//  MARK: - CollectionViewDelegate, CollectionViewDataSource
 extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,9 +91,7 @@ extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionCell.reuseId, for: indexPath) as! BannerCollectionCell
-        
         let promoProduct = banners[indexPath.row]
         cell.update(promoProduct)
         
@@ -105,9 +99,7 @@ extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let banner = banners[indexPath.row]
-        
         onBannerTapped?(banner)
     }
 }

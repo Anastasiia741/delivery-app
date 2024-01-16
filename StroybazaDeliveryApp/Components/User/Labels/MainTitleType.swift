@@ -5,7 +5,7 @@
 import UIKit
 
 enum MainTitleType {
-    case detail, product, productSkeleton, promo, menuTitle, cartTitle, cartAddTitle, emailTitle, email, contact, history, auth, orderHistory, orderAmount, orderStatus, titleDetail, disclaimer
+    case detail, product, productSkeleton, promo, menuTitle, cartTitle, cartAddTitle, emailTitle, email, contact, history, auth, orderHistory, orderAmount, orderStatus, titleDetail, disclaimer, deleteAccount
 }
 
 final class MainTitleLabel: UILabel {
@@ -83,7 +83,7 @@ final class MainTitleLabel: UILabel {
             self.numberOfLines = 3
         case .disclaimer:
             self.text = "Политика Конфиденциальности"
-            self.textColor = .black
+            self.textColor = .systemBlack
             self.font = UIFont.systemFont(ofSize: 14, weight: .light)
             self.textAlignment = .center
             self.numberOfLines = 3
@@ -93,7 +93,18 @@ final class MainTitleLabel: UILabel {
             let underlineAttributedString = NSAttributedString(string: self.text ?? "", attributes: underlineAttribute)
             self.attributedText = underlineAttributedString
         case .productSkeleton:
-            self.text = "Shimmer"
+            self.text = ""
+            self.backgroundColor = .lightGray
+        case .deleteAccount:
+            self.text = "Удалить аккаунт"
+            self.textColor = .gray
+            self.textAlignment = .center
+            self.font = UIFont.systemFont(ofSize: 14, weight: .light)
+            self.isUserInteractionEnabled = true
+
+            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+            let underlineAttributedString = NSAttributedString(string: self.text ?? "", attributes: underlineAttribute)
+            self.attributedText = underlineAttributedString
         }
     }
 }

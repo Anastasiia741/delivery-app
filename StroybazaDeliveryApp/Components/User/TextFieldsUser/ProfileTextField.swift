@@ -25,11 +25,13 @@ final class ProfileTextField: UITextField {
         
         switch style {
         case .name:
-            self.font = UIFont.boldSystemFont(ofSize: 17)
             let attributes: [NSAttributedString.Key: Any] = [
-                .foregroundColor: UIColor.black
-            ]
-            self.attributedPlaceholder = NSAttributedString(string: "Ваше имя", attributes: attributes)
+                .foregroundColor: UIColor.black]
+            let placeholderAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.gray]
+            let placeholderText = "Ваше имя"
+            let attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
+            self.attributedPlaceholder = attributedPlaceholder
             self.backgroundColor = .none
             padding()
         case .number:
@@ -46,29 +48,29 @@ final class ProfileTextField: UITextField {
         case .product:
             self.font = UIFont.systemFont(ofSize: 20, weight: .medium)
             self.placeholder = "Название товара"
-            self.backgroundColor = .none
+            self.backgroundColor = .systemGray5.withAlphaComponent(0.5)
             self.textColor = UIColor.lightGray
             self.layer.borderWidth = 2
-            self.layer.borderColor = UIColor(named: "PriceButton")?.cgColor
+            self.layer.borderColor = UIColor.priceButton?.cgColor
             self.returnKeyType = .next
             padding()
         case .price:
             self.font = UIFont.systemFont(ofSize: 20, weight: .medium)
             self.placeholder = "Цена"
             self.keyboardType = .decimalPad
-            self.backgroundColor = .none
+            self.backgroundColor = .systemGray5.withAlphaComponent(0.5)
             self.textColor = UIColor.lightGray
             self.layer.borderWidth = 2
-            self.layer.borderColor = UIColor(named: "PriceButton")?.cgColor
+            self.layer.borderColor = UIColor.priceButton?.cgColor
             self.returnKeyType = .next
             padding()
         case .category:
             self.font = UIFont.systemFont(ofSize: 20, weight: .medium)
             self.placeholder = "Категория"
-            self.backgroundColor = .none
+            self.backgroundColor = .systemGray5.withAlphaComponent(0.5)
             self.textColor = UIColor.lightGray
             self.layer.borderWidth = 2
-            self.layer.borderColor = UIColor(named: "PriceButton")?.cgColor
+            self.layer.borderColor = UIColor.priceButton?.cgColor
             self.returnKeyType = .next
             padding()
         }

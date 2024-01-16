@@ -4,12 +4,15 @@
 
 import UIKit
 
-class CategoryCollectionCell: UICollectionViewCell {
-    
+final class CategoryCollectionCell: UICollectionViewCell {
+ 
+//  MARK: - ReuseID
     static let reuseId = ReuseId.categoryCollectionCell
+//  MARK: - UI
     private let containerView = ContainerView()
     private let nameLabel = MainTitleLabel(style: .menuTitle)
-    
+
+//  MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -21,17 +24,15 @@ class CategoryCollectionCell: UICollectionViewCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension CategoryCollectionCell {
-    
     func update(_ category: Category) {
         nameLabel.text = category.category.capitalized.lowercased()
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CategoryCollectionCell {
-    
     func setupViews() {
         contentView.addSubview(containerView)
         containerView.addSubview(nameLabel)

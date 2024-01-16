@@ -188,7 +188,7 @@ private extension CartScreenVC {
         showPromocodeResultAlert(message: discountMessage)
         
         if let promoCode = alertController?.textFields?.first?.text?.lowercased() {
-            self.orderService.promoсode = promoCode
+//            self.orderService.promoсode = promoCode
         }
     }
     
@@ -245,6 +245,7 @@ private extension CartScreenVC {
         }
     }
 }
+
 
 //MARK: - Animation
 private extension CartScreenVC {

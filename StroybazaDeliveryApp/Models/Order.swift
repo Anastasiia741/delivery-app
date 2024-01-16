@@ -7,7 +7,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct Order {
-
     var id: String = UUID().uuidString
     var userID: String
     var positions = [ProductsPosition]()

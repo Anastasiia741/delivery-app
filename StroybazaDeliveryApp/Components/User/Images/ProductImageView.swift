@@ -4,7 +4,6 @@
 
 import UIKit
 
-
 enum ProductImageType {
     case menu, menuSkeleton, cart, detail, editProduct
 }
@@ -27,9 +26,8 @@ final class ProductImageView: UIImageView {
         let width = UIScreen.main.bounds.width
         self.layer.cornerRadius = 8
         self.layer.borderWidth = 3
-        self.layer.borderColor = UIColor(named: "PriceButton")?.cgColor
+        self.layer.borderColor = UIColor.priceButton?.cgColor
         self.layer.masksToBounds = true
-        self.translatesAutoresizingMaskIntoConstraints = false
         
         switch style {
         case .menu:
@@ -53,6 +51,7 @@ final class ProductImageView: UIImageView {
             self.layer.cornerRadius = 8
             self.layer.borderWidth = 0
             self.image = UIImage()
+            self.backgroundColor = .systemGray
         }
     }
 }

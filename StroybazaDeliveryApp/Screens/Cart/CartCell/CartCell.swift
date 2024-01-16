@@ -8,13 +8,11 @@ import FirebaseStorage
 
 final class CartCell: UITableViewCell {
     
-    //MARK: - reuseId
+//  MARK: - reuseId
     static let reuseId = ReuseId.cartCell
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var product: Product?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let productImageView = ProductImageView(style: ProductImageType.cart)
     private let nameLabel = MainTitleLabel(style: MainTitleType.cartTitle)
     private let priceLabel = PriceLabel(style: PriceLabelType.product)
@@ -22,7 +20,8 @@ final class CartCell: UITableViewCell {
     private let stepperView = CustomStepper()
     private let stepperContainerView = UIView ()
     var onProductChanged: ((Product, Int)->())?
-
+    
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -33,14 +32,11 @@ final class CartCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension CartCell {
-    
     func update(_ product: Product) {
-        
         self.product = product
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
@@ -53,25 +49,20 @@ extension CartCell {
                 }
             }
         }
-        
         nameLabel.text = product.name
         priceLabel.text = "\(product.price) сом"
         stepperView.currentValue = product.quantity
     }
     
     @objc func stepperChangedValueAction(sender: CustomStepper) {
-        
         guard let product = self.product else { return }
         onProductChanged?(product, sender.currentValue)
     }
-    
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension CartCell {
-    
     func setupViews() {
-        
         contentView.addSubview(productImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(horizontalStackView)
@@ -81,7 +72,6 @@ private extension CartCell {
     }
     
     func setupConstraints() {
-        
         productImageView.snp.makeConstraints { make in
             make.left.equalTo(contentView).offset(16)
             make.top.equalTo(contentView).offset(10)
@@ -90,7 +80,7 @@ private extension CartCell {
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(8)
-            make.right.equalTo(contentView).offset(10)
+            make.right.equalTo(contentView).offset(-10)
             make.left.equalTo(productImageView.snp.right).offset(12)
         }
         
@@ -102,7 +92,7 @@ private extension CartCell {
         
         priceLabel.snp.makeConstraints { make in
             make.left.equalTo(horizontalStackView)
-            make.centerY.equalTo(horizontalStackView)
+            make.centerY.equalTo(contentView.safeAreaLayoutGuide).offset(16)
         }
         
         stepperContainerView.snp.makeConstraints { make in
@@ -118,4 +108,3 @@ private extension CartCell {
         stepperView.addTarget(self, action: #selector(stepperChangedValueAction), for: .valueChanged)
     }
 }
-

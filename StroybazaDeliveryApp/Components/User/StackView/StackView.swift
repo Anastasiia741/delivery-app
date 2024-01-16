@@ -34,8 +34,6 @@ final class StackView: UIStackView {
             self.spacing = 10
             self.distribution = .fillEqually
             self.alignment = .fill
-
-
         case .verticalForAuth:
             self.axis = .vertical
             self.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
@@ -46,6 +44,7 @@ final class StackView: UIStackView {
             self.axis = .vertical
             self.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 12, trailing: -10)
             self.isLayoutMarginsRelativeArrangement = true
+            self.distribution = .equalSpacing
         case .verticalForPromo:
             self.axis = .vertical
             self.spacing = 10

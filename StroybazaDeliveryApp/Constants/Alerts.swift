@@ -45,6 +45,10 @@ enum AlertMessage {
     static let authPassword = "Пароли не совпадают"
     static let authErrorRegist = "Ошибка регистрации:"
     static let orderStatus = "Выберите статус заказа"   
-
+    static let deleteAccount = "Удалить аккаунт"
+    static let deleteQuestion = "Вы уверены, что хотите удалить свою учетную запись?"
+    static let deleteAction = "Удалить"
+    static let deleteTitle = "Аккаунт удален"
+    static let deleteMessage = "Ваш аккаунт успешно удален."
 
 }

@@ -24,13 +24,12 @@ final class PriceLabel: UILabel {
         switch style{
         case .detail:
             self.font = UIFont.systemFont(ofSize: 20)
-            self.tintColor = .brown
+            self.tintColor = .systemBrown
         case .product:
             self.font = UIFont.systemFont(ofSize: 15)
         case .price:
             self.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-            self.tintColor = .red
+            self.tintColor = .systemRed
         }
     }
 }
-

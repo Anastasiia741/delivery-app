@@ -16,7 +16,6 @@ final class ProfileImageView: UIImageView {
     }
     
     private func commonInit() {
-        
         self.image = UIImage(named: "profile")
         self.contentMode = .scaleAspectFill
         self.layer.masksToBounds = true

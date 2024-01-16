@@ -7,32 +7,29 @@ import SnapKit
 import FirebaseStorage
 import SDWebImage
 
-protocol ProductCellDelegate: AnyObject {
-    func priceButtonTapped(for product: Product)
-}
 
 final class ProductCell: UITableViewCell {
-    //MARK: - ReuseId
+        
+//  MARK: - ReuseId
     static let reuseId = ReuseId.productCell
-    
-    weak var delegate: ProductCellDelegate?
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var product: Product?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let nameLabel = MainTitleLabel(style: MainTitleType.product)
     private let detailLabel = DetaileLabel(style: DetaileLabelType.product)
     private let productImageView = ProductImageView(style: ProductImageType.menu)
     private let verticalStackView = StackView(style: .vertical)
-    let priceButton: PriceButton = {
+    public let priceButton: PriceButton = {
         let button = PriceButton(style: PriceButtonType.colorBackground)
         button.addTarget(nil, action: #selector(priceButtonTapped), for: .touchUpInside)
         button.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         return button
     }()
-    var isPriceButtonVisible = true
-    
+//  MARK: - Action
+    public var onPriceButtonCellTapped: ((Product)->())?
+    public var isPriceButtonVisible = true
+  
+//  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -44,20 +41,19 @@ final class ProductCell: UITableViewCell {
     }
 }
 
-//MARK: - Action
+//  MARK: - Action
 extension ProductCell {
-    
     @objc func priceButtonTapped() {
         if let product = product {
-            delegate?.priceButtonTapped(for: product)
+            onPriceButtonCellTapped?(product)
             UIView.animate(withDuration: 0.1, animations: {
                 self.priceButton.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
-                self.priceButton.backgroundColor = UIColor(named: CollorBackground.priceButton)?.withAlphaComponent(0.7)
-                self.priceButton.setTitleColor(.white, for: .normal)
+                self.priceButton.backgroundColor = .priceButton?.withAlphaComponent(0.7)
+                self.priceButton.setTitleColor(.systemBackground, for: .normal)
             }) { (_) in
                 UIView.animate(withDuration: 0.1) {
                     self.priceButton.transform = CGAffineTransform.identity
-                    self.priceButton.backgroundColor = UIColor(named: CollorBackground.priceButton)?.withAlphaComponent(0.4)
+                    self.priceButton.backgroundColor = .priceButton?.withAlphaComponent(0.4)
                     self.priceButton.setTitleColor(.brown, for: .normal)
                 }
             }
@@ -65,19 +61,18 @@ extension ProductCell {
     }
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension ProductCell {
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         productImageView.image = nil
     }
     
     func update(withProduct product: Product) {
-        
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
-            imageRef.downloadURL { url, error in
+            imageRef.downloadURL { [weak self]  url, error in
+                guard let self = self else { return }
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
@@ -88,15 +83,14 @@ extension ProductCell {
         
         self.product = product
         nameLabel.text = product.name
-        detailLabel.text = product.detail
+        detailLabel.text = product.description
         priceButton.setTitle("\(product.price) сом", for: .normal)
         priceButton.isHidden = !isPriceButtonVisible
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension ProductCell {
-    
     func setupViews() {   
         contentView.addSubview(productImageView)
         contentView.addSubview(verticalStackView)
@@ -106,7 +100,6 @@ private extension ProductCell {
     }
     
     func setupConstraints() {
-        
         productImageView.snp.makeConstraints { make in
             make.left.top.equalTo(contentView).offset(16)
             make.centerY.equalTo(contentView)

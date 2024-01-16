@@ -6,13 +6,11 @@ import UIKit
 
 final class SkeletonView: UIView {
     
-    //MARK: - UI
+//  MARK: - UI
     private let nameLabelFirst = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let detailLabelFirst = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let productImageViewFirst = ProductImageView(style: ProductImageType.menuSkeleton)
     private let priceButtonFirst = PriceButton(style: PriceButtonType.colorSkeleton)
-    
-    //TASK: - 
     private let nameLabelSecond = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let detailLabelSecond = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let productImageViewSecond  = ProductImageView(style: ProductImageType.menuSkeleton)
@@ -22,7 +20,7 @@ final class SkeletonView: UIView {
     private let productImageViewThird = ProductImageView(style: ProductImageType.menuSkeleton)
     private let priceButtonThird = PriceButton(style: PriceButtonType.colorSkeleton)
     
-    
+//  MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -33,31 +31,28 @@ final class SkeletonView: UIView {
     }
 }
 
-extension SkeletonView {
-   
-    private func commonInit() {
+//  MARK: - Layout
+private extension SkeletonView {
+    func commonInit() {
         setupViews()
         setupConstraints()
         setupGradientAnimation()
     }
     
-    func startSkeletonAnimation() {
-        for subview in subviews {
-            applyGradient(to: subview)
-        }
-    }
-}
-
-//MARK: - Layout
-private extension SkeletonView {
-    
-    private func setupGradientAnimation() {
+    func setupGradientAnimation() {
         applyGradient(to: productImageViewFirst)
         applyGradient(to: nameLabelFirst)
         applyGradient(to: detailLabelFirst)
         applyGradient(to: priceButtonFirst)
+        applyGradient(to: nameLabelSecond)
+        applyGradient(to: nameLabelSecond)
+        applyGradient(to: detailLabelSecond)
+        applyGradient(to: priceButtonSecond)
+        applyGradient(to: productImageViewThird)
+        applyGradient(to: nameLabelThird)
+        applyGradient(to: detailLabelThird)
+        applyGradient(to: priceButtonThird)
     }
-    
     
     func makeAnimationGroup(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
         let animDuration: CFTimeInterval = 1.5
@@ -76,83 +71,123 @@ private extension SkeletonView {
         let group = CAAnimationGroup()
         group.animations = [anim1, anim2]
         group.repeatCount = .greatestFiniteMagnitude
-        group.duration = anim2.beginTime + anim2.duration
         group.isRemovedOnCompletion = false
         
         if let previousGroup = previousGroup {
             group.beginTime = previousGroup.beginTime + 0.33
         }
-        
         return group
     }
     
-    
-    private func applyGradient(to view: UIView) {
+    func applyGradient(to view: UIView) {
         let gradient = CAGradientLayer()
-
         gradient.cornerRadius = 8
         gradient.frame = view.bounds
         let animationGroup = makeAnimationGroup()
+        gradient.locations = [0.0, 1.0]
         view.layer.cornerRadius = 8
+        view.layer.masksToBounds = true
         view.layer.addSublayer(gradient)
-
         gradient.add(animationGroup, forKey: "backgroundColor")
     }
     
- 
     func setupViews() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         addSubview(productImageViewFirst)
         addSubview(nameLabelFirst)
         addSubview(detailLabelFirst)
         addSubview(priceButtonFirst)
-        
+        addSubview(productImageViewSecond)
+        addSubview(nameLabelSecond)
+        addSubview(detailLabelSecond)
+        addSubview(priceButtonSecond)
+        addSubview(productImageViewThird)
+        addSubview(nameLabelThird)
+        addSubview(detailLabelThird)
+        addSubview(priceButtonThird)
     }
     
     func setupConstraints() {
-        
+        let spacing: CGFloat = 16
         productImageViewFirst.snp.makeConstraints { make in
-            make.left.top.equalTo(self).offset(16)
+            make.left.top.equalTo(self).offset(spacing)
             make.width.height.equalTo(100)
         }
         
         nameLabelFirst.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(16)
-            make.left.equalTo(productImageViewFirst.snp.right).offset(16)
+            make.top.equalTo(self).offset(spacing)
+            make.left.equalTo(productImageViewFirst.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(230)
         }
         
         detailLabelFirst.snp.makeConstraints { make in
-            make.top.equalTo(nameLabelFirst.snp.bottom).offset(16)
-            make.left.equalTo(productImageViewFirst.snp.right).offset(16)
+            make.top.equalTo(nameLabelFirst.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewFirst.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(200)
         }
         
         priceButtonFirst.snp.makeConstraints { make in
-            make.top.equalTo(detailLabelFirst.snp.bottom).offset(16)
-            make.right.equalTo(self).inset(16)
-            make.height.equalTo(35)
-            make.width.equalTo(130)
+            make.top.equalTo(detailLabelFirst.snp.bottom).offset(spacing)
+            make.right.equalTo(self).inset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+        }
+        
+        productImageViewSecond.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonFirst.snp.bottom).offset(spacing)
+            make.left.equalTo(self).offset(spacing)
+            make.width.height.equalTo(100)
+        }
+        
+        nameLabelSecond.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonFirst.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewSecond.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(230)
+        }
+        
+        detailLabelSecond.snp.makeConstraints { make in
+            make.top.equalTo(nameLabelSecond.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewSecond.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(200)
+        }
+        
+        priceButtonSecond.snp.makeConstraints { make in
+            make.top.equalTo(detailLabelSecond.snp.bottom).offset(spacing)
+            make.right.equalTo(self).inset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+        }
+        
+        productImageViewThird.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonSecond.snp.bottom).offset(spacing)
+            make.left.equalTo(self).offset(spacing)
+            make.width.height.equalTo(100)
+        }
+        
+        nameLabelThird.snp.makeConstraints { make in
+            make.top.equalTo(priceButtonSecond.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewThird.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(230)
+        }
+        
+        detailLabelThird.snp.makeConstraints { make in
+            make.top.equalTo(nameLabelThird.snp.bottom).offset(spacing)
+            make.left.equalTo(productImageViewThird.snp.right).offset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(200)
+        }
+        
+        priceButtonThird.snp.makeConstraints { make in
+            make.top.equalTo(detailLabelThird.snp.bottom).offset(spacing)
+            make.right.equalTo(self).inset(spacing)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
         }
     }
 }
-
-extension UIColor {
-    static var gradientDarkGrey: UIColor {
-        return UIColor(red: 239 / 255.0, green: 241 / 255.0, blue: 241 / 255.0, alpha: 1)
-    }
-    
-    static var gradientLightGrey: UIColor {
-        return UIColor(red: 201 / 255.0, green: 201 / 255.0, blue: 201 / 255.0, alpha: 1)
-    }
-}
-
-
-
-
-
-
-
 

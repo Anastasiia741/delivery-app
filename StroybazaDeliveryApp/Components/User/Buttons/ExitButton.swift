@@ -22,7 +22,7 @@ final class ExitButtonView: UIView {
     }
     
     private func setupConstraints() {
-      
+        
         exitButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
@@ -46,8 +46,9 @@ final class ExitButton: UIButton {
     private func commonInit() {
         
         self.setTitle("Выйти", for: .normal)
-        self.setTitleColor(.white, for: .normal)
-        self.backgroundColor = UIColor(named: "ExitButton")
+        self.setTitleColor(.systemBackground, for: .normal)
+        self.backgroundColor = .exitButton
         self.layer.cornerRadius = 20
     }
 }
+

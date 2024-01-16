@@ -20,23 +20,24 @@ final class AuthTextField: UITextField {
     }
     
     private func commonInit(_ style: AuthTextFieldType) {
-        
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         self.leftView = leftPaddingView
         self.leftViewMode = .always
-        self.backgroundColor = UIColor(named: "WhiteAlpha")
+        self.backgroundColor = .whiteColor
         self.layer.cornerRadius = 12
         self.returnKeyType = .next
+        let placeholderColor = UIColor.gray
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: placeholderColor]
         switch style {
         case .email:
-            self.placeholder = "Введите email"
+            self.attributedPlaceholder = NSAttributedString(string: "Введите email", attributes: placeholderAttributes)
             self.returnKeyType = .next
         case .password:
-            self.placeholder = "Введите пароль"
+            self.attributedPlaceholder = NSAttributedString(string: "Введите пароль", attributes: placeholderAttributes)
             self.isSecureTextEntry = true
             self.returnKeyType = .next
         case .confirmPassword:
-            self.placeholder = "Повторите пароль"
+            self.attributedPlaceholder = NSAttributedString(string: "Повторите пароль", attributes: placeholderAttributes)
             self.isSecureTextEntry = true
             self.returnKeyType = .next
         }

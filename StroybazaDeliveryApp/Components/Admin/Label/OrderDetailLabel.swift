@@ -5,7 +5,7 @@
 import UIKit
 
 enum OrderDetailType {
-    case name, email, numberOrder, address, phoneNumber, order, amount, descriptionForMain, descriptionForDetail, productName, productPrice, productCategory, productDescription, productDetail
+    case name, email, numberOrder, address, phoneNumber, order, amount, descriptionForMain, descriptionForDetail, productName, productPrice, productCategory, descriptionProduct, productDetail
 }
 
 final class OrderDetailLabel: UILabel {
@@ -27,20 +27,16 @@ final class OrderDetailLabel: UILabel {
         switch style {
         case .numberOrder:
             self.text = "Номер заказа №23 \nДата заказа 23.10.2023 - 19:58"
-
         case .address:
             self.text = "Адресс доставки: \n______"
-
         case .phoneNumber:
             self.text = "Номер телефона: \n+996 ______"
-
         case .order:
             self.text = "Заказ: \nШоколадный 1 \nМедовый 2 \nЧизкейк 2"
             self.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         case .amount:
             self.text = "Сумма: 2320 сом"
             self.font = UIFont.boldSystemFont(ofSize: 22)
-
         case .name:
             self.text = "Не указано имя"
         case .email:
@@ -63,7 +59,7 @@ final class OrderDetailLabel: UILabel {
             self.text = "Категория:"
             self.textColor = .lightGray
             self.font = UIFont.boldSystemFont(ofSize: 18)
-        case .productDescription:
+        case .descriptionProduct:
             self.text = "Описание для главной:"
             self.textColor = .lightGray
             self.font = UIFont.boldSystemFont(ofSize: 18)

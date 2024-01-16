@@ -21,9 +21,7 @@ final class DBServiceOrders {
     func saveOrder(order: Order,
                    promocode: String,
                    completion: @escaping (Result<Order, Error>) -> ()) {
-        var orderData = order.representation
-        orderData["promocode"] = promocode
-        
+
         ordersRef.document(order.id).setData(order.representation) { error in
             
             if let error = error {
@@ -100,13 +98,14 @@ final class DBServiceOrders {
                    let userId = document["userID"] as? String,
                    let dateTimestamp = document["date"] as? Timestamp,
                    let status = document["status"] as? String,
+                   let promocode = document["promocode"] as? String,
                    let _ = document["cost"] as? Int
                 {
                     self?.fetchPositionsForOrder(by: orderId) { result in
                         switch result {
                         case .success(let positions):
                             let date = dateTimestamp.dateValue()
-                            let userOrder = Order(id: orderId, userID: userId, positions: positions, date: date, status: status, promocode: "")
+                            let userOrder = Order(id: orderId, userID: userId, positions: positions, date: date, status: status, promocode: promocode)
                             
                             userOrders.append(userOrder)
                             

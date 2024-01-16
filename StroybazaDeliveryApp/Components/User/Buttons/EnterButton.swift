@@ -28,26 +28,10 @@ final class EnterButtom: UIButton {
         case .authorization:
             self.setTitle("Войти", for: .normal)
             self.setTitleColor(.black, for: .normal)
-            self.backgroundColor = UIColor(named: "AuthButtonRed")
-            
-            let gradientLayer = CAGradientLayer()
-            
-            if let pinkColor = UIColor(named: "AuthButtonRed"),
-               let defaultColor = UIColor(named: "AuthButtonDark") {
-                
-                gradientLayer.colors = [pinkColor.cgColor, defaultColor.cgColor]
-            } else {
-                gradientLayer.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
-            }
-            
-            gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-            gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-            gradientLayer.frame = self.bounds
-            self.layer.insertSublayer(gradientLayer, at: 0)
-            
+            self.backgroundColor = .authButton
         case .registration:
             self.setTitle("Регистрация", for: .normal)
-            self.setTitleColor(.brown, for: .normal)
+            self.setTitleColor(.systemBrown, for: .normal)
         }
     }
 }

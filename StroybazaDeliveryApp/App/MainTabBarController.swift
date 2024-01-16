@@ -7,19 +7,24 @@ import SnapKit
 
 final class MainTabBarController: UITabBarController {
     
-    //MARK: - UI
-    private let menuVC: UINavigationController = {
-        let controller = MenuScreenVC()
+    public let menuModuleConfigurator = MenuModuleConfigurator()
+    public let authModuleConfigurator = AuthModuleConfiguration()
+    public let cartModuleConfigurator =  CartModuleConfigurator()
+    public let profileModuleConfigurator = ProfileModuleConfigurator()
+    public let adminModuleConfigurator = AdminModuleConfigurator()
+    public let productEditModuleConfigurator = ProductEditModuleConfigurator()
+    public let createModuleConfigurator = CreateModuleConfigurator()
+    
+//  MARK: - UI
+    private lazy var menuVC: UINavigationController = {
+        let controller = menuModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.menu, tag: 0)
-        
         controller.tabBarItem = tabBarItem
-        
         return navigationControler
     }()
-    private let cartVC: UINavigationController = {
-        let controller = CartScreenVC()
+    private lazy var cartVC: UINavigationController = {
+        let controller = cartModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
         
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.cart, tag: 1)
@@ -28,61 +33,43 @@ final class MainTabBarController: UITabBarController {
         
         return navigationControler
     }()
-    private let profileVC: UINavigationController = {
-        let controller = ProfileScreenVC()
+    private lazy var profileVC: UINavigationController = {
+        let controller = profileModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.profile, tag: 2)
-        
         controller.tabBarItem = tabBarItem
-        
         return navigationControler
     }()
-    private let authVC: UINavigationController = {
-        let controller = AuthorizationScreenVC()
+    private lazy var authVC: UINavigationController = {
+        let controller = authModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.profile, tag: 2)
-        
         controller.tabBarItem = tabBarItem
-        
         return navigationControler
     }()
-    private let adminVC: UINavigationController = {
-        
-        let controller = AdminScreenVC()
+    private lazy var adminVC: UINavigationController = {
+        let controller = adminModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.order, tag: 0)
-        
         controller.tabBarItem = tabBarItem
-        
         return navigationControler
     }()
-    private let productVC:  UINavigationController = {
-        
-        let controller = ProductScreenVC()
+    private lazy var productVC:  UINavigationController = {
+        let controller = productEditModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.product, tag: 1)
-        
         controller.tabBarItem = tabBarItem
-        
         return navigationControler
     }()
-    private let createProductVC:  UINavigationController = {
-        
-        let controller = CreateProductScreenVC()
+    private lazy var createProductVC:  UINavigationController = {
+        let controller = createModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.createProduct, tag: 2)
-        
         controller.tabBarItem = tabBarItem
-       
         return navigationControler
     }()
     
-    //MARK: - Lifecurcle
+//  MARK: - Life Сycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyles()
@@ -90,15 +77,12 @@ final class MainTabBarController: UITabBarController {
     }
 }
 
-//MARK: - Roles
+//  MARK: - Roles
 extension MainTabBarController {
     
     func updateTabBarForCurrentUser() {
-        
         if let currentUser = DBServiceAuth.shared.currentUser {
-            
             if currentUser.uid == Users.userId {
-                
                 viewControllers = [adminVC, productVC, createProductVC]
             } else {
                 viewControllers = [menuVC, cartVC, profileVC]
@@ -106,16 +90,14 @@ extension MainTabBarController {
         } else {
             viewControllers = [menuVC, cartVC, authVC]
         }
-        
     }
-    
 }
 
-//MARK: - Styles
+//  MARK: - Styles
 extension MainTabBarController {
-    
+ 
     func setupStyles() {
-        tabBar.tintColor = UIColor(named: CollorBackground.buyButton)
-        tabBar.backgroundColor = .white
+        tabBar.tintColor = .buyButton
+        tabBar.backgroundColor = .systemBackground
     }
 }

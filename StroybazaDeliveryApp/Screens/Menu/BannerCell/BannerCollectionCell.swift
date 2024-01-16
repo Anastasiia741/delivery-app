@@ -8,13 +8,11 @@ import FirebaseStorage
 import SDWebImage
 
 final class BannerCollectionCell: UICollectionViewCell {
-    //MARK: - ReuseId
+//  MARK: - ReuseId
     static var reuseId = ReuseId.bannerCellCollection
-    
-    //MARK: - Properties
+//  MARK: - Properties
     private var product: Product?
-    
-    //MARK: - UI
+//  MARK: - UI
     private let nameLabel = MainTitleLabel(style: MainTitleType.promo)
     private let priceButton: PriceButton = {
         let button = PriceButton(style: PriceButtonType.noneBackground)
@@ -30,7 +28,8 @@ final class BannerCollectionCell: UICollectionViewCell {
         view.clipsToBounds = true
         return view
     }()
-    
+   
+//  MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -40,12 +39,10 @@ final class BannerCollectionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
-//MARK: - Business Logic
+//  MARK: - Business Logic
 extension BannerCollectionCell {
-  
     override func prepareForReuse() {
         super.prepareForReuse()
         productImageView.image = nil
@@ -69,11 +66,9 @@ extension BannerCollectionCell {
     }
 }
 
-//MARK: - Layout
+//  MARK: - Layout
 private extension BannerCollectionCell {
-    
     func setupView() {
-        
         contentView.addSubview(containerView)
         containerView.addSubview(productImageView)
         containerView.addSubview(verticalStackView)

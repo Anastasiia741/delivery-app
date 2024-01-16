@@ -6,9 +6,9 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-protocol OrderStatusDelegate: AnyObject {
-    func updateOrderStatus(orderID: String, newStatus: String)
-}
+//protocol OrderStatusDelegate: AnyObject {
+//    func updateOrderStatus(orderID: String, newStatus: String)
+//}
 
 
 final class DetailOrderScreenVC: UIViewController {
@@ -18,7 +18,7 @@ final class DetailOrderScreenVC: UIViewController {
     var selectOrder: Order?
     private let profileService = DBServiceProfile.shared
     private let orderService = DBServiceOrders.shared
-    var orderStatusDelegate: OrderStatusDelegate?
+//    var orderStatusDelegate: OrderStatusDelegate?
     
     //MARK: - UI
     private let containerView = ContainerView()
@@ -33,7 +33,7 @@ final class DetailOrderScreenVC: UIViewController {
     private let scrollView = UIScrollView()
     private let verticalStackView = StackView(style: .vertical)
     
-    //MARK: - Life Curcle
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -43,7 +43,6 @@ final class DetailOrderScreenVC: UIViewController {
         fetchUserProfile()
         fetchOrderDetails()
         fetchOrderStatus()
-        
     }
 }
 
@@ -140,8 +139,7 @@ private extension DetailOrderScreenVC {
                 self?.changeStatusButton.setTitle(status, for: .normal)
                 if let orderID = self?.selectOrder?.id {
                     self?.orderService.updateOrderStatus(orderID: orderID, newStatus: status)
-                    self?.orderStatusDelegate?.updateOrderStatus(orderID: orderID, newStatus: status)
-                    
+//                    self?.orderStatusDelegate?.updateOrderStatus(orderID: orderID, newStatus: status)
                 }
             }
             alertController.addAction(action)
@@ -157,7 +155,6 @@ private extension DetailOrderScreenVC {
 private extension DetailOrderScreenVC {
     
     func setupViews() {
-        
         view.addSubview(containerView)
         containerView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(numberOrderDetailLabel)

@@ -97,12 +97,12 @@ private extension AdminScreenVC {
     func showOrderDetailScreen( _ order: Order) {
         let viewController = DetailOrderScreenVC()
         viewController.selectOrder = order
-        navigationController?.navigationBar.tintColor = UIColor(named: CollorBackground.buyButton)
+        navigationController?.navigationBar.tintColor = .buyButton
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showMainMenu() {
-        let authViewController = AuthorizationScreenVC()
+        let authViewController = AuthController()
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true, completion: nil)
     }
@@ -139,7 +139,7 @@ private extension AdminScreenVC {
     }
     
     func setupStyles() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         self.navigationItem.title = Titles.orderAdmin
     }
     
@@ -150,7 +150,6 @@ private extension AdminScreenVC {
             make.left.right.bottom.equalToSuperview()
         }
     }
-    
 }
 
 //MARK: - UITableView

@@ -11,7 +11,7 @@ enum Images {
         static let cart = UIImage(systemName: "cart.fill")
         static let profile = UIImage(systemName: "person.crop.circle.dashed")
         static let order = UIImage(systemName: "storefront.circle")
-        static let product = UIImage(systemName: "tshirt.circle")
+        static let product = UIImage(systemName: "circle.lefthalf.striped.horizontal")
         static let createProduct = UIImage(systemName: "plus.circle")
     }
     
@@ -74,13 +74,6 @@ enum FieldType {
     case unknown
 }
 
-enum CollorBackground {
-    static let priceButton = "PriceButton"
-    static let buyButton = "BuyButton"
-    static let backgroundPromo = "GrayAlpha"
-    static let orderButtonHeader = "normalButtonBackground"
-    static let orderButtonHeaderTap = "pressedButtonBackground"
-}
 
 enum ButtonsName {
     static let exit = "arrow.right.doc.on.clipboard"
@@ -103,5 +96,5 @@ enum TextMessage {
     static let cardOrder = "Мы уже готовим ваш заказ. Ожидайте 🌺"
     static let authorization = "Авторизация"
     static let registration = "Регистрация"
+    static let policy = "https://ilten.github.io/app-policy/"
 }
-

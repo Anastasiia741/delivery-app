@@ -7,18 +7,15 @@ import Foundation
 final class OrderService {
     
     let productRepository = ProductsRepository()
-    var promoсode: String = ""
     
     func calculatePrice() -> (Int, Int) {
         var totalPrice = 0
         var totalQuantity = 0
         let products = productRepository.retrieve()
-        
         for product in products {
             totalQuantity += product.quantity
             totalPrice += product.price * product.quantity
         }
-        
         return (totalPrice, totalQuantity)
     }
     
@@ -27,13 +24,10 @@ final class OrderService {
     }
     
     func update(_ product: Product, _ count: Int) -> [Product] {
-        
         var products = productRepository.retrieve()
-        
         for (index, item) in products.enumerated() {
             if item.id == product.id {
                 products[index].quantity = count
-                
                 if count == 0 {
                     products.remove(at: index)
                 }
@@ -41,15 +35,12 @@ final class OrderService {
                 break
             }
         }
-        
         return products
     }
     
     func addProduct(_ product: Product?) -> [Product] {
-        
         guard let product = product else { return [] }
         var products = productRepository.retrieve()
-        
         for (index, item) in products.enumerated() {
             if item.id == product.id {
                 products[index].quantity += 1
@@ -66,7 +57,6 @@ final class OrderService {
     }
     
     func removeProduct(_ product: Product) -> [Product] {
-        
         var products = productRepository.retrieve()
         for (index, item) in products.enumerated() {
             if item.id == product.id {
@@ -76,5 +66,4 @@ final class OrderService {
         }
         return products
     }
-    
 }

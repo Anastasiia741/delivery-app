@@ -16,7 +16,7 @@ final class BackgroundImageView: UIImageView {
     }
     
     private func commonInit() {
-        self.image = UIImage(named: "Logo")
+        self.image = UIImage(named: "logo")
         self.contentMode = .scaleAspectFit
     }
 }

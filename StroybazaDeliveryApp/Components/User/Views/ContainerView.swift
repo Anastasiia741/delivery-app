@@ -16,7 +16,7 @@ final class ContainerView: UIView {
     }
     
     private func commonInit() {
-        self.backgroundColor = UIColor(named: "BlackAlpha")
+        self.backgroundColor = .blackAlpha
         self.layer.cornerRadius = 12
     }
 }
