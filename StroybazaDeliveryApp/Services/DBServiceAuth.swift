@@ -5,7 +5,7 @@
 import Foundation
 import FirebaseAuth
 
-final class DBServiceAuth {
+class DBServiceAuth {
    
     static let shared = DBServiceAuth()
     private let databaseProfile = DBServiceProfile.shared

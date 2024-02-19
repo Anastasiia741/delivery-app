@@ -97,6 +97,10 @@ extension ProfileController {
 
 
 extension ProfileController: ProfileViewProtocol, ProfileCellProtocol, ProfileContactProtocol {
+    func textFieldDidChange(_ newProfile: NewUser) {
+         
+    }
+    
    
     func didUpdateProfileInfo(_ name: String?, _ phone: String?) {
         presenter?.nameTF = name ?? ""

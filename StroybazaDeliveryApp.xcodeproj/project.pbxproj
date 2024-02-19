@@ -10,9 +10,18 @@
 		12B5F0A72B29DC5800021902 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B5F0A62B29DC5800021902 /* MenuPresenter.swift */; };
 		12B5F0A92B29DC6300021902 /* MenuConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B5F0A82B29DC6300021902 /* MenuConfigurator.swift */; };
 		7133D6522B206D46001FE673 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7133D6512B206D46001FE673 /* Product.swift */; };
+		71353CD32B690738008A7868 /* CalculateOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71353CD22B690738008A7868 /* CalculateOrder.swift */; };
 		714C957D2A98B08A0057A8BA /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714C957C2A98B08A0057A8BA /* StackView.swift */; };
 		714C957F2A98C6000057A8BA /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714C957E2A98C6000057A8BA /* OrderService.swift */; };
 		714F7A642B552AA100E533AD /* UIWindow+Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714F7A632B552AA100E533AD /* UIWindow+Key.swift */; };
+		714F7AE72B5A6B7800E533AD /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AE62B5A6B7800E533AD /* FirebaseDatabase */; };
+		714F7AE92B5A6BB100E533AD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AE82B5A6BB100E533AD /* FirebaseAuth */; };
+		714F7AEB2B5A6BB900E533AD /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AEA2B5A6BB900E533AD /* FirebaseDatabase */; };
+		714F7AED2B5A6BBF00E533AD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AEC2B5A6BBF00E533AD /* FirebaseFirestore */; };
+		714F7AEF2B5A6BD500E533AD /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AEE2B5A6BD500E533AD /* FirebaseDatabaseSwift */; };
+		714F7AF12B5A6BDE00E533AD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AF02B5A6BDE00E533AD /* FirebaseFirestoreSwift */; };
+		714F7AF52B5A6C2600E533AD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AF42B5A6C2600E533AD /* FirebaseAuth */; };
+		714F7AF92B5A6C4500E533AD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 714F7AF82B5A6C4500E533AD /* FirebaseStorage */; };
 		714FB8AD2AE7E46F00B58106 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 714FB8AC2AE7E46F00B58106 /* SDWebImage */; };
 		7157F8C72AC1EA8D007BC110 /* ProfileTitileOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7157F8C62AC1EA8D007BC110 /* ProfileTitileOrderCell.swift */; };
 		716403932AA9E3A500D44A88 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716403922AA9E3A500D44A88 /* ActivityIndicator.swift */; };
@@ -101,7 +110,7 @@
 		71AA56072B35DC47008278BE /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AA56062B35DC47008278BE /* ProfilePresenter.swift */; };
 		71C0E3A02AE994FF00DF7A35 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E39F2AE994FF00DF7A35 /* FirebaseAuth */; };
 		71C0E3A22AE994FF00DF7A35 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A12AE994FF00DF7A35 /* FirebaseDatabase */; };
-		71C0E3A42AE994FF00DF7A35 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A32AE994FF00DF7A35 /* FirebaseDatabaseSwift */; };
+		71C0E3A42AE994FF00DF7A35 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A32AE994FF00DF7A35 /* FirebaseDatabaseSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		71C0E3A62AE994FF00DF7A35 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A52AE994FF00DF7A35 /* FirebaseFirestore */; };
 		71C0E3A82AE994FF00DF7A35 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A72AE994FF00DF7A35 /* FirebaseFirestoreSwift */; };
 		71C0E3AA2AE994FF00DF7A35 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 71C0E3A92AE994FF00DF7A35 /* FirebaseStorage */; };
@@ -110,6 +119,10 @@
 		71D8D2502AF2AF2D00A301D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D8D24F2AF2AF2D00A301D7 /* Reachability.swift */; };
 		71DB3AB62A9631EA00C781C5 /* TitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DB3AB52A9631EA00C781C5 /* TitleTextView.swift */; };
 		71F057922B1DDDBF009D18A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71F057912B1DDDBF009D18A0 /* GoogleService-Info.plist */; };
+		71F262152B5A6CE800EE3D25 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71F262142B5A6CE800EE3D25 /* FirebaseFirestoreSwift */; };
+		71F262172B5A706F00EE3D25 /* Array+save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F262162B5A706F00EE3D25 /* Array+save.swift */; };
+		71F2621F2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F2621E2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.swift */; };
+		71F262262B5A711600EE3D25 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F262252B5A711600EE3D25 /* ArrayTests.swift */; };
 		71F487CB2AD309D300C3807E /* DBServiceProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487CA2AD309D300C3807E /* DBServiceProducts.swift */; };
 		71F487EE2AD55E2700C3807E /* CreateProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487ED2AD55E2700C3807E /* CreateProductImageCell.swift */; };
 		71F487F02AD56FF800C3807E /* CreateProductNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487EF2AD56FF800C3807E /* CreateProductNameCell.swift */; };
@@ -119,12 +132,39 @@
 		71F487FB2AD6A49900C3807E /* EditProductDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F487FA2AD6A49900C3807E /* EditProductDetailCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		714F7AC62B58107E00E533AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 718800B32A7A5C0000F7C948 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 718800BA2A7A5C0000F7C948;
+			remoteInfo = StroybazaDeliveryApp;
+		};
+		714F7AD62B5838CA00E533AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 718800B32A7A5C0000F7C948 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 718800BA2A7A5C0000F7C948;
+			remoteInfo = StroybazaDeliveryApp;
+		};
+		71F262202B5A70B500EE3D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 718800B32A7A5C0000F7C948 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 718800BA2A7A5C0000F7C948;
+			remoteInfo = StroybazaDeliveryApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		12B5F0A62B29DC5800021902 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		12B5F0A82B29DC6300021902 /* MenuConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfigurator.swift; sourceTree = "<group>"; };
 		7133D6512B206D46001FE673 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		71353CD22B690738008A7868 /* CalculateOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateOrder.swift; sourceTree = "<group>"; };
 		714C957C2A98B08A0057A8BA /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		714C957E2A98C6000057A8BA /* OrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
+		714F76B92B600F1E00931C2A /* CreateProductUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CreateProductUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		714F76BA2B600F1E00931C2A /* ProfileSaveButtonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProfileSaveButtonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		714F7A632B552AA100E533AD /* UIWindow+Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Key.swift"; sourceTree = "<group>"; };
 		7157F8C62AC1EA8D007BC110 /* ProfileTitileOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTitileOrderCell.swift; sourceTree = "<group>"; };
 		716403922AA9E3A500D44A88 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -216,6 +256,10 @@
 		71D8D24F2AF2AF2D00A301D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		71DB3AB52A9631EA00C781C5 /* TitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextView.swift; sourceTree = "<group>"; };
 		71F057912B1DDDBF009D18A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		71F262162B5A706F00EE3D25 /* Array+save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+save.swift"; sourceTree = "<group>"; };
+		71F2621C2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StroybazaDeliveryAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71F2621E2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StroybazaDeliveryAppTests.swift; sourceTree = "<group>"; };
+		71F262252B5A711600EE3D25 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 		71F487CA2AD309D300C3807E /* DBServiceProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBServiceProducts.swift; sourceTree = "<group>"; };
 		71F487ED2AD55E2700C3807E /* CreateProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductImageCell.swift; sourceTree = "<group>"; };
 		71F487EF2AD56FF800C3807E /* CreateProductNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductNameCell.swift; sourceTree = "<group>"; };
@@ -226,6 +270,29 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		714F7ABF2B58107E00E533AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714F7AE72B5A6B7800E533AD /* FirebaseDatabase in Frameworks */,
+				714F7AF52B5A6C2600E533AD /* FirebaseAuth in Frameworks */,
+				714F7AF92B5A6C4500E533AD /* FirebaseStorage in Frameworks */,
+				71F262152B5A6CE800EE3D25 /* FirebaseFirestoreSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714F7ACD2B5838CA00E533AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				714F7AF12B5A6BDE00E533AD /* FirebaseFirestoreSwift in Frameworks */,
+				714F7AEF2B5A6BD500E533AD /* FirebaseDatabaseSwift in Frameworks */,
+				714F7AEB2B5A6BB900E533AD /* FirebaseDatabase in Frameworks */,
+				714F7AE92B5A6BB100E533AD /* FirebaseAuth in Frameworks */,
+				714F7AED2B5A6BBF00E533AD /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		718800B82A7A5C0000F7C948 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,6 +306,13 @@
 				714FB8AD2AE7E46F00B58106 /* SDWebImage in Frameworks */,
 				71C0E3AC2AE994FF00DF7A35 /* FirebaseStorageCombine-Community in Frameworks */,
 				71C0E3A62AE994FF00DF7A35 /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71F262192B5A70B500EE3D25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				714F7A632B552AA100E533AD /* UIWindow+Key.swift */,
+				71F262162B5A706F00EE3D25 /* Array+save.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -390,8 +465,12 @@
 			isa = PBXGroup;
 			children = (
 				718800BD2A7A5C0000F7C948 /* StroybazaDeliveryApp */,
+				71F2621D2B5A70B500EE3D25 /* StroybazaDeliveryAppTests */,
 				714FB8AE2AE7E5B000B58106 /* Frameworks */,
 				71C0E3932AE98DFB00DF7A35 /* StroybazaDeliveryApp.app */,
+				71F2621C2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.xctest */,
+				714F76B92B600F1E00931C2A /* CreateProductUITests.xctest */,
+				714F76BA2B600F1E00931C2A /* ProfileSaveButtonTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -508,10 +587,10 @@
 				71F487CA2AD309D300C3807E /* DBServiceProducts.swift */,
 				7185F3832AB0B2990001604A /* DBServiceOrders.swift */,
 				71A50E362ACC433A00369620 /* DBServiceProfile.swift */,
-				718801142A7A63C400F7C948 /* ProductsService.swift */,
-				718801162A7A63E000F7C948 /* BannerService.swift */,
 				718801A42A811B0600F7C948 /* ProductsRepository.swift */,
 				714C957E2A98C6000057A8BA /* OrderService.swift */,
+				718801142A7A63C400F7C948 /* ProductsService.swift */,
+				718801162A7A63E000F7C948 /* BannerService.swift */,
 				71D8D24F2AF2AF2D00A301D7 /* Reachability.swift */,
 			);
 			path = Services;
@@ -672,6 +751,16 @@
 			path = TextFieldsAdmin;
 			sourceTree = "<group>";
 		};
+		71F2621D2B5A70B500EE3D25 /* StroybazaDeliveryAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				71F2621E2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.swift */,
+				71F262252B5A711600EE3D25 /* ArrayTests.swift */,
+				71353CD22B690738008A7868 /* CalculateOrder.swift */,
+			);
+			path = StroybazaDeliveryAppTests;
+			sourceTree = "<group>";
+		};
 		71F487EC2AD55E0300C3807E /* CreateProductCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -717,6 +806,55 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		714F7AC12B58107E00E533AD /* CreateProductUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 714F7ACA2B58107E00E533AD /* Build configuration list for PBXNativeTarget "CreateProductUITests" */;
+			buildPhases = (
+				714F7ABE2B58107E00E533AD /* Sources */,
+				714F7ABF2B58107E00E533AD /* Frameworks */,
+				714F7AC02B58107E00E533AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				714F7AC72B58107E00E533AD /* PBXTargetDependency */,
+			);
+			name = CreateProductUITests;
+			packageProductDependencies = (
+				714F7AE62B5A6B7800E533AD /* FirebaseDatabase */,
+				714F7AF42B5A6C2600E533AD /* FirebaseAuth */,
+				714F7AF82B5A6C4500E533AD /* FirebaseStorage */,
+				71F262142B5A6CE800EE3D25 /* FirebaseFirestoreSwift */,
+			);
+			productName = CreateProductUITests;
+			productReference = 714F76B92B600F1E00931C2A /* CreateProductUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		714F7ACF2B5838CA00E533AD /* ProfileSaveButtonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 714F7AD82B5838CA00E533AD /* Build configuration list for PBXNativeTarget "ProfileSaveButtonTests" */;
+			buildPhases = (
+				714F7ACC2B5838CA00E533AD /* Sources */,
+				714F7ACD2B5838CA00E533AD /* Frameworks */,
+				714F7ACE2B5838CA00E533AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				714F7AD72B5838CA00E533AD /* PBXTargetDependency */,
+			);
+			name = ProfileSaveButtonTests;
+			packageProductDependencies = (
+				714F7AE82B5A6BB100E533AD /* FirebaseAuth */,
+				714F7AEA2B5A6BB900E533AD /* FirebaseDatabase */,
+				714F7AEC2B5A6BBF00E533AD /* FirebaseFirestore */,
+				714F7AEE2B5A6BD500E533AD /* FirebaseDatabaseSwift */,
+				714F7AF02B5A6BDE00E533AD /* FirebaseFirestoreSwift */,
+			);
+			productName = ProfileSaveButtonTests;
+			productReference = 714F76BA2B600F1E00931C2A /* ProfileSaveButtonTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		718800BA2A7A5C0000F7C948 /* StroybazaDeliveryApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 718800CF2A7A5C0100F7C948 /* Build configuration list for PBXNativeTarget "StroybazaDeliveryApp" */;
@@ -745,6 +883,24 @@
 			productReference = 71C0E3932AE98DFB00DF7A35 /* StroybazaDeliveryApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		71F2621B2B5A70B500EE3D25 /* StroybazaDeliveryAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71F262222B5A70B500EE3D25 /* Build configuration list for PBXNativeTarget "StroybazaDeliveryAppTests" */;
+			buildPhases = (
+				71F262182B5A70B500EE3D25 /* Sources */,
+				71F262192B5A70B500EE3D25 /* Frameworks */,
+				71F2621A2B5A70B500EE3D25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71F262212B5A70B500EE3D25 /* PBXTargetDependency */,
+			);
+			name = StroybazaDeliveryAppTests;
+			productName = StroybazaDeliveryAppTests;
+			productReference = 71F2621C2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -752,11 +908,23 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					714F7AC12B58107E00E533AD = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 718800BA2A7A5C0000F7C948;
+					};
+					714F7ACF2B5838CA00E533AD = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 718800BA2A7A5C0000F7C948;
+					};
 					718800BA2A7A5C0000F7C948 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					71F2621B2B5A70B500EE3D25 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 718800BA2A7A5C0000F7C948;
 					};
 				};
 			};
@@ -779,11 +947,28 @@
 			projectRoot = "";
 			targets = (
 				718800BA2A7A5C0000F7C948 /* StroybazaDeliveryApp */,
+				714F7AC12B58107E00E533AD /* CreateProductUITests */,
+				714F7ACF2B5838CA00E533AD /* ProfileSaveButtonTests */,
+				71F2621B2B5A70B500EE3D25 /* StroybazaDeliveryAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		714F7AC02B58107E00E533AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714F7ACE2B5838CA00E533AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		718800B92A7A5C0000F7C948 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -794,9 +979,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71F2621A2B5A70B500EE3D25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		714F7ABE2B58107E00E533AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		714F7ACC2B5838CA00E533AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		718800B72A7A5C0000F7C948 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -844,6 +1050,7 @@
 				71A50E372ACC433A00369620 /* DBServiceProfile.swift in Sources */,
 				71AA55F12B31A1D9008278BE /* ProductController.swift in Sources */,
 				7177E37A2A8D136E00C9845E /* DetailButton.swift in Sources */,
+				71F262172B5A706F00EE3D25 /* Array+save.swift in Sources */,
 				71913F072B3EF8E7002D87AA /* EditPresenter.swift in Sources */,
 				718801252A7ABD9D00F7C948 /* ProfileOrderCell.swift in Sources */,
 				7188016A2A7C0EFB00F7C948 /* EnterButton.swift in Sources */,
@@ -902,7 +1109,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71F262182B5A70B500EE3D25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71F2621F2B5A70B500EE3D25 /* StroybazaDeliveryAppTests.swift in Sources */,
+				71F262262B5A711600EE3D25 /* ArrayTests.swift in Sources */,
+				71353CD32B690738008A7868 /* CalculateOrder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		714F7AC72B58107E00E533AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 718800BA2A7A5C0000F7C948 /* StroybazaDeliveryApp */;
+			targetProxy = 714F7AC62B58107E00E533AD /* PBXContainerItemProxy */;
+		};
+		714F7AD72B5838CA00E533AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 718800BA2A7A5C0000F7C948 /* StroybazaDeliveryApp */;
+			targetProxy = 714F7AD62B5838CA00E533AD /* PBXContainerItemProxy */;
+		};
+		71F262212B5A70B500EE3D25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 718800BA2A7A5C0000F7C948 /* StroybazaDeliveryApp */;
+			targetProxy = 71F262202B5A70B500EE3D25 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		718800C92A7A5C0100F7C948 /* LaunchScreen.storyboard */ = {
@@ -916,6 +1151,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		714F7AC82B58107E00E533AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.CreateProductUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StroybazaDeliveryApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StroybazaDeliveryApp";
+			};
+			name = Debug;
+		};
+		714F7AC92B58107E00E533AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.CreateProductUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StroybazaDeliveryApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StroybazaDeliveryApp";
+			};
+			name = Release;
+		};
+		714F7AD92B5838CA00E533AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.ProfileSaveButtonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StroybazaDeliveryApp;
+			};
+			name = Debug;
+		};
+		714F7ADA2B5838CA00E533AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.ProfileSaveButtonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StroybazaDeliveryApp;
+			};
+			name = Release;
+		};
 		718800CD2A7A5C0100F7C948 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1050,7 +1377,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1086,7 +1413,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1104,9 +1431,70 @@
 			};
 			name = Release;
 		};
+		71F262232B5A70B500EE3D25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.StroybazaDeliveryAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StroybazaDeliveryApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StroybazaDeliveryApp";
+			};
+			name = Debug;
+		};
+		71F262242B5A70B500EE3D25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stasy.StroybazaDeliveryAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StroybazaDeliveryApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StroybazaDeliveryApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		714F7ACA2B58107E00E533AD /* Build configuration list for PBXNativeTarget "CreateProductUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				714F7AC82B58107E00E533AD /* Debug */,
+				714F7AC92B58107E00E533AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		714F7AD82B5838CA00E533AD /* Build configuration list for PBXNativeTarget "ProfileSaveButtonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				714F7AD92B5838CA00E533AD /* Debug */,
+				714F7ADA2B5838CA00E533AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		718800B62A7A5C0000F7C948 /* Build configuration list for PBXProject "StroybazaDeliveryApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1121,6 +1509,15 @@
 			buildConfigurations = (
 				718800D02A7A5C0100F7C948 /* Debug */,
 				718800D12A7A5C0100F7C948 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71F262222B5A70B500EE3D25 /* Build configuration list for PBXNativeTarget "StroybazaDeliveryAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71F262232B5A70B500EE3D25 /* Debug */,
+				71F262242B5A70B500EE3D25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1155,6 +1552,46 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		714F7AE62B5A6B7800E533AD /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		714F7AE82B5A6BB100E533AD /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		714F7AEA2B5A6BB900E533AD /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		714F7AEC2B5A6BBF00E533AD /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		714F7AEE2B5A6BD500E533AD /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		714F7AF02B5A6BDE00E533AD /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		714F7AF42B5A6C2600E533AD /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		714F7AF82B5A6C4500E533AD /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		714FB8AC2AE7E46F00B58106 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 714FB8AB2AE7E46F00B58106 /* XCRemoteSwiftPackageReference "SDWebImage" */;
@@ -1199,6 +1636,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		71F262142B5A6CE800EE3D25 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C0E39E2AE994FF00DF7A35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

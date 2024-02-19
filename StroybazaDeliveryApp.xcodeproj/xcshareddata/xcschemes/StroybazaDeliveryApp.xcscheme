@@ -28,6 +28,41 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "714F7AC12B58107E00E533AD"
+               BuildableName = "CreateProductUITests.xctest"
+               BlueprintName = "CreateProductUITests"
+               ReferencedContainer = "container:StroybazaDeliveryApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "714F7ACF2B5838CA00E533AD"
+               BuildableName = "ProfileSaveButtonTests.xctest"
+               BlueprintName = "ProfileSaveButtonTests"
+               ReferencedContainer = "container:StroybazaDeliveryApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "71F2621B2B5A70B500EE3D25"
+               BuildableName = "StroybazaDeliveryAppTests.xctest"
+               BlueprintName = "StroybazaDeliveryAppTests"
+               ReferencedContainer = "container:StroybazaDeliveryApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

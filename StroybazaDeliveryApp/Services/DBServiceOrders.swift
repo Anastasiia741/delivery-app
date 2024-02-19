@@ -7,7 +7,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-final class DBServiceOrders {
+ class DBServiceOrders {
     
     static let shared = DBServiceOrders()
     private let db = Firestore.firestore()
@@ -15,7 +15,7 @@ final class DBServiceOrders {
     private let authService = DBServiceAuth.shared
     private var ordersRef: CollectionReference { return db.collection("orders") }
 
-    private init() {}
+    init() {}
     
     //MARK: - Save order in firebace
     func saveOrder(order: Order,

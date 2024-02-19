@@ -20,12 +20,13 @@ protocol ProfilePresenterProtocol: AnyObject {
 }
 
 final class ProfilePresenter {
+    
     weak var view: ProfileViewProtocol?
     let cell: ProfileCellProtocol? = nil
     //  MARK: Database
-    private let authService = DBServiceAuth.shared
-    private let databaseService = DBServiceOrders.shared
-    private let databaseProfile = DBServiceProfile.shared
+    var authService = DBServiceAuth.shared
+    var databaseService = DBServiceOrders.shared
+    var databaseProfile = DBServiceProfile.shared
     
     //  MARK: Properties
     public var orders: [Order] = [] {

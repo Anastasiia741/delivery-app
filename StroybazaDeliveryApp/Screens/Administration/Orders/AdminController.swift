@@ -62,7 +62,7 @@ extension AdminController: AdminViewProtocol {
     }
     
     func showMainMenu() {
-        let authViewController = AuthController()
+        let authViewController = AuthModuleConfiguration().configure()
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true, completion: nil)
     }

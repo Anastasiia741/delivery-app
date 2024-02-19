@@ -6,7 +6,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 
-final class DBServiceProfile {
+class DBServiceProfile {
     
     static let shared = DBServiceProfile()
     private let db = Firestore.firestore()
@@ -20,8 +20,6 @@ final class DBServiceProfile {
         
         var updatedUser = user
         updatedUser.email = email
-        print(updatedUser)
-
         print(user)
         usersRef.document(user.id).setData(user.representation) { error in
             if let error = error {
@@ -86,5 +84,4 @@ final class DBServiceProfile {
             }
         }
     }
-    
 }

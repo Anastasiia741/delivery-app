@@ -7,7 +7,6 @@ import UIKit
 
 protocol AuthPresenterProtocol {
     // MARK: - User Events
-    //    func enterButtonTapped()
     func disclaimerLabelTapped()
 }
 
@@ -25,7 +24,6 @@ extension AuthPresenter: AuthPresenterProtocol {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    //
     
     func authenticateUser(email: String, password: String) {
         database.signIn(email: email, password: password) { [weak self] result in

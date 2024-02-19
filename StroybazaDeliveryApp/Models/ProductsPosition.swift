@@ -46,3 +46,12 @@ struct ProductsPosition: Identifiable {
         self.count = count
     }
 }
+
+extension ProductsPosition: Equatable {
+    static func == (lhs: ProductsPosition, rhs: ProductsPosition) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.product as! AnyHashable == rhs.product as! AnyHashable &&
+               lhs.count == rhs.count
+               // Add other properties if needed
+    }
+}

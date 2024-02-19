@@ -63,3 +63,16 @@ struct Order {
         self.promocode = promocode
     }
 }
+
+
+extension Order: Equatable {
+    static func == (lhs: Order, rhs: Order) -> Bool {
+        return lhs.id == rhs.id &&
+               lhs.userID == rhs.userID &&
+               lhs.positions == rhs.positions &&
+               lhs.date == rhs.date &&
+               lhs.status == rhs.status &&
+               lhs.promocode == rhs.promocode
+               // Add other properties if needed
+    }
+}

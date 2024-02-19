@@ -4,7 +4,7 @@
 
 import Foundation
 
-final class OrderService {
+ class OrderService {
     
     let productRepository = ProductsRepository()
     
