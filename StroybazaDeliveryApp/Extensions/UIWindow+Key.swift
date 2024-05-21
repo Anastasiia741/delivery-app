@@ -1,16 +1,11 @@
-//
 //  UIWindow+Key.swift
 //  StroybazaDeliveryApp
-//
 //  Created by Анастасия Набатова on 15/1/24.
-//
 
 import Foundation
 import UIKit
 
-
 extension UIWindow {
-    
     static var key: UIWindow! {
         if #available(iOS 13, *) {
             return UIApplication

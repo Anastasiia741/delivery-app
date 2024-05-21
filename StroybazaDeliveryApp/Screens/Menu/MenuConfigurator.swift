@@ -9,10 +9,8 @@ final class MenuModuleConfigurator {
     func configure() -> MenuController {
         let menuVC = MenuController()
         let presenter = MenuPresenter()
-        
         menuVC.presenter = presenter
         presenter.view = menuVC
-        
         return menuVC
     }
 }

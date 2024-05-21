@@ -6,7 +6,6 @@ import UIKit
 import SnapKit
 
 final class PromoCell: UITableViewCell {
-    
 //  MARK: - ReuseID
     static let reuseId = ReuseId.promoCell
 //  MARK: - Properties
@@ -69,11 +68,9 @@ private extension PromoCell {
         containerView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
-        
         titleLabel.snp.makeConstraints { make in
             make.top.left.right.equalTo(containerView).inset(16)
         }
-        
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.right.left.bottom.equalTo(containerView)
@@ -83,25 +80,19 @@ private extension PromoCell {
 
 //  MARK: - CollectionViewDelegate, CollectionViewDataSource
 extension PromoCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromoCollectionCell.reuseId, for: indexPath) as! PromoCollectionCell
-        
         let promoProduct = products[indexPath.row]
         cell.update(promoProduct)
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let promoProduct = products[indexPath.row]
-        
         onPromoTapped?(promoProduct)
     }
 }

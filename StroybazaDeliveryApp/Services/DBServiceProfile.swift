@@ -17,7 +17,6 @@ class DBServiceProfile {
     
     //MARK: - Update profile info
     func setProfile(user: NewUser, email: String, completion: @escaping (Result<NewUser, Error>) -> ()) {
-        
         var updatedUser = user
         updatedUser.email = email
         print(user)
@@ -32,22 +31,16 @@ class DBServiceProfile {
     
     //MARK: - Get profile info
     func getProfile(by userId: String? = nil, completion: @escaping (Result<NewUser, Error>) -> ()) {
-           
            let documentIdToFetch = userId != nil ? userId! : DBServiceAuth.shared.currentUser!.uid
-           
-           usersRef.document(documentIdToFetch).getDocument { docSnapshot, error  in
+                      usersRef.document(documentIdToFetch).getDocument { docSnapshot, error  in
                if let error = error {
-                   print("Ошибка при получении профиля пользователя: \(error.localizedDescription)")
                    completion(.failure(error))
                    return
                }
-               
                guard let snap = docSnapshot, snap.exists else {
-                   print("Документ профиля пользователя не найден")
                    completion(.failure(NSError(domain: "", code: 404, userInfo: nil)))
                    return
                }
-               
                if let data = snap.data(),
                   let userName = data["name"] as? String,
                   let id = data["id"] as? String,
@@ -57,7 +50,6 @@ class DBServiceProfile {
                    let user = NewUser(id: id, name: userName, phone: phone, address: address, email: email)
                    completion(.success(user))
                } else {
-                   print("User profile document has incorrect structure")
                    completion(.failure(NSError(domain: "", code: 500, userInfo: nil)))
                }
            }
@@ -65,13 +57,9 @@ class DBServiceProfile {
     
     //MARK: - Save profile image
     func save(imageData: Data, nameImg: String, completion: @escaping (_ imageLink: String?) -> Void) {
-        
         let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/profileImages").child(nameImg)
-        
         _ = storageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            
-            if let error = error {
-                print("Ошибка загрузки:", error)
+            if error != nil {
                 completion(nil)
             } else {
                 storageRef.downloadURL { (url, error) in

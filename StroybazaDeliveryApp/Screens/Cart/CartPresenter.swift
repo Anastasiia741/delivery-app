@@ -8,7 +8,6 @@ protocol CartPresenterProtocol: AnyObject {
     var orderProducts: [Product] {  get set  }
     var products: [Product] { get set }
     var orderService: OrderService { get }
-
     func viewDidLoad()
     func fetchOrder()
     func orderButtonTapped(with promoCode: String?)
@@ -47,7 +46,6 @@ extension CartPresenter {
 
 //  MARK: - Business Logic
 extension CartPresenter: CartPresenterProtocol {
-   
     func fetchPromoProducts() {
         productsDB.fetchAllProducts { [weak self] result in
             guard let self = self else { return }
@@ -56,8 +54,8 @@ extension CartPresenter: CartPresenterProtocol {
                 let bannerProducts = products.filter { $0.category == CategoryName.discount }
                 self.products = bannerProducts
                 view?.reloadTable()
-            case .failure(let error):
-                print("Ошибка при загрузке баннеров: \(error)")
+            case .failure(_):
+                break
             }
         }
     }
@@ -96,8 +94,7 @@ extension CartPresenter {
                 } else {
                     DBServiceOrders.shared.saveOrder(order: order, promocode: order.promocode) { [weak self] result in
                         switch result {
-                        case .success(let order):
-                            print("\(TextMessage.cardMessade) \(order.cost)")
+                        case .success(_):
                             self?.orderProducts.removeAll()
                             self?.view?.reloadTable()
                             self?.productsRepository.save(self?.orderProducts ?? [Product]())

@@ -9,7 +9,6 @@ protocol CreateProductNameDelegate: AnyObject {
 }
 
 final class CreateProductNameCell: UITableViewCell, UITextFieldDelegate {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.createProductNameCell
 //  MARK: - Propertise
@@ -35,7 +34,6 @@ final class CreateProductNameCell: UITableViewCell, UITextFieldDelegate {
 
 //  MARK: - Navigation
 extension CreateProductNameCell {
-    
     func setupAction() {
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         categoryTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -43,7 +41,6 @@ extension CreateProductNameCell {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField == nameTextField {
             categoryTextField.becomeFirstResponder()
         } else if textField == categoryTextField {
@@ -51,14 +48,12 @@ extension CreateProductNameCell {
         } else if textField == priceTextField {
             textField.resignFirstResponder()
         }
-        
         return true
     }
 }
 
 //  MARK: - Delegate
 extension CreateProductNameCell {
-    
     func clearNameTextField() {
         nameTextField.text = ""
         categoryTextField.text = ""
@@ -74,13 +69,11 @@ extension CreateProductNameCell {
 
 //  MARK: - Layout
 private extension CreateProductNameCell {
-    
     func setupViews() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(nameTextField)
         verticalStackView.addArrangedSubview(categoryTextField)
         verticalStackView.addArrangedSubview(priceTextField)
-        
         nameTextField.delegate = self
         categoryTextField.delegate = self
         priceTextField.delegate = self
@@ -90,15 +83,12 @@ private extension CreateProductNameCell {
         verticalStackView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalTo(contentView).inset(20)
         }
-        
         nameTextField.snp.makeConstraints { make in
             make.height.equalTo(35)
         }
-        
         categoryTextField.snp.makeConstraints { make in
             make.height.equalTo(35)
         }
-        
         priceTextField.snp.makeConstraints { make in
             make.height.equalTo(35)
         }

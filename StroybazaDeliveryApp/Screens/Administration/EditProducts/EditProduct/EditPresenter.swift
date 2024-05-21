@@ -12,7 +12,6 @@ protocol EditPresenterProtocol: AnyObject {
 }
 
 final class EditPresenter {
-  
     weak var view: EditViewProtocol?
 //  MARK: - Properties
     public var selectedProduct: Product? {
@@ -26,7 +25,6 @@ final class EditPresenter {
 
 //  MARK: - Event handler
 extension EditPresenter: EditPresenterProtocol {
-   
     func updateProductInfo() {
         if selectedProduct != nil {
             view?.reloadTable()
@@ -38,10 +36,8 @@ extension EditPresenter: EditPresenterProtocol {
             return
         }
         productsDB.delete(product: product) { [weak self] error in
-            if let error = error {
-                print("Ошибка удаления продукта: \(error.localizedDescription)")
+            if error != nil {
             } else {
-                print("Товар успешно удален")
                 self?.view?.showSuccessAlert()
             }
         }
@@ -50,10 +46,8 @@ extension EditPresenter: EditPresenterProtocol {
     func saveButtonTapped() {
         guard let selectedProduct = selectedProduct else { return }
         productsDB.update(product: selectedProduct) { [weak self] error in
-            if let error = error {
-                print("Ошибка при обновлении данных: \(error.localizedDescription)")
+            if error != nil {
             } else {
-                print("Данные сохранены: \(selectedProduct)")
                 self?.view?.showSuccessAlert()
                 if self?.isImageChange == true {
                     guard let selectedImage = self?.view?.selectedImage, let imageURL = selectedProduct.image else { return }
@@ -61,9 +55,7 @@ extension EditPresenter: EditPresenterProtocol {
                         if let imageURL = imageURL {
                             self?.selectedProduct?.image = imageURL
                             self?.view?.showSuccessAlert()
-                        } else {
-                            print("Ошибка при загрузке изображения в Firebase Storage.")
-                        }
+                        } 
                     }
                 }
             }

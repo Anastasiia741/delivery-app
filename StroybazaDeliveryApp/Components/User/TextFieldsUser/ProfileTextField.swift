@@ -25,7 +25,7 @@ final class ProfileTextField: UITextField {
         
         switch style {
         case .name:
-            let attributes: [NSAttributedString.Key: Any] = [
+            let _: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor.black]
             let placeholderAttributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor.gray]

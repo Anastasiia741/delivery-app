@@ -16,12 +16,10 @@ final class ProductsRepository: ProductsRepositoryI {
     
     private let encoder = JSONEncoder() //кодирует в бинарник
     private let decoder = JSONDecoder() //разкодирует
-    
     private let key = "Products"
     
     //MARK: - Public methods
     func save(_ products: [Product]) { //метод сохранить
-        
         //Array<Product> -> Data
         //массив кладем в бинарник и кодируем, бинарник кладем в UserDefaults
         do {
@@ -33,7 +31,6 @@ final class ProductsRepository: ProductsRepositoryI {
     }
     //retrieve - получить данные
     func retrieve() -> [Product] {  //метод получить
-        
         //Data -> Array<Product>
         //вытаскиваем из UserDefaults бинарник
         guard let data = UserDefaults.standard.data(forKey: key) else { return [] }

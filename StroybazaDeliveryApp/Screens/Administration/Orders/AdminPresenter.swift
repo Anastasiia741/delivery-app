@@ -13,7 +13,6 @@ protocol AdminPresenterProtocol {
 }
 
 final class AdminPresenter {
-   
     weak var view: AdminController?
 //  MARK: - Properties
     public var filteredOrders: [Order] = [] {
@@ -33,7 +32,6 @@ final class AdminPresenter {
 
 //  MARK: - Navigation
 extension AdminPresenter {
-   
     func logout() {
         DBServiceAuth.shared.signOut { [weak self] result in
             switch result {
@@ -48,7 +46,6 @@ extension AdminPresenter {
 
 //  MARK: - Business Logic
 extension AdminPresenter: AdminPresenterProtocol {
-    
     func filterOrdersByStatus(_ status: OrderStatus) {
         selectedStatus = status
         switch status {

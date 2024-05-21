@@ -8,10 +8,8 @@ final class CreateModuleConfigurator {
     func configure() -> CreateController {
         let createVC = CreateController()
         let presenter = CreatePresenter()
-        
         createVC.presenter = presenter
         presenter.view = createVC
-        
         return createVC
     }
 }

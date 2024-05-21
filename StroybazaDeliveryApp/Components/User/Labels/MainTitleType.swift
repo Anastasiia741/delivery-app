@@ -88,7 +88,6 @@ final class MainTitleLabel: UILabel {
             self.textAlignment = .center
             self.numberOfLines = 3
             self.isUserInteractionEnabled = true
-            
             let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
             let underlineAttributedString = NSAttributedString(string: self.text ?? "", attributes: underlineAttribute)
             self.attributedText = underlineAttributedString
@@ -101,7 +100,6 @@ final class MainTitleLabel: UILabel {
             self.textAlignment = .center
             self.font = UIFont.systemFont(ofSize: 14, weight: .light)
             self.isUserInteractionEnabled = true
-
             let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
             let underlineAttributedString = NSAttributedString(string: self.text ?? "", attributes: underlineAttribute)
             self.attributedText = underlineAttributedString

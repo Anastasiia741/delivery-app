@@ -5,14 +5,11 @@
 import Foundation
 
 final class ProductModuleConfigurator {
-    
     func configure() -> ProductController {
         let productVC = ProductController()
         let presenter = ProductPresenter()
-        
         productVC.presenter = presenter
         presenter.view = productVC
-        
         return productVC
     }
 }

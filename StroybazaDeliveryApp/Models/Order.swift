@@ -13,7 +13,6 @@ struct Order {
     var date: Date
     var status = OrderStatus.new.rawValue
     var promocode: String
-    
     var cost: Int {
         var sum = 0
         for position in positions {
@@ -21,7 +20,6 @@ struct Order {
         }
         return sum
     }
-    
     var representation: [String: Any] {
         var repres = [String: Any]()
         repres["id"] = id
@@ -34,7 +32,6 @@ struct Order {
     }
     
     init(id: String, userID: String, positions: [ProductsPosition], date: Date, status: String, promocode: String ) {
-        
         self.id = id
         self.userID = userID
         self.positions = positions
@@ -43,7 +40,6 @@ struct Order {
         self.promocode = promocode
     }
     
-    // Инициализатор для преобразования данных из документа Firebase
     init?(doc: DocumentSnapshot) {
         guard let data = doc.data(),
               let id = data["id"] as? String,
@@ -54,7 +50,6 @@ struct Order {
         else {
             return nil
         }
-        
         self.id = id
         self.userID = userID
         self.positions = []
@@ -64,7 +59,6 @@ struct Order {
     }
 }
 
-
 extension Order: Equatable {
     static func == (lhs: Order, rhs: Order) -> Bool {
         return lhs.id == rhs.id &&
@@ -73,6 +67,5 @@ extension Order: Equatable {
                lhs.date == rhs.date &&
                lhs.status == rhs.status &&
                lhs.promocode == rhs.promocode
-               // Add other properties if needed
     }
 }

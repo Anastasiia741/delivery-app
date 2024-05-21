@@ -10,12 +10,10 @@ protocol ProfileCellProtocol: AnyObject {
 }
 
 final class ProfileCell: UITableViewCell {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.profileCell
 //  MARK: - Properties
-    private var profile = Profile(profile: NewUser(id: "", name: "", phone: "", address: "", email: ""))
-    
+    private var profile = ProfilePresenter().profile
     weak var delegate: ProfileCellProtocol?
 //  MARK: - UI
     let profileImage = ProfileImageView(frame: .init())
@@ -51,9 +49,9 @@ extension ProfileCell {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == nameTextField {
-            profile.profile.name = textField.text ?? ""
+            profile?.name = textField.text ?? ""
         } else if textField == numberTextField {
-            profile.profile.phone = textField.text ?? ""
+            profile?.phone = textField.text ?? ""
         }
     }
     

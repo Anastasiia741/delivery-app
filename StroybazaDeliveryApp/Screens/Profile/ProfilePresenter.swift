@@ -10,25 +10,19 @@ protocol ProfilePresenterProtocol: AnyObject {
     var nameTF: String { get set }
     var phoneTF: String { get set}
     var addressTF: String { get set}
-    
     func logout()
     func saveButtonTapped()
     func deleteAccountButtonTapped()
-    
     func fetchUserProfile()
     func fetchOrderHistory()
 }
 
 final class ProfilePresenter {
-    
     weak var view: ProfileViewProtocol?
     let cell: ProfileCellProtocol? = nil
-    //  MARK: Database
     var authService = DBServiceAuth.shared
     var databaseService = DBServiceOrders.shared
     var databaseProfile = DBServiceProfile.shared
-    
-    //  MARK: Properties
     public var orders: [Order] = [] {
         didSet {
             view?.reloadTable()
@@ -45,7 +39,6 @@ final class ProfilePresenter {
 }
 
 extension ProfilePresenter: ProfilePresenterProtocol {
-    
     func logout() {
         authService.signOut { result in
             switch result {
@@ -59,14 +52,11 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     
     func saveButtonTapped() {
         guard var updatedProfile = profile else {
-            print("Профиль пользователя не инициализирован")
             return
         }
-        
         updatedProfile.name = nameTF
         updatedProfile.phone = phoneTF
         updatedProfile.address = addressTF
-        
         saveProfile(updatedProfile)
     }
     
@@ -82,15 +72,12 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     }
 }
 
-
 extension ProfilePresenter {
-    
     func saveProfile(_ profile: NewUser) {
         if let email = authService.currentUser?.email {
             databaseProfile.setProfile(user: profile, email: email) { [weak self] result in
                 switch result {
                 case .success(let updatedProfile):
-                    print("Данные профиля успешно обновлены")
                     self?.profile = updatedProfile
                     self?.view?.reloadTable()
                     self?.view?.saveAlert()

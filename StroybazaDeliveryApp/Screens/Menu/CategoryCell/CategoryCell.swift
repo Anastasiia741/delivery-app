@@ -5,7 +5,6 @@
 import UIKit
 
 class CategoryCell: UITableViewCell {
-    
 //  MARK: - ReuseID
     static let reuseID = ReuseId.categoryCell
 //  MARK: - Properties
@@ -97,10 +96,8 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate {
               let cell = collectionView.cellForItem(at: IndexPath(row: previousSelectedIndex, section: SectionRows.none)) as? CategoryCollectionCell {
                cell.isSelected = false
            }
-
         selectedCategory = category
         collectionView.reloadData()
-        
         isFirstLaunch = false
         onCategoryTapped?(category)
     }

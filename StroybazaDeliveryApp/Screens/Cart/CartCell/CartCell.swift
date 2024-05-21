@@ -7,7 +7,6 @@ import SnapKit
 import FirebaseStorage
 
 final class CartCell: UITableViewCell {
-    
 //  MARK: - reuseId
     static let reuseId = ReuseId.cartCell
 //  MARK: - Properties
@@ -77,24 +76,20 @@ private extension CartCell {
             make.top.equalTo(contentView).offset(10)
             make.bottom.lessThanOrEqualTo(contentView).offset(-8)
         }
-        
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(8)
             make.right.equalTo(contentView).offset(-10)
             make.left.equalTo(productImageView.snp.right).offset(12)
         }
-        
         horizontalStackView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(40)
             make.left.equalTo(productImageView.snp.right).offset(12)
             make.right.equalTo(contentView).offset(-16)
         }
-        
         priceLabel.snp.makeConstraints { make in
             make.left.equalTo(horizontalStackView)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide).offset(16)
         }
-        
         stepperContainerView.snp.makeConstraints { make in
             make.width.equalTo(50)
             make.height.equalTo(30)

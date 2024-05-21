@@ -23,5 +23,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To take product photos</string>
 </dict>
 </plist>

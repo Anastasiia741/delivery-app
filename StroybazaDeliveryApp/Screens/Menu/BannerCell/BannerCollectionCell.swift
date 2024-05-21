@@ -51,7 +51,6 @@ extension BannerCollectionCell {
     func update(_ product: Product) {
         if let productImage = product.image {
             let imageRef = Storage.storage().reference(forURL: productImage)
-            
             imageRef.downloadURL { url, error in
                 if let error = error {
                     print(error.localizedDescription)

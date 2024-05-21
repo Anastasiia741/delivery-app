@@ -30,7 +30,6 @@ final class AuthController: UIViewController, UITextFieldDelegate {
 
 // MARK: - Event Handler
 extension AuthController: AuthViewProtocol {
-    
     func getTextFieldValues() -> (email: String?, password: String?, confirmPassword: String?) {
         let email = emailTextField.text
         let password = passwordTextField.text
@@ -41,10 +40,8 @@ extension AuthController: AuthViewProtocol {
     func setupActions() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view?.addGestureRecognizer(tapGestureRecognizer)
-        
         let disclaimerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(disclaimerLabelTapped))
         disclaimerLabel.addGestureRecognizer(disclaimerTapGestureRecognizer)
-        
         enterButton.addTarget(self, action: #selector(enterButtonTapped), for: .touchUpInside)
         registrButton.addTarget(self, action: #selector(toggleAuthButtonTapped), for: .touchUpInside)
     }
@@ -66,7 +63,6 @@ extension AuthController: AuthViewProtocol {
     
     @objc func enterButtonTapped() {
         let (email, password, confirmPassword) = getTextFieldValues()
-        
         guard let email = email, !email.isEmpty,
               let password = password, !password.isEmpty else {
             showAlert(message: AlertMessage.authMessage)
@@ -80,7 +76,6 @@ extension AuthController: AuthViewProtocol {
                 showAlert(message: AlertMessage.authFields)
                 return
             }
-            
             presenter?.registerUser(email: email, password: password, confirmPassword: confirmPassword)
         }
     }
@@ -99,7 +94,6 @@ extension AuthController: AuthViewProtocol {
 
 // MARK: - Navigation Logic
 extension AuthController {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case emailTextField:
@@ -143,7 +137,6 @@ extension AuthController {
 
 //  MARK: - Layout
 private extension AuthController {
-    
     func updateTitleLabel() {
         titleLabel.text = isAuth ? "\(TextMessage.authorization)" : "\(TextMessage.registration)"
     }
@@ -164,11 +157,9 @@ private extension AuthController {
         verticalStackView.addArrangedSubview(enterButton)
         verticalStackView.addArrangedSubview(registrButton)
         verticalStackView.addArrangedSubview(disclaimerLabel)
-        
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-        
         emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         confirmPasswordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -178,11 +169,9 @@ private extension AuthController {
         view.backgroundColor = .systemBackground
         verticalStackView.removeArrangedSubview(confirmPasswordTextField)
         confirmPasswordTextField.removeFromSuperview()
-        
         if !isAuth {
             verticalStackView.addArrangedSubview(confirmPasswordTextField)
         }
-        
         UIView.animate(withDuration: 0.4) {
             self.view.layoutIfNeeded()
         }
@@ -195,12 +184,10 @@ private extension AuthController {
             make.left.right.equalTo(view).inset(90)
             make.height.equalTo(50)
         }
-        
         containerView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.left.right.equalTo(view.safeAreaLayoutGuide).inset(50)
         }
-        
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(containerView.snp.top).inset(18)
             make.left.equalTo(containerView.snp.left).inset(18)

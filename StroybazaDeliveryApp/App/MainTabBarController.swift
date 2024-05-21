@@ -6,7 +6,6 @@ import UIKit
 import SnapKit
 
 final class MainTabBarController: UITabBarController {
-    
     public let menuModuleConfigurator = MenuModuleConfigurator()
     public let authModuleConfigurator = AuthModuleConfiguration()
     public let cartModuleConfigurator =  CartModuleConfigurator()
@@ -14,7 +13,6 @@ final class MainTabBarController: UITabBarController {
     public let adminModuleConfigurator = AdminModuleConfigurator()
     public let productEditModuleConfigurator = ProductEditModuleConfigurator()
     public let createModuleConfigurator = CreateModuleConfigurator()
-    
 //  MARK: - UI
     private lazy var menuVC: UINavigationController = {
         let controller = menuModuleConfigurator.configure()
@@ -26,11 +24,8 @@ final class MainTabBarController: UITabBarController {
     private lazy var cartVC: UINavigationController = {
         let controller = cartModuleConfigurator.configure()
         let navigationControler = UINavigationController.init(rootViewController: controller)
-        
         let tabBarItem = UITabBarItem(title: AlertMessage.emptyMessage, image: Images.TabBar.cart, tag: 1)
-        
         controller.tabBarItem = tabBarItem
-        
         return navigationControler
     }()
     private lazy var profileVC: UINavigationController = {
@@ -79,7 +74,6 @@ final class MainTabBarController: UITabBarController {
 
 //  MARK: - Roles
 extension MainTabBarController {
-    
     func updateTabBarForCurrentUser() {
         if let currentUser = DBServiceAuth.shared.currentUser {
             if currentUser.uid == Users.userId {
@@ -95,7 +89,6 @@ extension MainTabBarController {
 
 //  MARK: - Styles
 extension MainTabBarController {
- 
     func setupStyles() {
         tabBar.tintColor = .buyButton
         tabBar.backgroundColor = .systemBackground

@@ -16,7 +16,6 @@ protocol ProductEditPresenterProtocol: AnyObject {
 }
 
 final class ProductEditPresenter {
-    
     weak var view: ProductEditViewProtocol?
 //  MARK: - Service
     private let productsDB = DBServiceProducts.shared
@@ -46,7 +45,6 @@ final class ProductEditPresenter {
 
 //  MARK: - View Events
 extension ProductEditPresenter: ProductEditPresenterProtocol {
- 
     func viewDidLoad() {
         view?.showLoadingIndicator()
         fetchAllProducts()
@@ -64,7 +62,6 @@ extension ProductEditPresenter: ProductEditPresenterProtocol {
 
 //  MARK: - Business Logic
 private extension ProductEditPresenter {
-    
     func fetchAllProducts() {
         productsDB.fetchAllProducts { [weak self] result in
             guard let self = self else { return }
@@ -76,8 +73,7 @@ private extension ProductEditPresenter {
                     fetchProducts(for: defaultCategory)
                 }
                 selectedCategory = newCategories.first
-            case .failure(let error):
-                print("Ошибка при загрузке баннеров: \(error)")
+            case .failure(_):
                 view?.hideLoadingIndicator()
             }
         }
@@ -98,9 +94,7 @@ private extension ProductEditPresenter {
                 self?.products = filteredProducts
                 self?.view?.hideLoadingIndicator()
                 self?.view?.reloadTable()
-                
-            case .failure(let error):
-                print("Ошибка при получении товаров: \(error)")
+            case .failure(_):
                 self?.view?.hideLoadingIndicator()
             }
         }

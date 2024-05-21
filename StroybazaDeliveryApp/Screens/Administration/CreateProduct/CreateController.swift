@@ -39,14 +39,12 @@ final class CreateController: UIViewController {
         tableView.register(CreateProductImageCell.self, forCellReuseIdentifier: CreateProductImageCell.reuseId)
         tableView.register(CreateProductNameCell.self, forCellReuseIdentifier: CreateProductNameCell.reuseId)
         tableView.register(CreateProductDetailCell.self, forCellReuseIdentifier: CreateProductDetailCell.reuseId)
-        
         return tableView
     }()
 }
 
 //  MARK: - Life Cycle
 extension CreateController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -67,7 +65,6 @@ extension CreateController {
 
 //  MARK: - Presentation Logic
 extension CreateController {
-    
     func reloadTable() {
         tableView.reloadData()
     }
@@ -83,7 +80,6 @@ extension CreateController {
 
 //  MARK: - Keyboard observe
 private extension CreateController {
-    
     func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -107,10 +103,8 @@ private extension CreateController {
 
 //  MARK: - Event Handler
 extension CreateController {
-    
     func setupAction() {
         saveView.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
@@ -150,12 +144,10 @@ extension CreateController {
 
 //MARK: - EditProductDelegate
 extension CreateController: CreateProductDelegate, CreateProductNameDelegate, CreateProductDescriptionDelegate {
-    
     func didSelectImage(_ image: UIImage?, _ imageURL: String) {
         if let image = image {
             self.presenter?.selectedImage = image
         }
-        
         if !imageURL.isEmpty {
             self.presenter?.imageURL = imageURL
         }
@@ -175,7 +167,6 @@ extension CreateController: CreateProductDelegate, CreateProductNameDelegate, Cr
 
 //  MARK: - CreateViewProtocol Methods
 extension CreateController: CreateViewProtocol {
-    
     func clearTextFields() {
         presenter?.productName = ""
         presenter?.productCategory = ""
@@ -204,7 +195,6 @@ extension CreateController: CreateViewProtocol {
 
 //  MARK: - Layout
 private extension CreateController {
-    
     func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
@@ -232,10 +222,8 @@ private extension CreateController {
 
 //  MARK: - TableViewDataSource, TableViewDelegate
 extension CreateController: UITableViewDataSource, UITableViewDelegate  {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = CreateProductSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .image:
             return CellHeight.adminImage
@@ -250,7 +238,6 @@ extension CreateController: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = CreateProductSection.init(rawValue: section)
-        
         switch section {
         case .image:
             return SectionRows.createProduct

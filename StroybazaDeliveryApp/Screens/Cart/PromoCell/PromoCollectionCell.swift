@@ -8,7 +8,6 @@ import FirebaseStorage
 import SDWebImage
 
 final class PromoCollectionCell: UICollectionViewCell {
-    
 //  MARK: - ReuseId
     static var reuseId = ReuseId.promoCollectionCell
 //  MARK: - Properties
@@ -54,7 +53,6 @@ extension PromoCollectionCell {
 
 //  MARK: - Layout
 private extension PromoCollectionCell {
-    
     func setupView() {
         contentView.addSubview(productImage)
         contentView.addSubview(verticalStackView)

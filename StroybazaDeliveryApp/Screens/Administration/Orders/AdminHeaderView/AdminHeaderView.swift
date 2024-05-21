@@ -5,7 +5,6 @@
 import UIKit
 
 final class AdminHeaderView: UITableViewHeaderFooterView {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.adminHeaderView
 //  MARK: - UI

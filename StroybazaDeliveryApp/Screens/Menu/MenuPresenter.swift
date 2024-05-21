@@ -25,7 +25,6 @@ protocol MenuPresenterProtocol: AnyObject {
 }
 
 final class MenuPresenter {
-    
     weak var view: MenuViewProtocol?
 //  MARK: - Database
     private let orderService = OrderService()
@@ -52,7 +51,6 @@ final class MenuPresenter {
 
 //  MARK: - View Events
 extension MenuPresenter: MenuPresenterProtocol {
-
     func viewDidLoad() {
         view?.showSkeletonLoading()
         fetchAllProducts()
@@ -78,11 +76,8 @@ extension MenuPresenter: MenuPresenterProtocol {
 
 //MARK: - Business Logic
 extension MenuPresenter {
-    
     func fetchAllProducts() {
-      
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            
             self.productsDB.fetchAllProducts { [weak self] result in
                 guard let self = self else { return }
                 switch result {
@@ -94,9 +89,8 @@ extension MenuPresenter {
                     }
                     selectedCategory = newCategories.first
                     view?.hideSkeletonLoading()
-                    
-                case .failure(let error):
-                    print("Ошибка при загрузке баннеров: \(error)")
+                case .failure(_):
+                    break
                 }
             }
         }
@@ -109,17 +103,14 @@ extension MenuPresenter {
     }
     
     func fetchProducts(for category: Category) {
-        
         productsDB.fetchAllProducts { [weak self] result in
             switch result {
             case .success(let (products, _)):
                 let filteredProducts = products.filter { $0.category == category.category}
                 self?.products = filteredProducts
-                
                 self?.view?.reloadTable()
-                
-            case .failure(let error):
-                print("Ошибка при получении товаров: \(error)")
+            case .failure(_):
+                break
             }
         }
     }

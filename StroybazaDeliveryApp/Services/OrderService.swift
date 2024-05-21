@@ -48,11 +48,8 @@ import Foundation
                 return products
             }
         }
-        
         products.append(product)
         productRepository.save(products)
-        
-        print(products)
         return products
     }
     

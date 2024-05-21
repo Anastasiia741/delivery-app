@@ -6,14 +6,11 @@ import Foundation
 
 
 final class CartModuleConfigurator {
-    
     func configure() -> CartController {
         let cartVC = CartController()
         let presenter = CartPresenter()
-        
         cartVC.presenter = presenter
         presenter.view = cartVC
-        
         return cartVC
     }
 }

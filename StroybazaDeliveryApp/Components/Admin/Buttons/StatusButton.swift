@@ -20,17 +20,15 @@ class StatusButton: UIButton {
     }
     
     private func commonInit(_ style: OrderStatus) {
-        
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1.5
         self.layer.borderColor = UIColor.gray.cgColor
-        self.setTitleColor(.black, for: .normal)
+        self.setTitleColor(.systemBlack, for: .normal)
         self.backgroundColor = .gray.withAlphaComponent(0.5)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         self.clipsToBounds = true
         self.widthAnchor.constraint(equalToConstant: 100).isActive = true
         self.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        
         switch style {
         case .all:
             self.setTitle(OrderStatus.all.rawValue, for: .normal)

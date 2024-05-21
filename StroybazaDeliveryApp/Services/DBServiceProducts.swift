@@ -16,12 +16,9 @@ final class DBServiceProducts {
     private let productCollection = Firestore.firestore().collection("products")
     private let storage = Storage.storage()
     private var cachedProducts: [Product] = []
-    
     var products: Product?
     var listenerRegistation: ListenerRegistration?
-    
-    init() {}
-    
+        
     //  MARK: - add collection 'product' in firebase
     func add(product: Product, completion: @escaping (Error?) -> Void) throws {
         try productCollection.addDocument(from: product) { error in
@@ -31,21 +28,17 @@ final class DBServiceProducts {
     
     //  MARK: - Fetch and monitor changes of products from firebase
     func fetchAllProducts(completion: @escaping (Result<([Product], [Category]), Error>) -> Void)  {
-        
         if !cachedProducts.isEmpty {
             let categories = extractCategories(from: cachedProducts)
             completion(.success((cachedProducts, categories)))
         }
-        
         self.listenerRegistation = self.db.collection("products").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
-            
             var products: [Product] = []
             var categories: [Category] = []
-            
             for document in querySnapshot!.documents {
                 if let product = try? document.data(as: Product.self) {
                     products.append(product)
@@ -54,15 +47,12 @@ final class DBServiceProducts {
                     categories.append(category)
                 }
             }
-            
             let arrayCategories = Array(Set(categories))
             var sortedCategories = arrayCategories.sorted { $0.category < $1.category }
-            
             if let armatureIndex = sortedCategories.firstIndex(where: { $0.category == CategoryName.armature }) {
                 let armatureCategory = sortedCategories.remove(at: armatureIndex)
                 sortedCategories.insert(armatureCategory, at: 0)
             }
-            
             DispatchQueue.main.async {
                 self.cachedProducts = products
                 completion(.success((products, sortedCategories)))
@@ -79,7 +69,6 @@ final class DBServiceProducts {
     
     deinit {
         listenerRegistation?.remove()
-        print("Регистрация listener удалена")
     }
     
     //  MARK: - Use this method for CreateProductScreenVC
@@ -89,11 +78,8 @@ final class DBServiceProducts {
         do {
             let newDocumentRef = try productCollection.addDocument(from: newProduct)
             newProduct.documentID = newDocumentRef.documentID
-            
-            print("Новый документ успешно создан. ID: \(newDocumentRef.documentID)")
             update(product: newProduct, completion: completion)
         } catch {
-            print("Ошибка при создании нового документа. Error: \(error.localizedDescription)")
             completion(error)
         }
     }
@@ -103,7 +89,6 @@ final class DBServiceProducts {
         let productID = product.id
         productCollection.whereField("id", isEqualTo: productID).getDocuments { (querySnapshot, error) in
             if let error = error {
-                print("Ошибка поиска документа по ID: \(productID). Ошибка: \(error.localizedDescription)")
                 completion(error)
             } else if let snapshot = querySnapshot, !snapshot.isEmpty {
                 let document = snapshot.documents.first
@@ -117,15 +102,12 @@ final class DBServiceProducts {
                     "quantity": product.quantity
                 ]) { error in
                     if let error = error {
-                        print("Ошибка обновления документа: \(productID). Ошибка: \(error.localizedDescription)")
                         completion(error)
                     } else {
-                        print("Документ успешно обновлен. ID: \(productID)")
                         completion(nil)
                     }
                 }
             } else {
-                print("Документ с ID \(productID) не найден.")
                 completion(error)
             }
         }
@@ -134,9 +116,8 @@ final class DBServiceProducts {
     //  MARK: - Save image in storage
     func save(imageData: Data, nameImg: String, completion: @escaping (_ imageLink: String?) -> Void) {
         let storageRef = storage.reference(forURL: "gs://souvenir-shop-716eb.appspot.com/productImages").child(nameImg)
-        _ = storageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            if let error = error {
-                print("Ошибка загрузки: ", error)
+        storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            if error != nil {
                 completion(nil)
             } else {
                 storageRef.downloadURL { (url, error) in
@@ -172,18 +153,14 @@ final class DBServiceProducts {
         let imageRef = Storage.storage().reference(forURL: imageURL)
         if let imageData = image.jpegData(compressionQuality: 0.8) {
             imageRef.putData(imageData, metadata: nil) { (_, error) in
-                if let error = error {
-                    print("Ошибка при загрузке нового изображения в Firebase Storage: \(error.localizedDescription)")
+                if error != nil {
                     completion(nil)
                 } else {
-                    print("Изображение успешно загружено по ссылке: \(imageURL)")
                     imageRef.downloadURL { (url, error) in
                         if let url = url {
                             let newImageURL = url.absoluteString
-                            print("Новая ссылка на изображение: \(newImageURL)")
                             completion(newImageURL)
                         } else {
-                            print("Ошибка при получении новой URL изображения: \(String(describing: error?.localizedDescription))")
                             completion(nil)
                         }
                     }
@@ -202,7 +179,6 @@ final class DBServiceProducts {
         let storageRef = storage.reference(forURL: uniqueImageURL)
         storageRef.putData(imageData, metadata: nil) { (metadata, error) in
             if let error = error {
-                print("Ошибка при загрузке нового изображения: ", error)
                 completion(nil, error)
             } else {
                 storageRef.downloadURL { (url, error) in

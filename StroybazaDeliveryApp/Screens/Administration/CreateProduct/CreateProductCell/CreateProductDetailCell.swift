@@ -6,11 +6,9 @@ import UIKit
 
 protocol CreateProductDescriptionDelegate: AnyObject {
     func didUpdateProductInfo(_ descriptionForMain: String, _ descriptionForDetail: String)
-    
 }
 
 final class CreateProductDetailCell: UITableViewCell, UITextViewDelegate {
-
 //  MARK: - ReuseId
     static let reuseId = ReuseId.createProductDetailCell
 //  MARK: - Propertise
@@ -34,10 +32,8 @@ final class CreateProductDetailCell: UITableViewCell, UITextViewDelegate {
     }
 }
 
-
 //  MARK: - Delegate
 extension CreateProductDetailCell {
-    
     func clearDescTextView() {
         descriptionMainTV.text = ""
         descriptionDetailTV.text = ""
@@ -50,14 +46,12 @@ extension CreateProductDetailCell {
 
 //  MARK: - Layout
 private extension CreateProductDetailCell {
-    
     func setupViews() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(descriptionMainLable)
         verticalStackView.addArrangedSubview(descriptionMainTV)
         verticalStackView.addArrangedSubview(descriptionDetailLable)
         verticalStackView.addArrangedSubview(descriptionDetailTV)
-        
         descriptionMainTV.delegate = self
         descriptionDetailTV.delegate = self
     }

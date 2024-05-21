@@ -14,7 +14,6 @@ protocol CartViewProtocol: AnyObject {
  }
 
 final class CartController: UIViewController {
-    
     public var presenter: CartPresenterProtocol?
 //  MARK: - UI
     public let informView = InformView()
@@ -36,7 +35,6 @@ final class CartController: UIViewController {
         return tableView
     }()
 }
-
 
 extension CartController: CartViewProtocol {
     func reloadTable() {
@@ -165,7 +163,6 @@ extension CartController {
 
 //  MARK: - Layout
 private extension CartController {
-    
     func setupViews() {
         view.addSubview(tableView)
         view.addSubview(promoView)
@@ -184,23 +181,19 @@ private extension CartController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.left.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
-        
         tableView.snp.makeConstraints { make in
             make.top.equalTo(productCountLabel.safeAreaLayoutGuide).offset(35)
             make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-150)
         }
-        
         promoView.snp.makeConstraints { make in
             make.bottom.equalTo(orderView.snp.top)
             make.left.right.equalTo(view.safeAreaLayoutGuide)
         }
-        
         orderView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.left.right.equalTo(view).inset(-2)
         }
-        
         informView.snp.makeConstraints { make in
             make.bottom.equalTo(view).offset(-100)
             make.leading.equalTo(view).offset(20)
@@ -212,7 +205,6 @@ private extension CartController {
 
 //  MARK: - UITableViewDelegate, UITableViewDataSource
 extension CartController: UITableViewDelegate, UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         Sections.cart
     }
@@ -244,7 +236,6 @@ extension CartController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             cell.update(product)
-            
             return cell
         case .promoProducts:
             let cell = tableView.dequeueReusableCell(withIdentifier: PromoCell.reuseId, for: indexPath) as! PromoCell
@@ -253,7 +244,6 @@ extension CartController: UITableViewDelegate, UITableViewDataSource {
             cell.onPromoTapped = { product in
                 self.presenter?.addPromoProductToOrder(for: product)
             }
-            
             return cell
         default:
             return UITableViewCell()

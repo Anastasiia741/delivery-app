@@ -5,14 +5,11 @@
 import Foundation
 
 final class EditModuleConfigurator {
-    
     func configure() -> EditController {
         let editVC = EditController()
         let presenter = EditPresenter()
-        
         editVC.presenter = presenter
         presenter.view = editVC
-        
         return editVC
     }
 }

@@ -11,7 +11,6 @@ protocol AdminViewProtocol {
 }
 
 final class AdminController: UIViewController {
-    
     public var presenter: AdminPresenter?
 //MARK: - Properties
     private var selectedStatus: OrderStatus = .all
@@ -23,7 +22,6 @@ final class AdminController: UIViewController {
         button.addTarget(self, action: #selector(exitBarButtonTapped), for: .touchUpInside)
         button.tintColor = .gray
         let barButtonItem = UIBarButtonItem(customView: button)
-        
         return barButtonItem
     }()
     private lazy var tableView: UITableView = {
@@ -35,7 +33,6 @@ final class AdminController: UIViewController {
         tableView.separatorStyle = .none
         tableView.register(AdminHeaderView.self, forHeaderFooterViewReuseIdentifier: AdminHeaderView.reuseId)
         tableView.register(AdminCell.self, forCellReuseIdentifier: AdminCell.reuseId)
-        
         return tableView
     }()
 }

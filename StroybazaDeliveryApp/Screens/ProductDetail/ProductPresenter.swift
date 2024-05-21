@@ -13,9 +13,7 @@ protocol ProductPresenterProtocol: AnyObject {
 
 final class ProductPresenter {
     weak var view: ProductViewProtocol?
-    //  MARK: - Actions
     var selectedProduct: Product?
-    //  MARK: - Properties
     private let orderService = OrderService()
 }
 
@@ -34,7 +32,6 @@ extension ProductPresenter {
 
 //  MARK: - Business Logic
 extension ProductPresenter: ProductPresenterProtocol {
-    
     func updateImageDetail() {
         if let product = selectedProduct {
             if let productImage = product.image {

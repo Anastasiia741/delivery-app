@@ -11,7 +11,6 @@ struct Screen {
 }
 
 final class BannerCell: UITableViewCell {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.bannerCell
 //  MARK: - Properties
@@ -85,7 +84,6 @@ private extension BannerCell {
 
 //  MARK: - CollectionViewDelegate, CollectionViewDataSource
 extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return banners.count
     }
@@ -94,7 +92,6 @@ extension BannerCell: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionCell.reuseId, for: indexPath) as! BannerCollectionCell
         let promoProduct = banners[indexPath.row]
         cell.update(promoProduct)
-        
         return cell
     }
     

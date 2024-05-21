@@ -9,7 +9,6 @@ protocol AdminCellDelegate: AnyObject {
 }
 
 final class AdminCell: UITableViewCell {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.adminCell
 //  MARK: - Properties

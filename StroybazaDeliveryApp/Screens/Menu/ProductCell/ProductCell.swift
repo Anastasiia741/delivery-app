@@ -7,9 +7,7 @@ import SnapKit
 import FirebaseStorage
 import SDWebImage
 
-
 final class ProductCell: UITableViewCell {
-        
 //  MARK: - ReuseId
     static let reuseId = ReuseId.productCell
 //  MARK: - Properties
@@ -80,7 +78,6 @@ extension ProductCell {
                 }
             }
         }
-        
         self.product = product
         nameLabel.text = product.name
         detailLabel.text = product.description
@@ -104,13 +101,11 @@ private extension ProductCell {
             make.left.top.equalTo(contentView).offset(16)
             make.centerY.equalTo(contentView)
         }
-        
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.left.equalTo(productImageView.snp.right).offset(16)
             make.right.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
         }
-        
         priceButton.snp.makeConstraints { make in
             make.top.equalTo(verticalStackView.snp.bottom).offset(16)
             make.right.equalTo(contentView.safeAreaLayoutGuide).inset(16)

@@ -11,9 +11,8 @@ protocol EditViewProtocol: AnyObject {
 }
 
 final class EditController: UIViewController {
-   
     public var presenter: EditPresenterProtocol?
-//MARK: - Properties
+// MARK: - Properties
     public var selectedImage: UIImage?
 //  MARK: - UI
     private let horizontalStack = StackView(style: .horizontal)
@@ -35,7 +34,6 @@ final class EditController: UIViewController {
         tableView.register(EditProductImageCell.self, forCellReuseIdentifier: EditProductImageCell.reuseId)
         tableView.register(EditProductNameCell.self, forCellReuseIdentifier: EditProductNameCell.reuseId)
         tableView.register(EditProductDetailCell.self, forCellReuseIdentifier: EditProductDetailCell.reuseId)
-        
         return tableView
     }()
 }
@@ -64,10 +62,8 @@ extension EditController {
 
 //  MARK: -  Keyboard observe
 private extension EditController {
-    
     func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
@@ -116,7 +112,6 @@ extension EditController: EditViewProtocol {
 
 //  MARK: - Navigation
 private extension EditController {
-    
     func setupAction() {
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
@@ -139,7 +134,6 @@ private extension EditController {
 
 //  MARK: - EditProductDelegate
 extension EditController: EditProductDelegate, EditProductDescriptionDelegate, EditProductNameDelegate {
-    
     func didSelectImage(_ imageURL: String?, _ image: UIImage) {
         presenter?.selectedProduct?.image = imageURL
         selectedImage = image
@@ -159,7 +153,6 @@ extension EditController: EditProductDelegate, EditProductDescriptionDelegate, E
 
 //  MARK: - Layout
 private extension EditController {
-    
     func setupViews() {
         view.addSubview(tableView)
         view.addSubview(horizontalStack)
@@ -187,7 +180,6 @@ private extension EditController {
 
 //  MARK: - TableViewDelegate, TableViewDataSource
 extension EditController:  UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = CreateProductSection.init(rawValue: indexPath.section)
         switch section {
@@ -225,9 +217,7 @@ extension EditController:  UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.updateProductDetail()
             cell.selectionStyle = .none
-            
             return cell
-            
         case .name:
             let cell = tableView.dequeueReusableCell(withIdentifier: EditProductNameCell.reuseId, for: indexPath) as! EditProductNameCell
             cell.selectedProduct = presenter?.selectedProduct
@@ -235,7 +225,6 @@ extension EditController:  UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.delegate = self
             return cell
-            
         case .detail:
             let cell = tableView.dequeueReusableCell(withIdentifier: EditProductDetailCell.reuseId, for: indexPath) as! EditProductDetailCell
             cell.selectedProduct = presenter?.selectedProduct
@@ -243,7 +232,6 @@ extension EditController:  UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.delegate = self
             return cell
-      
         case .none:
             fatalError("Случай необработанной секции: \(String(describing: section))")
         }

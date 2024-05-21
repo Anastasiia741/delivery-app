@@ -6,7 +6,6 @@ import Foundation
 import FirebaseAuth
 
 class DBServiceAuth {
-   
     static let shared = DBServiceAuth()
     private let databaseProfile = DBServiceProfile.shared
     private let auth = Auth.auth()
@@ -68,7 +67,6 @@ class DBServiceAuth {
             if let error = error {
                 completion(.failure(error))
             } else {
-                print("Пользователь удален")
                 completion(.success(()))
             }
         }

@@ -8,42 +8,16 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-////Presenter -> Business Logic -> Interactor
-//protocol MenuScreenInteractor {
-//
-//}
-
-//VC -> View Event -> Presenter
-//protocol MenuScreenPresenterProtocol (MVP)
-//protocol MenuViewEventProtocol (VIP)
-//protocol MenuScreenPresenterInput (VIPER)
-
-
-//-> Presenter Responsibilities:
-//Event Handler
-//Business Logic -> Services,
-
-//-> Controller Responsibilities:
-//Configure UI
-//Layout
-//Update View
-
-//Interactor -> Update View -> View
 protocol MenuViewProtocol: AnyObject {
-    
-//  Presentation
     func reloadTable()
     func showSkeletonLoading()
     func hideSkeletonLoading()
-//  Navigation
     func showDetailScreen(_ product: Product)
 }
 
 final class MenuController: UIViewController {
-    
     public var presenter: MenuPresenterProtocol?
     public let productModuleConfigurator = ProductModuleConfigurator()
-//  MARK: - UI
     private let skeletonView = SkeletonView()
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -56,7 +30,6 @@ final class MenuController: UIViewController {
         tableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.reuseId)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.reuseID)
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.reuseId)
-        
         return tableView
     }()
 }
@@ -69,7 +42,6 @@ extension MenuController: MenuViewProtocol {
     
     func showSkeletonLoading() {
         view.addSubview(skeletonView)
-        
         skeletonView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -97,7 +69,6 @@ extension MenuController {
         setupStyles()
         setupViews()
         setupConstraints()
-        
         presenter?.viewDidLoad()
     }
 }
@@ -115,7 +86,6 @@ private extension MenuController {
 
 //  MARK: - Layout
 private extension MenuController {
-    
     func setupStyles() {
         view.backgroundColor = .systemBackground
         self.navigationItem.title = Titles.menu
@@ -134,7 +104,6 @@ private extension MenuController {
 
 //  MARK: - TableViewDataSource, TableViewDelegate
 extension MenuController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = MenuSection.init(rawValue: indexPath.section)
         switch section {
@@ -151,7 +120,6 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = MenuSection.init(rawValue: section)
-        
         switch section {
         case .banner:
             return SectionRows.banner
@@ -166,7 +134,6 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = MenuSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .banner:
             let cell = tableView.dequeueReusableCell(withIdentifier: BannerCell.reuseId, for: indexPath) as! BannerCell
@@ -176,23 +143,18 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
             cell.onBannerTapped = { banner in
                 self.presenter?.bannerCellTapped(banner)
             }
-            
             return cell
         case .category:
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.reuseID, for: indexPath) as! CategoryCell
-            
             cell.update(categories: presenter?.newCategories ?? [])
-            
             cell.onCategoryTapped = { [weak self] category in
                 self?.categoryCellTapped(category)
             }
             return cell
-            
         case .products:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
             guard let product = presenter?.products[indexPath.row] else { return UITableViewCell() }
             cell.selectionStyle = .none
-            
             cell.onPriceButtonCellTapped = { product in
                 self.presenter?.priceButtonCellTapped(product)
             }
@@ -202,7 +164,6 @@ extension MenuController: UITableViewDataSource, UITableViewDelegate {
                 cell.isHidden = true
             }
             return cell
-            
         default:
             return UITableViewCell()
         }

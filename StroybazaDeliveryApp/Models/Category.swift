@@ -5,11 +5,9 @@
 import Foundation
 
 struct Category: Codable, Comparable, Equatable, Hashable {
-    
     static func < (lhs: Category, rhs: Category) -> Bool {
         lhs.category < rhs.category
     }
-    
     let category: String
 }
       

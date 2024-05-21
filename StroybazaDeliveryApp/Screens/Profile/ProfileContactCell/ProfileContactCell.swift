@@ -13,7 +13,8 @@ final class ProfileContactCell: UITableViewCell, UITextFieldDelegate {
 //  MARK: - ReuseId
     static let reuseId = ReuseId.profileContactCell
 //  MARK: - Propertice
-    var profile = Profile(profile: NewUser(id: "", name: "", phone: "", address: "", email: ""))
+    private var profile = ProfilePresenter().profile
+
 //  MARK: - UI
     private let emailLabel = MainTitleLabel(style: .emailTitle)
     private let titleLabel = MainTitleLabel(style: .contact)
@@ -22,11 +23,9 @@ final class ProfileContactCell: UITableViewCell, UITextFieldDelegate {
     private let verticalStackView = StackView(style: .vertical)
     weak var delegate: ProfileContactProtocol?
 
-    
 //  MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-     
         setupViews()
         setupAction()
         setupConstraints()
@@ -64,7 +63,6 @@ private extension ProfileContactCell {
         verticalStackView.addArrangedSubview(emailTextField)
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(addressTextField)
-        
         addressTextField.delegate = self
     }
     

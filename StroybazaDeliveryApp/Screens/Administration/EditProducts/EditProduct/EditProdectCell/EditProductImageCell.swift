@@ -11,7 +11,6 @@ protocol EditProductDelegate: AnyObject {
 }
 
 final class EditProductImageCell: UITableViewCell {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.editProductImageCell
 //  MARK: - Database
@@ -78,15 +77,12 @@ extension EditProductImageCell: UIImagePickerControllerDelegate, UINavigationCon
         imagePicker.sourceType = sourceType
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
-        
         var responder: UIResponder? = contentView
         while responder != nil && !(responder is UIViewController) {
             responder = responder?.next
         }
         if let viewController = responder as? UIViewController {
             viewController.present(imagePicker, animated: true, completion: nil)
-        } else {
-            print("UIViewController Не найден")
         }
     }
 }
@@ -123,7 +119,6 @@ private extension EditProductImageCell {
 
 //  MARK: - Layout
 private extension EditProductImageCell {
-    
     func setupViews() {
         contentView.addSubview(productImage)
     }

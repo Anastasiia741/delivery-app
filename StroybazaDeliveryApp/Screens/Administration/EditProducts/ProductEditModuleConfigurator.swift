@@ -5,14 +5,11 @@
 import Foundation
 
 final class ProductEditModuleConfigurator {
-    
     func configure() -> ProductEditController {
         let productVC = ProductEditController()
         let presenter = ProductEditPresenter()
-        
         productVC.presenter = presenter
         presenter.view = productVC
-        
         return productVC
     }
 }

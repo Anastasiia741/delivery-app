@@ -12,7 +12,6 @@ protocol ProductEditViewProtocol: AnyObject {
 }
 
 final class ProductEditController: UIViewController {
-    
     public var presenter: ProductEditPresenterProtocol?
     private let editModuleConfigurator = EditModuleConfigurator()
 //  MARK: - UI
@@ -50,7 +49,6 @@ extension ProductEditController {
 
 //  MARK: - Presentation Logic
 extension ProductEditController: ProductEditViewProtocol {
- 
     func reloadTable() {
         tableView.reloadData()
     }
@@ -69,7 +67,6 @@ extension ProductEditController: ProductEditViewProtocol {
 
 //  MARK: - Activity Indicator
  extension ProductEditController {
-    
     func showLoadingIndicator() {
         DispatchQueue.main.async {
             self.view.addSubview(self.activityIndicator)
@@ -88,7 +85,6 @@ extension ProductEditController: ProductEditViewProtocol {
 
 //  MARK: - Layout
 private extension ProductEditController {
-    
     func setupViews() {
         view.addSubview(tableView)
     }
@@ -107,7 +103,6 @@ private extension ProductEditController {
 
 //  MARK: - TableViewDataSource, TableViewDelegate
 extension ProductEditController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = MenuSection.init(rawValue: indexPath.section)
         switch section {
@@ -124,7 +119,6 @@ extension ProductEditController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = MenuSection.init(rawValue: section)
-        
         switch section {
         case .banner:
             return Sections.productsAdmin
@@ -139,7 +133,6 @@ extension ProductEditController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = MenuSection.init(rawValue: indexPath.section)
-        
         switch section {
         case .banner:
             let cell = tableView.dequeueReusableCell(withIdentifier: BannerCell.reuseId, for: indexPath) as! BannerCell
@@ -147,7 +140,6 @@ extension ProductEditController: UITableViewDataSource, UITableViewDelegate {
             cell.onBannerTapped = { banner in
                 self.showDetailScreen(banner)
             }
-            
             return cell
         case .category:
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.reuseID, for: indexPath) as! CategoryCell
@@ -155,17 +147,14 @@ extension ProductEditController: UITableViewDataSource, UITableViewDelegate {
             cell.onCategoryTapped = { [weak self] category in
                 self?.categoryCellTapped(category)
             }
-            
             return cell
         case .products:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
             guard let product = presenter?.products[indexPath.row] else { return UITableViewCell() }
             cell.selectionStyle = .none
-            
             if let selectedCategory = presenter?.selectedCategory, product.category == selectedCategory.category {
                 cell.isPriceButtonVisible = false
                 cell.update(withProduct: product)
-
             } else {
                 cell.isHidden = true
             }

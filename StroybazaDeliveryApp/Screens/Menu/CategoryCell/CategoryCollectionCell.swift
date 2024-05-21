@@ -5,7 +5,6 @@
 import UIKit
 
 final class CategoryCollectionCell: UICollectionViewCell {
- 
 //  MARK: - ReuseID
     static let reuseId = ReuseId.categoryCollectionCell
 //  MARK: - UI

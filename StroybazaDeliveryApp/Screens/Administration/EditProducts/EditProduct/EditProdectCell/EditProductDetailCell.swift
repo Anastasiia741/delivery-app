@@ -9,7 +9,6 @@ protocol EditProductDescriptionDelegate: AnyObject {
 }
 
 final class EditProductDetailCell: UITableViewCell {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.editProductDetailCell
 //  MARK: - Properties

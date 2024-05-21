@@ -6,7 +6,6 @@ import Foundation
 import UIKit
 
 protocol AuthPresenterProtocol {
-    // MARK: - User Events
     func disclaimerLabelTapped()
 }
 
@@ -18,7 +17,6 @@ final class AuthPresenter {
 
 // MARK: - Event Handler
 extension AuthPresenter: AuthPresenterProtocol {
-    
     func disclaimerLabelTapped() {
         if let url = URL(string: TextMessage.policy) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -31,7 +29,6 @@ extension AuthPresenter: AuthPresenterProtocol {
             case .success:
                 self?.view?.navigateToMenuScreen()
             case .failure(let error):
-                print("Authentication Error: \(error), \(error.localizedDescription)")
                 self?.view?.showAlert(message: "\(AlertMessage.authError) \(error.localizedDescription)")
             }
         }
@@ -42,7 +39,6 @@ extension AuthPresenter: AuthPresenterProtocol {
             view?.showAlert(message: AlertMessage.authFields)
             return
         }
-        
         guard password == confirmPassword else {
             view?.showAlert(message: AlertMessage.authPassword)
             return
@@ -52,7 +48,6 @@ extension AuthPresenter: AuthPresenterProtocol {
             case .success:
                 self?.view?.navigateToMenuScreen()
             case .failure(let error):
-                print("Registration Error: \(error), \(error.localizedDescription)")
                 self?.view?.showAlert(message: "\(AlertMessage.authErrorRegist) \(error.localizedDescription)")
             }
         }

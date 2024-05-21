@@ -5,7 +5,6 @@
 import UIKit
 
 final class SkeletonView: UIView {
-    
 //  MARK: - UI
     private let nameLabelFirst = MainTitleLabel(style: MainTitleType.productSkeleton)
     private let detailLabelFirst = MainTitleLabel(style: MainTitleType.productSkeleton)
@@ -61,18 +60,15 @@ private extension SkeletonView {
         anim1.toValue = UIColor.gradientDarkGrey.cgColor
         anim1.duration = animDuration
         anim1.beginTime = 0.0
-        
         let anim2 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
         anim2.fromValue = UIColor.gradientDarkGrey.cgColor
         anim2.toValue = UIColor.gradientLightGrey.cgColor
         anim2.duration = animDuration
         anim2.beginTime = anim1.beginTime + anim1.duration
-        
         let group = CAAnimationGroup()
         group.animations = [anim1, anim2]
         group.repeatCount = .greatestFiniteMagnitude
         group.isRemovedOnCompletion = false
-        
         if let previousGroup = previousGroup {
             group.beginTime = previousGroup.beginTime + 0.33
         }
@@ -113,75 +109,64 @@ private extension SkeletonView {
             make.left.top.equalTo(self).offset(spacing)
             make.width.height.equalTo(100)
         }
-        
         nameLabelFirst.snp.makeConstraints { make in
             make.top.equalTo(self).offset(spacing)
             make.left.equalTo(productImageViewFirst.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(230)
         }
-        
         detailLabelFirst.snp.makeConstraints { make in
             make.top.equalTo(nameLabelFirst.snp.bottom).offset(spacing)
             make.left.equalTo(productImageViewFirst.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(200)
         }
-        
         priceButtonFirst.snp.makeConstraints { make in
             make.top.equalTo(detailLabelFirst.snp.bottom).offset(spacing)
             make.right.equalTo(self).inset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(100)
         }
-        
         productImageViewSecond.snp.makeConstraints { make in
             make.top.equalTo(priceButtonFirst.snp.bottom).offset(spacing)
             make.left.equalTo(self).offset(spacing)
             make.width.height.equalTo(100)
         }
-        
         nameLabelSecond.snp.makeConstraints { make in
             make.top.equalTo(priceButtonFirst.snp.bottom).offset(spacing)
             make.left.equalTo(productImageViewSecond.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(230)
         }
-        
         detailLabelSecond.snp.makeConstraints { make in
             make.top.equalTo(nameLabelSecond.snp.bottom).offset(spacing)
             make.left.equalTo(productImageViewSecond.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(200)
         }
-        
         priceButtonSecond.snp.makeConstraints { make in
             make.top.equalTo(detailLabelSecond.snp.bottom).offset(spacing)
             make.right.equalTo(self).inset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(100)
         }
-        
         productImageViewThird.snp.makeConstraints { make in
             make.top.equalTo(priceButtonSecond.snp.bottom).offset(spacing)
             make.left.equalTo(self).offset(spacing)
             make.width.height.equalTo(100)
         }
-        
         nameLabelThird.snp.makeConstraints { make in
             make.top.equalTo(priceButtonSecond.snp.bottom).offset(spacing)
             make.left.equalTo(productImageViewThird.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(230)
         }
-        
         detailLabelThird.snp.makeConstraints { make in
             make.top.equalTo(nameLabelThird.snp.bottom).offset(spacing)
             make.left.equalTo(productImageViewThird.snp.right).offset(spacing)
             make.height.equalTo(30)
             make.width.equalTo(200)
         }
-        
         priceButtonThird.snp.makeConstraints { make in
             make.top.equalTo(detailLabelThird.snp.bottom).offset(spacing)
             make.right.equalTo(self).inset(spacing)

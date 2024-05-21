@@ -9,7 +9,6 @@ protocol EditProductNameDelegate: AnyObject {
 }
 
 final class EditProductNameCell: UITableViewCell, UITextFieldDelegate {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.editProductNameCell
 //  MARK: - Properties
@@ -78,7 +77,6 @@ extension EditProductNameCell {
 
 //  MARK: - Layout
 private extension EditProductNameCell {
-    
     func setupViews() {
         contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(nameLabel)
@@ -87,7 +85,6 @@ private extension EditProductNameCell {
         verticalStackView.addArrangedSubview(categoryTextField)
         verticalStackView.addArrangedSubview(priceLabel)
         verticalStackView.addArrangedSubview(priceTextField)
-        
         nameTextField.delegate = self
         categoryTextField.delegate = self
         priceTextField.delegate = self
@@ -98,19 +95,15 @@ private extension EditProductNameCell {
     }
     
     func setupConstraints() {
-        
         verticalStackView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalTo(contentView).inset(20)
         }
-        
         nameTextField.snp.makeConstraints { make in
             make.height.equalTo(35)
         }
-        
         categoryTextField.snp.makeConstraints { make in
             make.height.equalTo(35)
         }
-        
         priceTextField.snp.makeConstraints { make in
             make.height.equalTo(35)
         }

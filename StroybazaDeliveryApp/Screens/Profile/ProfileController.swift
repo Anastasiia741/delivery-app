@@ -11,10 +11,8 @@ protocol ProfileViewProtocol: AnyObject {
 }
 
 final class ProfileController: UIViewController {
-    
     public var presenter: ProfilePresenterProtocol?
     private let authService = DBServiceAuth.shared
-//  MARK: UI
     private let exitButton = ExitButtonView()
     private let deleteAccountLabel = MainTitleLabel(style: .deleteAccount)
     private lazy var saveButton = UIBarButtonItem(title: ButtonsName.save, style: .done, target: self, action: #selector(saveButtonTap))
@@ -26,12 +24,10 @@ final class ProfileController: UIViewController {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-        
         tableView.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.reuseId)
         tableView.register(ProfileContactCell.self, forCellReuseIdentifier: ProfileContactCell.reuseId)
         tableView.register(ProfileTitileOrderCell.self, forCellReuseIdentifier: ProfileTitileOrderCell.reuseId)
         tableView.register(ProfileOrderCell.self, forCellReuseIdentifier: ProfileOrderCell.reuseId)
-        
         return tableView
     }()
 }
@@ -41,10 +37,8 @@ private extension ProfileController {
     func setupActions() {
         exitButton.exitButton.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        
         let deletetapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteAccountButtonTapped))
         deleteAccountLabel.addGestureRecognizer(deletetapGestureRecognizer)
-        
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -78,14 +72,12 @@ private extension ProfileController {
 
 //  MARK: - Life Cycle
 extension ProfileController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyles()
         setupViews()
         setupActions()
         setupConstraints()
-        
         presenter?.fetchUserProfile()
     }
     
@@ -95,13 +87,7 @@ extension ProfileController {
     }
 }
 
-
 extension ProfileController: ProfileViewProtocol, ProfileCellProtocol, ProfileContactProtocol {
-    func textFieldDidChange(_ newProfile: NewUser) {
-         
-    }
-    
-   
     func didUpdateProfileInfo(_ name: String?, _ phone: String?) {
         presenter?.nameTF = name ?? ""
         presenter?.phoneTF = phone ?? ""
@@ -117,7 +103,6 @@ extension ProfileController: ProfileViewProtocol, ProfileCellProtocol, ProfileCo
     
     func showAuthScreen() {
         let authViewController = AuthModuleConfiguration().configure()
-        
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true, completion: nil)
     }
@@ -130,7 +115,6 @@ extension ProfileController: ProfileViewProtocol, ProfileCellProtocol, ProfileCo
         alert.view.tintColor = UIColor.black
         let okAction = UIAlertAction(title: AlertMessage.okAction, style: .default)
         alert.addAction(okAction)
-        
         present(alert, animated: true)
     }
 
@@ -169,7 +153,6 @@ private extension ProfileController {
         exitButton.snp.makeConstraints { make in
             make.bottom.equalTo(exitButton.snp.top)
             make.top.equalTo(tableView.snp.bottom).offset(20)
-            
             make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(40)
         }

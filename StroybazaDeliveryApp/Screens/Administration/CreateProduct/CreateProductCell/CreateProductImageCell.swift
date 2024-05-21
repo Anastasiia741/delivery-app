@@ -10,7 +10,6 @@ protocol CreateProductDelegate: AnyObject {
 }
 
 final class CreateProductImageCell: UITableViewCell, UINavigationControllerDelegate {
-    
 //  MARK: - ReuseId
     static let reuseId = ReuseId.createProductImageCell
 //  MARK: - Database
@@ -26,7 +25,6 @@ final class CreateProductImageCell: UITableViewCell, UINavigationControllerDeleg
 //  MARK: - Life Cycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
         setupConstraints()
         setupAction()
@@ -39,7 +37,6 @@ final class CreateProductImageCell: UITableViewCell, UINavigationControllerDeleg
 
 //MARK: - ImagePicker
 extension CreateProductImageCell: UIImagePickerControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             self.selectedImage = selectedImage
@@ -58,7 +55,6 @@ extension CreateProductImageCell: UIImagePickerControllerDelegate {
         imagePicker.sourceType = sourceType
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
-        
         if let topViewController = UIApplication.shared.keyWindow?.rootViewController {
             topViewController.present(imagePicker, animated: true, completion: nil)
         }
@@ -67,29 +63,21 @@ extension CreateProductImageCell: UIImagePickerControllerDelegate {
 
 //MARK: - Actions
 private extension CreateProductImageCell {
-    
     func showAlertImage() {
-        
         let alertController = UIAlertController(title: AlertMessage.imageTitle, message: nil, preferredStyle: .actionSheet)
-        
         let galleryAction = UIAlertAction(title: AlertMessage.galeryAction, style: .default) { [weak self] _ in
             self?.showImagePicker(sourceType: .photoLibrary)
         }
-        
         let cameraAction = UIAlertAction(title: AlertMessage.photoAction, style: .default) { [weak self] _ in
             self?.showImagePicker(sourceType: .camera)
         }
-        
         let cancelAction = UIAlertAction(title: AlertMessage.cancelAction, style: .cancel, handler: nil)
-        
         alertController.addAction(galleryAction)
         alertController.addAction(cameraAction)
         alertController.addAction(cancelAction)
-        
         if let topViewController = UIApplication.shared.windows.first(where: \.isKeyWindow)?.rootViewController?.topmostViewController {
             topViewController.present(alertController, animated: true, completion: nil)
         }
-        
         selectImageFromGallery()
     }
     
@@ -117,10 +105,8 @@ private extension CreateProductImageCell {
     }
 }
 
-
 //MARK: - Bussines Logic
  extension CreateProductImageCell {
-    
     @objc func imageDidChange() {
         productImage.image = UIImage(named: Images.Picture.productImage)
     }
@@ -128,7 +114,6 @@ private extension CreateProductImageCell {
 
 //MARK: - Layout
 private extension CreateProductImageCell {
-    
     func setupViews() {
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(productImage)

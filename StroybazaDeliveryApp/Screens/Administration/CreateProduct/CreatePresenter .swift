@@ -12,13 +12,11 @@ protocol CreatePresenterProtocol {
     var productDetail: String { get set }
     var imageURL: String? { get set }
     var selectedImage: UIImage? { get set }
-    
     func createProduct(_ product: Product)
     func saveButtonTapped()
 }
 
 final class CreatePresenter {
-    
     public var view: CreateViewProtocol?
     //  MARK: - Database
     private let productsDB = DBServiceProducts.shared
@@ -34,16 +32,13 @@ final class CreatePresenter {
 
 //  MARK: - CreatePresenterProtocol
 extension CreatePresenter: CreatePresenterProtocol {
-    
     func saveButtonTapped() {
         view?.startActivityIndicator()
-        
         guard isInputValid() else {
             view?.stopActivityIndicator()
             view?.showWarningAlert()
             return
         }
-        
         createNewProduct()
     }
     
@@ -51,32 +46,25 @@ extension CreatePresenter: CreatePresenterProtocol {
         if productName.isEmpty || productCategory.isEmpty || String(productPrice).isEmpty || selectedImage == nil {
             return false
         }
-        
         if imageURL == nil {
             return false
         }
-        
         return true
     }
     
     private func createNewProduct() {
         let newProduct = makeNewProduct()
-        
         if let selectedImage = selectedImage, let imageURL = imageURL {
             productsDB.upload(image: selectedImage, url: imageURL) { [weak self] uploadedImageURL, error in
                 DispatchQueue.main.async {
                     self?.view?.stopActivityIndicator()
                 }
-                
                 if let uploadedImageURL = uploadedImageURL {
                     newProduct.image = uploadedImageURL
-                    print("Изображение успешно загружено")
-                } else if let error = error {
-                    print("Ошибка при загрузке изображения:", error.localizedDescription)
+                } else if error != nil {
                     self?.view?.showErrorAlert()
                     return
                 }
-                
                 self?.createProduct(newProduct)
             }
         } else {
@@ -102,7 +90,6 @@ extension CreatePresenter: CreatePresenterProtocol {
             if let error = error {
                 print("Ошибка создания продукта:", error.localizedDescription)
             } else {
-                print("Продукт создан: \(product.name)")
                 DispatchQueue.main.async {
                     self?.view?.showSuccessAlert()
                     self?.view?.clearTextFields()

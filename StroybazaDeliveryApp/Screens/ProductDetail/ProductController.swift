@@ -15,7 +15,6 @@ protocol ProductViewProtocol: AnyObject {
 
 final class ProductController: UIViewController {
     public var presenter: ProductPresenter?
-
 //  MARK: - UI
     private let scrollView = UIScrollView()
     private let productImage = ProductImageView(style: ProductImageType.detail)
@@ -57,7 +56,6 @@ extension ProductController: ProductViewProtocol {
 
 //  MARK: - Actions
 private extension ProductController {
-    
     func setupActions() {
         orderView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
     }
@@ -69,7 +67,6 @@ private extension ProductController {
 
 //  MARK: - Layout
 private extension ProductController {
-    
     func setupViews() {
         view.addSubview(scrollView)
         view.addSubview(orderView)
@@ -98,7 +95,6 @@ private extension ProductController {
             make.top.equalTo(scrollView).inset(20)
             make.width.equalTo(Screen.width)
         }
-        
         orderView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(0)
             make.left.right.equalTo(view.safeAreaLayoutGuide).inset(-2)
