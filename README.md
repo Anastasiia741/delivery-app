@@ -1,6 +1,8 @@
 # Stroybaza Delivery App 🛠️🏡📲
 This mobile application provides a convenient way to browse, order, and manage construction materials right from your mobile phone.
-You can download the app here: [Download the app here]([https://apps.apple.com/pt/app/kiyizgroup/id6502351648](https://apps.apple.com/ee/app/stroybazadelivery/id6473832872)
+
+You can download the app here: [Download the app here](https://apps.apple.com/pt/app/kiyizgroup/id6502351648)
+
 
 ## Key Features:
 - **Catalog Browsing:**
